@@ -1,15 +1,16 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DAL;
 using DataTransferObject;
+using Microsoft.Extensions.Configuration;
 
-namespace DAL
+namespace BusinessLayer
 {
-    public interface IAccountsDB
+    public interface IAccountManager
     {
 
-        IConfiguration Configuration { get; }
+        IAccountsDB AccountsDb { get; }
 
         List<Account> GetAccounts();
 
@@ -20,7 +21,6 @@ namespace DAL
         int UpdateAccount(Account account);
 
         int DeleteAccount(int id);
-
 
     }
 }

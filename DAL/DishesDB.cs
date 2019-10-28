@@ -42,12 +42,9 @@ namespace DAL
                                 Dish dish = new Dish();
 
                                 dish.IdDish = (int)dr["idDish"];
-                                dish.name = (string)dr["name"];                              
+                                dish.name = (string)dr["name"];
                                 dish.price = (int)dr["price"];
                                 dish.status = (string)dr["status"];
-
-
-           //ALEX BERTHOUZOZ STP REGARDE ICI JE NE POUVAIS PAS METTRE DATETIME
                                 dish.created_at = (DateTime)dr["created_at"];
                                 dish.IdRestaurant = (int)dr["IdRestaurant"];
 
@@ -76,7 +73,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Dish where idDish = @id "; 
+                    string query = "Select * from Dish where idDish = @id ";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -92,7 +89,7 @@ namespace DAL
                             dish.name = (string)dr["name"];
                             dish.price = (int)dr["price"];
                             dish.status = (string)dr["status"];
-                            dish.created_at = (string)dr["created_at"];
+                            dish.created_at = (DateTime)dr["created_at"];
                             dish.IdRestaurant = (int)dr["IdRestaurant"];
                         }
                     }
@@ -177,7 +174,7 @@ namespace DAL
                 {
                     string query = "DELETE FROM Dish WHERE IdDish=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);                  
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     cn.Open();
 
@@ -192,21 +189,15 @@ namespace DAL
             return result;
         }
 
-        List<Dish> IDishesDB.GetDishes()
-        {
-            throw new NotImplementedException();
-        }
-
-        Dish IDishesDB.GetDish(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Dish> GetDishes()
         {
             throw new NotImplementedException();
         }
 
+        public Dish AddCustomer(Dish dish)
+        {
+            throw new NotImplementedException();
+        }
 
     }
-}
+    }

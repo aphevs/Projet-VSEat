@@ -14,10 +14,12 @@ namespace DataTransferObject
 
         public int IdRestaurant { get; set; }
 
+        public int customerAccount { get; set; }
+
 
         public override string ToString()
         {
-            return $"{IdAccount}|{login}|{password}|{IdCourier}|{IdCustomer}|{IdRestaurant}";
+            return $"{IdAccount}|{login}|{password}|{IdCourier}|{IdCustomer}|{IdRestaurant}|{customerAccount}";
         }
     }
 }

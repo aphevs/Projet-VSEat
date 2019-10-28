@@ -40,11 +40,11 @@ namespace DAL
 
                                 Customer customer = new Customer();
 
-                                customer.idCustomer = (int)dr["idCustomer"];
+                                customer.IdCustomer = (int)dr["IdCustomer"];
                                 customer.name = (string)dr["name"];
                                 customer.created_at = (DateTime)dr["created_at"];
-                                customer.idCity = (int)dr["idCity"];
                                 customer.streetname = (string)dr["streetname"];
+                                customer.IdCity = (int)dr["IdCity"];
 
 
 
@@ -83,11 +83,12 @@ namespace DAL
                         {
                             customer = new Customer();
 
-                            customer.idCustomer = (int)dr["idCustomer"];
+                            customer.IdCustomer = (int)dr["IdCustomer"];
                             customer.name = (string)dr["name"];
                             customer.created_at = (DateTime)dr["created_at"];
-                            customer.idCity = (int)dr["idCity"];
                             customer.streetname = (string)dr["streetname"];
+                            customer.IdCity = (int)dr["IdCity"];
+                            
                         }
                     }
                 }
@@ -113,13 +114,13 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@name", customer.name);
                     cmd.Parameters.AddWithValue("@created_at", customer.created_at);
                     cmd.Parameters.AddWithValue("@streetname", customer.streetname);
-                    cmd.Parameters.AddWithValue("@idCity", customer.idCity);
+                    cmd.Parameters.AddWithValue("@IdCity", customer.IdCity);
 
 
 
                     cn.Open();
 
-                    customer.idCustomer = Convert.ToInt32(cmd.ExecuteScalar());
+                    customer.IdCustomer = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
@@ -144,7 +145,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@name", customer.name);
                     cmd.Parameters.AddWithValue("@created_at", customer.created_at);
                     cmd.Parameters.AddWithValue("@streetname", customer.streetname);
-                    cmd.Parameters.AddWithValue("@idCity", customer.idCity);                   
+                    cmd.Parameters.AddWithValue("@idCity", customer.IdCity);                   
 
                     cn.Open();
 

@@ -40,15 +40,16 @@ namespace DAL
 
                                 Account account = new Account();
 
-                                customer.idCustomer = (int)dr["idCustomer"];
-                                customer.name = (string)dr["name"];
-                                customer.created_at = (DateTime)dr["created_at"];
-                                customer.idCity = (int)dr["idCity"];
-                                customer.streetname = (string)dr["streetname"];
+                                account.IdAccount = (int)dr["IdAccount"];
+                                account.login = (string)dr["login"];
+                                account.password = (string)dr["password"];
+                                account.IdCourier = (int)dr["IdCourier"];
+                                account.IdCustomer = (int)dr["IdCustomer"];
+                                account.customerAccount = (int)dr["customerAccount"];
 
 
 
-                                results.Add(customer);
+                                results.Add(account);
                             }
                         }
                     }
@@ -62,16 +63,16 @@ namespace DAL
             }
         }
 
-        public Customer GetCustomer(int id)
+        public Account GetAccount(int id)
         {
-            Customer customer = null;
+            Account account = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Costumer where idCustomer = @id ";
+                    string query = "Select * from Account where idAccount = @id ";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -81,13 +82,14 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            customer = new Customer();
+                            account = new Account();
 
-                            customer.idCustomer = (int)dr["idCustomer"];
-                            customer.name = (string)dr["name"];
-                            customer.created_at = (DateTime)dr["created_at"];
-                            customer.idCity = (int)dr["idCity"];
-                            customer.streetname = (string)dr["streetname"];
+                            account.IdAccount = (int)dr["IdAccount"];
+                            account.login = (string)dr["login"];
+                            account.password = (string)dr["password"];
+                            account.IdCourier = (int)dr["IdCourier"];
+                            account.IdCustomer = (int)dr["IdCustomer"];
+                            account.customerAccount = (int)dr["customerAccount"];
                         }
                     }
                 }
@@ -97,10 +99,10 @@ namespace DAL
                 throw e;
             }
 
-            return customer;
+            return account;
         }
 
-        public Customer AddCustomer(Customer customer)
+        public Account AddAccount(Account account)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -108,18 +110,18 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Customer(name, created_at, streetname, idCity) values(@name, @created_at, @streetname, @idCity); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Account(login, password, IdCourier, IdCustomer, customerAccount) values(@login, @password, @IdCourier, @IdCustomer); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", customer.name);
-                    cmd.Parameters.AddWithValue("@created_at", customer.created_at);
-                    cmd.Parameters.AddWithValue("@streetname", customer.streetname);
-                    cmd.Parameters.AddWithValue("@idCity", customer.idCity);
-
+                    cmd.Parameters.AddWithValue("@login", account.login);
+                    cmd.Parameters.AddWithValue("@password", account.password);
+                    cmd.Parameters.AddWithValue("@IdCourier", account.IdCourier);
+                    cmd.Parameters.AddWithValue("@IdCustomer", account.IdCustomer);
+                    cmd.Parameters.AddWithValue("@customerAccount", account.customerAccount);
 
 
                     cn.Open();
 
-                    customer.idCustomer = Convert.ToInt32(cmd.ExecuteScalar());
+                    account.IdAccount = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
@@ -127,10 +129,10 @@ namespace DAL
                 throw e;
             }
 
-            return customer;
+            return account;
         }
 
-        public int UpdateCustomer(Customer customer)
+        public int UpdateAccount(Account account)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -139,12 +141,13 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Customer SET name = @name, created_at =@created_at, streetname = @streetname, IdCity = @IdCity WHERE IdCustomer=@id";
+                    string query = "UPDATE Account SET login = @login, password =@password, IdCourier = @IdCourier, IdCustomer = @IdCustomer, customerAccount = @customerAccount WHERE IdCustomer=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", customer.name);
-                    cmd.Parameters.AddWithValue("@created_at", customer.created_at);
-                    cmd.Parameters.AddWithValue("@streetname", customer.streetname);
-                    cmd.Parameters.AddWithValue("@idCity", customer.idCity);                   
+                    cmd.Parameters.AddWithValue("@login", account.login);
+                    cmd.Parameters.AddWithValue("@password", account.password);
+                    cmd.Parameters.AddWithValue("@IdCourier", account.IdCourier);
+                    cmd.Parameters.AddWithValue("@IdCustomer", account.IdCustomer);
+                    cmd.Parameters.AddWithValue("@customerAccount", account.customerAccount);
 
                     cn.Open();
 
@@ -159,7 +162,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteCustomer(int id)
+        public int DeleteAccount(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -168,7 +171,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Customer WHERE IdCustomer=@id";
+                    string query = "DELETE FROM Account WHERE IdAccount=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);                  
 
@@ -185,21 +188,20 @@ namespace DAL
             return result;
         }
 
-        List<Customer> ICustomersDB.GetCustomers()
+        public List<Account> GetAccounts()
         {
             throw new NotImplementedException();
         }
 
-        Customer ICustomersDB.GetCustomer(int id)
+        List<Account> IAccountsDB.GetAccounts()
         {
             throw new NotImplementedException();
         }
 
-        public List<Customer> GetCustomers()
+        Account IAccountsDB.GetAccount(int id)
         {
             throw new NotImplementedException();
         }
-
 
     }
 }

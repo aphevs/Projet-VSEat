@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using DAL;
 using DataTransferObject;
-using Microsoft.Extensions.Configuration;
 
-namespace BusinessLayer
+namespace DAL
 {
-    public interface ICustomerManager
+    public interface ICustomersDB
     {
-
-        ICustomersDB CustomersDb { get; }
+    
+        IConfiguration Configuration { get; }
 
         List<Customer> GetCustomers();
 
@@ -21,6 +20,7 @@ namespace BusinessLayer
         int UpdateCustomer(Customer customer);
 
         int DeleteCustomer(int id);
+
 
     }
 }
