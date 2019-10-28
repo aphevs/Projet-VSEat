@@ -6,17 +6,17 @@ namespace DataTransferObject
 {
     public class Customer
     {
-        public int idCustomer { get; set; }
+        public int IdCustomer { get; set; }
         public string name { get; set; }      
         public DateTime created_at { get; set; }
-        public int idCity { get; set; }
+        public int IdCity { get; set; }
 
         public string streetname { get; set; }
 
 
         public override string ToString()
         {
-            return $"{idCustomer}|{name}|{created_at}|{idCity}|{streetname}";
+            return $"{IdCustomer}|{name}|{created_at}|{IdCity}|{streetname}";
         }
     }
 }
