@@ -39,6 +39,7 @@ namespace ConsoleApp
             foreach (var customer in customers)
             {
                 Console.WriteLine($"ID:{customer.idCustomer} Name: {customer.name}") ;
+                Console.WriteLine("hey alex this is a test from piguet git this shit ub")
             }
 
             /*
