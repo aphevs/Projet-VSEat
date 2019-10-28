@@ -35,6 +35,15 @@ namespace ConsoleApp
             var city1 = citiesDBManager.GetCity(1);
             Console.WriteLine(city1.name);
 
+
+
+            var order_dishesDBManager = new Order_DishManager(Configuration);
+            //Get an order_dish
+            Console.WriteLine("--Get an order dish--");
+            var order_dish1 = order_dishesDBManager.GetOrder_Dish(1);
+            Console.WriteLine(city1.name);
+
+
             /*
 
             var customersDBManager = new CustomerManager(Configuration);
