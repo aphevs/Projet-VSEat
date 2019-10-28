@@ -33,13 +33,13 @@ namespace ConsoleApp
 
             //Add new hotel
             Console.WriteLine("--Add CUSTOMER--");
-            var newCustomer = customersDBManager.AddCustomer(new Customer {name = "AlexPiguet", created_at = new DateTime(2019, 10, 28), streetname = "Chemin des érables 29", idCity = 1 });
+            var newCustomer = customersDBManager.AddCustomer(new Customer {name = "Alex Piguet", created_at = new DateTime(2019, 10, 28), streetname = "Chemin des érables 29", idCity = 1 });
             Console.WriteLine($"ID: {newCustomer.idCustomer} Name: {newCustomer.name}");
             customers = customersDBManager.GetCustomers();
             foreach (var customer in customers)
             {
                 Console.WriteLine($"ID:{customer.idCustomer} Name: {customer.name}") ;
-                Console.WriteLine("hey alex this is a test from piguet git this shit ub")
+                
             }
 
             /*
