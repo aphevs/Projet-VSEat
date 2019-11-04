@@ -19,14 +19,14 @@ namespace DAL
         {
             List<Restaurant> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-                                                                                         
+
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     string query = "SELECT * FROM Restaurant";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                   
+
                     cn.Open();
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -40,8 +40,9 @@ namespace DAL
 
                             restaurant.IdRestaurant = (int)dr["IdRestaurant"];
                             restaurant.created_at = (DateTime)dr["created_at"];
-                            restaurant.IdCity = (int)dr["IdCity"];
                             restaurant.name = (string)dr["name"];
+                            restaurant.IdCity = (int)dr["IdCity"];
+                            
 
                             results.Add(restaurant);
                         }
@@ -163,7 +164,7 @@ namespace DAL
                 {
                     string query = "DELETE FROM Restaurant WHERE IdRestaurant=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);                  
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     cn.Open();
 
