@@ -4,9 +4,9 @@ using System.Text;
 
 namespace DataTransferObject
 {
-    public class Customer
+    public class Courier
     {
-        public int IdCustomer { get; set; }
+        public int IdCourier { get; set; }
         public string name { get; set; }      
         public DateTime created_at { get; set; }
         public int IdCity { get; set; }
@@ -18,7 +18,7 @@ namespace DataTransferObject
 
         public override string ToString()
         {
-            return $"{IdCustomer}|{name}|{created_at}|{IdCity}|{streetname}|{IdAccount}";
+            return $"{IdCourier}|{name}|{created_at}|{IdCity}|{streetname}|{IdAccount}";
         }
     }
 }

@@ -18,6 +18,22 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             var restaurantsDBManager = new RestaurantManager(Configuration);
+
+            var restaurants = restaurantsDBManager.GetRestaurants();
+
+
+            foreach (var restaurant in restaurants)
+            {
+                Console.WriteLine(restaurant.ToString());
+            }
+
+
+
+            //Get one restau
+            Console.WriteLine("--Get one Restaurant--");
+            var restaurant1 = restaurantsDBManager.GetRestaurant(1);
+            Console.WriteLine(restaurant1.name);
+
             /*
             Console.WriteLine("--Get all restaurants--");
             var restaurants = restaurantsDBManager.GetRestaurants();
@@ -26,7 +42,7 @@ namespace ConsoleApp
                 Console.WriteLine($"IdRestaurant:{restaurant.IdRestaurant} created_at: {restaurant.created_at} IdCity: {restaurant.IdCity}name: {restaurant.name}");
 
             }
-            */
+            
 
 
             var citiesDBManager = new CityManager(Configuration);

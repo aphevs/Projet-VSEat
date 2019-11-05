@@ -42,9 +42,7 @@ namespace DAL
 
                                 account.IdAccount = (int)dr["IdAccount"];
                                 account.login = (string)dr["login"];
-                                account.password = (string)dr["password"];
-                                account.IdCourier = (int)dr["IdCourier"];
-                                account.IdCustomer = (int)dr["IdCustomer"];
+                                account.password = (string)dr["password"];                         
                                 account.customerAccount = (int)dr["customerAccount"];
 
 
@@ -87,8 +85,6 @@ namespace DAL
                             account.IdAccount = (int)dr["IdAccount"];
                             account.login = (string)dr["login"];
                             account.password = (string)dr["password"];
-                            account.IdCourier = (int)dr["IdCourier"];
-                            account.IdCustomer = (int)dr["IdCustomer"];
                             account.customerAccount = (int)dr["customerAccount"];
                         }
                     }
@@ -110,12 +106,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Account(login, password, IdCourier, IdCustomer, customerAccount) values(@login, @password, @IdCourier, @IdCustomer); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Account(login, password, customerAccount) values(@login, @password, @customerAccount); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@login", account.login);
                     cmd.Parameters.AddWithValue("@password", account.password);
-                    cmd.Parameters.AddWithValue("@IdCourier", account.IdCourier);
-                    cmd.Parameters.AddWithValue("@IdCustomer", account.IdCustomer);
                     cmd.Parameters.AddWithValue("@customerAccount", account.customerAccount);
 
 
@@ -141,12 +135,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Account SET login = @login, password =@password, IdCourier = @IdCourier, IdCustomer = @IdCustomer, customerAccount = @customerAccount WHERE IdCustomer=@id";
+                    string query = "UPDATE Account SET login = @login, password =@password, customerAccount = @customerAccount WHERE IdAccount=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@login", account.login);
                     cmd.Parameters.AddWithValue("@password", account.password);
-                    cmd.Parameters.AddWithValue("@IdCourier", account.IdCourier);
-                    cmd.Parameters.AddWithValue("@IdCustomer", account.IdCustomer);
                     cmd.Parameters.AddWithValue("@customerAccount", account.customerAccount);
 
                     cn.Open();

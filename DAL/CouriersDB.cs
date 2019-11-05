@@ -7,26 +7,26 @@ using DataTransferObject;
 
 namespace DAL
 {
-    public class CustomersDB : ICustomersDB
+    public class CouriersDB : ICouriersDB
     {
         public IConfiguration Configuration { get; }
-        public CustomersDB(IConfiguration configuration)
+        public CouriersDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public List<Customer> Customers
+        public List<Courier> Couriers
         {
             get
             {
-                List<Customer> results = null;
+                List<Courier> results = null;
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "SELECT * FROM Customer";
+                        string query = "SELECT * FROM Courier";
                         SqlCommand cmd = new SqlCommand(query, cn);
 
                         cn.Open();
@@ -36,19 +36,19 @@ namespace DAL
                             while (dr.Read())
                             {
                                 if (results == null)
-                                    results = new List<Customer>();
+                                    results = new List<Courier>();
 
-                                Customer customer = new Customer();
+                                Courier courier = new Courier();
 
-                                customer.IdCustomer = (int)dr["IdCustomer"];
-                                customer.name = (string)dr["name"];
-                                customer.created_at = (DateTime)dr["created_at"];
-                                customer.streetname = (string)dr["streetname"];
-                                customer.IdCity = (int)dr["IdCity"];
-                                customer.IdAccount = (int)dr["IdAccount"];
+                                courier.IdCourier = (int)dr["IdCourier"];
+                                courier.name = (string)dr["name"];
+                                courier.created_at = (DateTime)dr["created_at"];
+                                courier.streetname = (string)dr["streetname"];
+                                courier.IdCity = (int)dr["IdCity"];
+                                courier.IdAccount = (int)dr["IdAccount"];
 
 
-                                results.Add(customer);
+                                results.Add(courier);
                             }
                         }
                     }
@@ -62,16 +62,16 @@ namespace DAL
             }
         }
 
-        public Customer GetCustomer(int id)
+        public Courier GetCourier(int id)
         {
-            Customer customer = null;
+            Courier courier = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Costumer where idCustomer = @id ";
+                    string query = "Select * from Courier where idCourier = @id ";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -81,14 +81,14 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            customer = new Customer();
+                            courier = new Courier();
 
-                            customer.IdCustomer = (int)dr["IdCustomer"];
-                            customer.name = (string)dr["name"];
-                            customer.created_at = (DateTime)dr["created_at"];
-                            customer.streetname = (string)dr["streetname"];
-                            customer.IdCity = (int)dr["IdCity"];
-                            customer.IdAccount = (int)dr["IdAccount"];
+                            courier.IdCourier = (int)dr["IdCourier"];
+                            courier.name = (string)dr["name"];
+                            courier.created_at = (DateTime)dr["created_at"];
+                            courier.streetname = (string)dr["streetname"];
+                            courier.IdCity = (int)dr["IdCity"];
+                            courier.IdAccount = (int)dr["IdAccount"];
 
                         }
                     }
@@ -99,10 +99,10 @@ namespace DAL
                 throw e;
             }
 
-            return customer;
+            return courier;
         }
 
-        public Customer AddCustomer(Customer customer)
+        public Courier AddCourier(Courier courier)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -110,18 +110,18 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Customer(name, created_at, streetname, idCity, idAccount) values(@name, @created_at, @streetname, @idCity, @idAccount); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Courier(name, created_at, streetname, idCity, idAccount) values(@name, @created_at, @streetname, @idCity, @idAccount); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", customer.name);
-                    cmd.Parameters.AddWithValue("@created_at", customer.created_at);
-                    cmd.Parameters.AddWithValue("@streetname", customer.streetname);
-                    cmd.Parameters.AddWithValue("@IdCity", customer.IdCity);
-                    cmd.Parameters.AddWithValue("@IdAccount", customer.IdAccount);
+                    cmd.Parameters.AddWithValue("@name", courier.name);
+                    cmd.Parameters.AddWithValue("@created_at", courier.created_at);
+                    cmd.Parameters.AddWithValue("@streetname", courier.streetname);
+                    cmd.Parameters.AddWithValue("@IdCity", courier.IdCity);
+                    cmd.Parameters.AddWithValue("@IdAccount", courier.IdAccount);
 
 
                     cn.Open();
 
-                    customer.IdCustomer = Convert.ToInt32(cmd.ExecuteScalar());
+                    courier.IdCourier = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
@@ -129,10 +129,10 @@ namespace DAL
                 throw e;
             }
 
-            return customer;
+            return courier;
         }
 
-        public int UpdateCustomer(Customer customer)
+        public int UpdateCourier(Courier courier)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -141,13 +141,13 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Customer SET name = @name, created_at =@created_at, streetname = @streetname, IdCity = @IdCity, IdAccount = @IdAccount WHERE IdCustomer=@id";
+                    string query = "UPDATE Courier SET name = @name, created_at =@created_at, streetname = @streetname, IdCity = @IdCity, IdAccount = @IdAccount WHERE IdCourier=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", customer.name);
-                    cmd.Parameters.AddWithValue("@created_at", customer.created_at);
-                    cmd.Parameters.AddWithValue("@streetname", customer.streetname);
-                    cmd.Parameters.AddWithValue("@idCity", customer.IdCity);
-                    cmd.Parameters.AddWithValue("@IdAccount", customer.IdAccount);
+                    cmd.Parameters.AddWithValue("@name", courier.name);
+                    cmd.Parameters.AddWithValue("@created_at", courier.created_at);
+                    cmd.Parameters.AddWithValue("@streetname", courier.streetname);
+                    cmd.Parameters.AddWithValue("@idCity", courier.IdCity);
+                    cmd.Parameters.AddWithValue("@IdAccount", courier.IdAccount);
 
                     cn.Open();
 
@@ -162,7 +162,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteCustomer(int id)
+        public int DeleteCourier(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -171,7 +171,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Customer WHERE IdCustomer=@id";
+                    string query = "DELETE FROM Courier WHERE IdCourier=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);                  
 
@@ -188,17 +188,17 @@ namespace DAL
             return result;
         }
 
-        List<Customer> ICustomersDB.GetCustomers()
+        List<Courier> ICouriersDB.GetCouriers()
         {
             throw new NotImplementedException();
         }
 
-        Customer ICustomersDB.GetCustomer(int id)
+        Courier ICouriersDB.GetCourier(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Customer> GetCustomers()
+        public List<Courier> GetCouriers()
         {
             throw new NotImplementedException();
         }

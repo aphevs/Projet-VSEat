@@ -35,7 +35,8 @@ namespace DAL
                         {
                             if (results == null)
                                 results = new List<Restaurant>();
-
+                            
+                           
                             Restaurant restaurant = new Restaurant();
 
                             restaurant.IdRestaurant = (int)dr["IdRestaurant"];
