@@ -15,14 +15,15 @@ namespace BusinessLayer
         public ScheduleManager(IConfiguration configuration)
         {
             ScheduleDB = new SchedulesDB(configuration);
+
         }
 
-        
 
         public Schedule GetSchedule(int id)
         {
             return ScheduleDB.GetSchedule(id);
         }
+
 
 
     }

@@ -16,7 +16,6 @@ namespace DAL
         }
 
 
-        
 
         public Schedule GetSchedule(int id)
         {
@@ -27,7 +26,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Schedule WHERE IdSchedule = @id "; 
+                    string query = "SELECT * FROM Schedule WHERE IdSchedule = @id ";  //si plusieurs resultats, on va lire dr.Read pour les voir: location = Sion
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -42,7 +41,7 @@ namespace DAL
                             schedule.IdSchedule = (int)dr["IdSchedule"];
                             schedule.openingTime = (DateTime)dr["openingTime"];
                             schedule.closingTime = (DateTime)dr["closingTime"];
-                         
+
                         }
                     }
                 }
@@ -54,7 +53,6 @@ namespace DAL
 
             return schedule;
         }
-
 
 
     }

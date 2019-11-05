@@ -7,24 +7,24 @@ using DataTransferObject;
 
 namespace DAL
 {
-    public class RestaurantsDB : IRestaurantsDB
+    public class OrdersDB : IOrdersDB
     {
         public IConfiguration Configuration { get; }
-        public RestaurantsDB(IConfiguration configuration)
+        public OrdersDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public List<Restaurant> GetRestaurants()
+        public List<Order> GetOrders()
         {
-            List<Restaurant> results = null;
+            List<Order> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Restaurant";
+                    string query = "SELECT * FROM Order";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -34,18 +34,18 @@ namespace DAL
                         while (dr.Read())
                         {
                             if (results == null)
-                                results = new List<Restaurant>();
-                            
-                           
-                            Restaurant restaurant = new Restaurant();
+                                results = new List<Order>();
 
-                            restaurant.IdRestaurant = (int)dr["IdRestaurant"];
-                            restaurant.created_at = (DateTime)dr["created_at"];
-                            restaurant.name = (string)dr["name"];
-                            restaurant.IdCity = (int)dr["IdCity"];
-                            restaurant.IdSchedule = (int)dr["IdSchedule"];
+                            Order order = new Order();
 
-                            results.Add(restaurant);
+                            order.IdOrder= (int)dr["IdOrder"];
+                            order.status = (string)dr["status"];
+                            order.placetodeliver = (string)dr["placetodeliver"];
+                            order.comment = (string)dr["comment"];
+                            order.IdCustomer = (int)dr["IdCustomer"];
+                            order.IdCourier = (int)dr["IdCourier"];
+
+                            results.Add(order);
                         }
                     }
                 }
@@ -58,16 +58,16 @@ namespace DAL
             return results;
         }
 
-        public Restaurant GetRestaurant(int id)
+        public Order GetOrder(int id)
         {
-            Restaurant restaurant = null;
+            Order order = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Restaurant WHERE IdRestaurant = @id ";  //si plusieurs resultats, on va lire dr.Read pour les voir: location = Sion
+                    string query = "SELECT * FROM Order WHERE IdOrder = @id "; 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -77,13 +77,14 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            restaurant = new Restaurant();
+                            order = new Order();
 
-                            restaurant.IdRestaurant = (int)dr["IdRestaurant"];
-                            restaurant.created_at = (DateTime)dr["created_at"];
-                            restaurant.IdCity = (int)dr["IdCity"];
-                            restaurant.name = (string)dr["name"];
-                            restaurant.IdSchedule = (int)dr["IdSchedule"];
+                            order.IdOrder = (int)dr["IdOrder"];
+                            order.status = (string)dr["status"];
+                            order.placetodeliver = (string)dr["placetodeliver"];
+                            order.comment = (string)dr["comment"];
+                            order.IdCustomer = (int)dr["IdCustomer"];
+                            order.IdCourier = (int)dr["IdCourier"];
                         }
                     }
                 }
@@ -93,10 +94,10 @@ namespace DAL
                 throw e;
             }
 
-            return restaurant;
+            return order;
         }
 
-        public Restaurant AddRestaurant(Restaurant restaurant)
+        public Order AddOrder(Order order)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -104,17 +105,18 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Restaurant(IdRestaurant, created_at, IdCity, name) values(@IdRestaurant, @created_at, @IdCity, name); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Order(IdOrder, status, created_at, placedeliver, comment, IdCustomer, IdCourier) values(@IdOrder, @status, @created_at, @placetodeliver, @comment, @IdCustomer, @IdCourier); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@IdRestaurant", restaurant.IdRestaurant);
-                    cmd.Parameters.AddWithValue("@created_at", restaurant.created_at);
-                    cmd.Parameters.AddWithValue("@IdCity", restaurant.IdCity);
-                    cmd.Parameters.AddWithValue("@name", restaurant.name);
-                    cmd.Parameters.AddWithValue("@IdSchedule", restaurant.IdSchedule);
-
+                    cmd.Parameters.AddWithValue("@IdOrder", order.IdOrder);
+                    cmd.Parameters.AddWithValue("@status", order.status);
+                    cmd.Parameters.AddWithValue("@created_at", order.created_at);
+                    cmd.Parameters.AddWithValue("@placetodeliver", order.placetodeliver);
+                    cmd.Parameters.AddWithValue("@comment", order.comment);
+                    cmd.Parameters.AddWithValue("@IdCustomer", order.IdCustomer);
+                    cmd.Parameters.AddWithValue("@IdCourier", order.IdCourier);
                     cn.Open();
 
-                    restaurant.IdRestaurant = Convert.ToInt32(cmd.ExecuteScalar());
+                    order.IdOrder = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
@@ -122,10 +124,10 @@ namespace DAL
                 throw e;
             }
 
-            return restaurant;
+            return order;
         }
 
-        public int UpdateRestaurant(Restaurant restaurant)
+        public int UpdateOrder(Order order)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -136,12 +138,13 @@ namespace DAL
                 {
                     string query = "UPDATE Restaurant SET IdRestaurant = @Idrestaurant, created_at = @created_at, IdCity = @IdCity, name = @name, IdSchedule = @IdSchedule WHERE IdRestaurant=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@Idrestaurant", restaurant.IdRestaurant);
-                    cmd.Parameters.AddWithValue("@created_at", restaurant.created_at);
-                    cmd.Parameters.AddWithValue("@IdCity", restaurant.IdCity);
-                    cmd.Parameters.AddWithValue("@name", restaurant.name);
-                    cmd.Parameters.AddWithValue("@IdSchedule", restaurant.IdSchedule);
-
+                    cmd.Parameters.AddWithValue("@Idrestaurant", order.IdOrder);
+                    cmd.Parameters.AddWithValue("@status", order.status);
+                    cmd.Parameters.AddWithValue("@created_at", order.created_at);
+                    cmd.Parameters.AddWithValue("@placetodeliver", order.placetodeliver);
+                    cmd.Parameters.AddWithValue("@comment", order.comment);
+                    cmd.Parameters.AddWithValue("@IdCustomer", order.IdCustomer);
+                    cmd.Parameters.AddWithValue("@IdCourier", order.IdCourier);
                     cn.Open();
 
                     result = cmd.ExecuteNonQuery();
@@ -155,7 +158,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteRestaurant(int id)
+        public int DeleteOrder(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -164,7 +167,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Restaurant WHERE IdRestaurant=@id";
+                    string query = "DELETE FROM Order WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
