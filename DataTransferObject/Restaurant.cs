@@ -10,10 +10,11 @@ namespace DataTransferObject
         public DateTime created_at { get; set; }
         public int IdCity { get; set; }
         public string name { get; set; }
+        public int IdSchedule { get; set; }
 
         public override string ToString()
         {
-            return $"{IdRestaurant}|{created_at}|{IdCity}|{name}";
+            return $"{IdRestaurant}|{created_at}|{IdCity}|{name}|{IdSchedule}";
         }
     }
 }

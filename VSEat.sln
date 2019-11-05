@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTransferObject", "DataTransferObject\DataTransferObject.csproj", "{036B48C6-E667-45FC-806A-9CF5AC182770}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebVSEat", "WebVSEat\WebVSEat.csproj", "{61574859-49BC-417E-BFD2-A4787DB747F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{036B48C6-E667-45FC-806A-9CF5AC182770}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{036B48C6-E667-45FC-806A-9CF5AC182770}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{036B48C6-E667-45FC-806A-9CF5AC182770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61574859-49BC-417E-BFD2-A4787DB747F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61574859-49BC-417E-BFD2-A4787DB747F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61574859-49BC-417E-BFD2-A4787DB747F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61574859-49BC-417E-BFD2-A4787DB747F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
