@@ -29,6 +29,20 @@ namespace WebVSEat.Controllers
             return View();
         }
 
+        public IActionResult LogIn()
+        {
+            ViewData["Message"] = "Log you in";
+
+            return View();
+        }
+
+        public IActionResult CreateAnAccount()
+        {
+            ViewData["Message"] = "Create an account";
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
