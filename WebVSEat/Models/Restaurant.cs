@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace DataTransferObject
+namespace WebVSEat.Models
 {
     public class Restaurant
     {
@@ -12,6 +13,7 @@ namespace DataTransferObject
         public DateTime created_at { get; set; }
         public int IdCity { get; set; }
         public string name { get; set; }
+        public string Name { get; internal set; }
         public int IdSchedule { get; set; }
 
         public override string ToString()

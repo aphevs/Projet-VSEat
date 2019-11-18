@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using WebVSEat.Models;
 
 namespace WebVSEat.Controllers
 {
@@ -15,19 +17,30 @@ namespace WebVSEat.Controllers
             return View();
         }
 
-        public ActionResult GetRestaurants()
+        public ActionResult GetRestaurants2()
         {
 
             return View();
 
         }
 
-
-
+        //Create a list déroulante
+        //selected = par défaut
         // GET: Restaurant/Details/5
         public ActionResult Details(int id)
         {
+
+            var names = new List<SelectListItem>
+            {
+                new SelectListItem{Value="1", Text = "Vache and me"},
+                new SelectListItem{Value="2", Text = "Downtown", Selected=true},
+                new SelectListItem{Value="3", Text = "Thai"}
+            };
+            ViewBag.Names = names;
+            ViewBag.Selected = 2;
             return View();
+
+
         }
         //if you have an object, you can get here, if not, you stay out
         [HttpPost]
@@ -107,16 +120,30 @@ namespace WebVSEat.Controllers
             }
         }
 
-        public ActionResult IndexRestaurant()
+        public ActionResult GetRestaurants()
         {
-            var restaurantList = new List<DataTransferObject.Restaurant>
+            var restaurantList = new List<Restaurant>
             {
-            new DataTransferObject.Restaurant() {IdRestaurant = 1, created_at = new DateTime(2008, 3, 1, 7, 0, 0), name = "Vache and me", IdCity =1, IdSchedule = 1 },
-            new DataTransferObject.Restaurant() {IdRestaurant = 2, created_at = new DateTime(2009, 7, 10, 0, 0, 0), name = "Downtown", IdCity =2, IdSchedule = 1 },
-            new DataTransferObject.Restaurant() {IdRestaurant = 3, created_at = new DateTime(2014, 4, 10, 0, 0, 0), name = "SAP", IdCity =1, IdSchedule = 1 },
-            new DataTransferObject.Restaurant() {IdRestaurant = 4, created_at = new DateTime(2018, 7, 11, 0, 0, 0), name = "San Andreas", IdCity =1, IdSchedule = 1 },
+            new Restaurant() {IdRestaurant = 1, created_at = new DateTime(2008, 3, 1, 7, 0, 0), name = "Vache and me", IdCity =1, IdSchedule = 1 },
+            new Restaurant() {IdRestaurant = 2, created_at = new DateTime(2009, 7, 10, 0, 0, 0), name = "Downtown", IdCity =2, IdSchedule = 1 },
+            new Restaurant() {IdRestaurant = 3, created_at = new DateTime(2014, 4, 10, 0, 0, 0), name = "SAP", IdCity =1, IdSchedule = 1 },
+            new Restaurant() {IdRestaurant = 4, created_at = new DateTime(2018, 7, 11, 0, 0, 0), name = "San Andreas", IdCity =1, IdSchedule = 1 },
             };
             return View();
+
+        }
+
+        public ActionResult GetCityRestaurants()
+        {
+            var restaurantList = new List<CityRestaurants>
+            {
+                new CityRestaurants() {city = "Sierre", lrestaurants = new List<Restaurant>{
+                new Restaurant() {Name ="Vache and me" },
+                new Restaurant() {Name = "Downtown" },
+                new Restaurant() {Name = "Team"},
+                }}
+            };
+            return View("GetCityRestaurants", restaurantList);
 
         }
     }

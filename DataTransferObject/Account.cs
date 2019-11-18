@@ -8,7 +8,7 @@ namespace DataTransferObject
         public string login { get; set; }
         public string password { get; set; }
 
-        public int customerAccount { get; set; }
+        public bool customerAccount { get; set; }
 
 
         public override string ToString()

@@ -8,6 +8,8 @@
 
 <h4>Restaurant</h4>
 <hr />
+
+<h2>@DateTime.Now.ToLongDateString()</h2>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Details">
@@ -29,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="name" class="control-label"></label>
-                <input asp-for="name" class="form-control" />
+                <select asp-for="name" class="form-control" asp-items="@(new SelectList(ViewBag.Names,"Value", "Text", ViewBag.Selected))"> </select>
                 <span asp-validation-for="name" class="text-danger"></span>
             </div>
             <div class="form-group">

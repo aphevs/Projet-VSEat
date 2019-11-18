@@ -1,7 +1,33 @@
 ﻿@{
     ViewData["Title"] = "Create an account";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+    <body>
+        <h2>@ViewData["Message"]</h2>
 
-<p>Use this area to provide additional information.</p>
+            <form action="/action_page.php">
+                Login<br>
+                <input type="text" name="login" value="">
+                <br>
+                Password<br>
+                <input type="password" name="password" value="">
+                <br>
+                Confirm your password<br>
+                <input type="password" value="">
+                <br>
+                Full name<br>
+                <input type="text" value="">
+                <br>
+                Street name<br>
+                <input type="text" value="">
+                <br>
+                Street code<br>
+                <input type="text" value="">
+                <br>
+                Street name<br>
+
+                <br><br>
+                <input type="submit" value="Create an account">
+
+
+            </form>
+        </body>
