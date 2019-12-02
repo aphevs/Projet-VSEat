@@ -16,6 +16,11 @@ namespace DataTransferObject
         public int IdAccount { get; set; }
 
 
+        public string login { get; set; }
+        public string password { get; set; }
+        public bool customerAccount { get; set; }
+
+
         public override string ToString()
         {
             return $"{IdCustomer}|{name}|{created_at}|{IdCity}|{streetname}|{IdAccount}";

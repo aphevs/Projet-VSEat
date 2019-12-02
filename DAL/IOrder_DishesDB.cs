@@ -9,7 +9,7 @@ namespace DAL
     public interface IOrder_DishesDB
     {
 
-        IConfiguration Configuration { get; }
+        //IConfiguration Configuration { get; }
 
 
         Order_Dish GetOrder_Dish(int id);

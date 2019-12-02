@@ -7,41 +7,43 @@ using Microsoft.Extensions.Configuration;
 
 namespace BusinessLayer
 {
-    public class RestaurantManager
+    public class RestaurantManager : IRestaurantManager
     {
-        public IRestaurantsDB RestaurantDB { get; }
+        private IRestaurantsDB RestaurantDBObject { get; }
 
 
-        public RestaurantManager(IConfiguration configuration)
+        public RestaurantManager(IRestaurantsDB restaurantDB)
         {
-            RestaurantDB = new RestaurantsDB(configuration);
+            RestaurantDBObject = restaurantDB;
 
         }
 
         public List<Restaurant> GetRestaurants()
         {
-            return RestaurantDB.GetRestaurants();
+            return RestaurantDBObject.GetRestaurants();
 
         }
 
         public Restaurant GetRestaurant(int id)
         {
-            return RestaurantDB.GetRestaurant(id);
+            return RestaurantDBObject.GetRestaurant(id);
         }
 
         public Restaurant AddRestaurant(Restaurant restaurant)
         {
-            return RestaurantDB.AddRestaurant(restaurant);
+            return RestaurantDBObject.AddRestaurant(restaurant);
         }
 
         public int UpdateRestaurant(Restaurant restaurant)
         {
-            return RestaurantDB.UpdateRestaurant(restaurant);
+            return RestaurantDBObject.UpdateRestaurant(restaurant);
         }
 
+
+        //put all algorithms deletion here
         public int DeleteRestaurant(int id)
         {
-            return RestaurantDB.DeleteRestaurant(id);
+            return RestaurantDBObject.DeleteRestaurant(id);
         }
 
 

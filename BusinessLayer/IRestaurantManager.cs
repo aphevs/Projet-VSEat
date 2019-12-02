@@ -10,7 +10,6 @@ namespace BusinessLayer
     public interface IRestaurantManager
     {
 
-        IRestaurantsDB RestaurantDb { get; }
 
         List<Restaurant> GetRestaurants();
 

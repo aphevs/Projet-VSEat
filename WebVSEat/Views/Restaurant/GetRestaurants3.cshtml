@@ -1,0 +1,59 @@
+﻿@model IEnumerable<DataTransferObject.Restaurant>
+
+@{
+    ViewData["Title"] = "GetRestaurants3";
+}
+
+<h2>GetRestaurants3</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdRestaurant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.created_at)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSchedule)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdRestaurant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.created_at)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSchedule)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id=item.IdRestaurant }) |
+                @Html.ActionLink("Details", "Details", new { id=item.IdRestaurant }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.IdRestaurant })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

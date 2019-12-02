@@ -6,45 +6,43 @@
 
 <h2>Details</h2>
 
-<h4>Restaurant</h4>
-<hr />
-
-<h2>@DateTime.Now.ToLongDateString()</h2>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Details">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdRestaurant" class="control-label"></label>
-                <input asp-for="IdRestaurant" class="form-control" />
-                <span asp-validation-for="IdRestaurant" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="created_at" class="control-label"></label>
-                <input asp-for="created_at" class="form-control" />
-                <span asp-validation-for="created_at" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdCity" class="control-label"></label>
-                <input asp-for="IdCity" class="form-control" />
-                <span asp-validation-for="IdCity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="name" class="control-label"></label>
-                <select asp-for="name" class="form-control" asp-items="@(new SelectList(ViewBag.Names,"Value", "Text", ViewBag.Selected))"> </select>
-                <span asp-validation-for="name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
-
 <div>
-    <a asp-action="Index">Back to List</a>
+    <h4>Restaurant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdRestaurant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdRestaurant)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.created_at)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.created_at)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdCity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdSchedule)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdSchedule)
+        </dd>
+    </dl>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<div>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.IdRestaurant  }) |
+    <a asp-action="GetRestaurants3">Back to List</a>
+</div>

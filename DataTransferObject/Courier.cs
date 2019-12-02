@@ -15,6 +15,9 @@ namespace DataTransferObject
 
         public int IdAccount { get; set; }
 
+        
+
+
 
         public override string ToString()
         {

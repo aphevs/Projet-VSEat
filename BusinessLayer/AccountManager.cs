@@ -17,6 +17,13 @@ namespace BusinessLayer
             AccountDB = new AccountsDB(configuration);
         }
 
+
+        //public List<Account> GetCustomerAccount()
+       // {
+        //    return AccountDB.GetCustomerAccount();
+       // }
+
+
         public List<Account> GetAccounts()
         {
             return AccountDB.GetAccounts();

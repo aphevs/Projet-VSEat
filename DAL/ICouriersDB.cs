@@ -9,7 +9,7 @@ namespace DAL
     public interface ICouriersDB
     {
     
-        IConfiguration Configuration { get; }
+        //IConfiguration Configuration { get; }
 
         List<Courier> GetCouriers();
 

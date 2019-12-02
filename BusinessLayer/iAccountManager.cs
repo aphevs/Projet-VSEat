@@ -12,6 +12,8 @@ namespace BusinessLayer
 
         IAccountsDB AccountsDb { get; }
 
+       // List<Account> GetCustomerAccount();
+
         List<Account> GetAccounts();
 
         Account GetAccount(int id);

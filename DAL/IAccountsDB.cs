@@ -9,7 +9,9 @@ namespace DAL
     public interface IAccountsDB
     {
 
-        IConfiguration Configuration { get; }
+        //IConfiguration Configuration { get; }
+
+        //List<Account> GetCustomerAccount();
 
         List<Account> GetAccounts();
 

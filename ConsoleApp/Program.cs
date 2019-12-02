@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using BusinessLayer;
+using System.Collections.Generic;
 
 namespace ConsoleApp
 {
@@ -18,11 +19,24 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
 
+            var customerDBManager = new CustomerManager(Configuration);
+           // var accounts = accountsDBManager.GetCustomerAccount();
 
+
+            List<Customer> lAccount = customerDBManager.GetCustomerAccount();
+            foreach (Customer cu in lAccount)
+            {
+                Console.WriteLine(cu);
+            }
+
+
+
+
+
+            /*
+             * 
             var restaurantsDBManager = new RestaurantManager(Configuration);
-
             var restaurants = restaurantsDBManager.GetRestaurants();
-
 
             foreach (var restaurant in restaurants)
             {
@@ -36,7 +50,7 @@ namespace ConsoleApp
             var restaurant1 = restaurantsDBManager.GetRestaurant(1);
             Console.WriteLine(restaurant1.name);
 
-            /*
+            
 
             var restaurantsDBManager = new RestaurantManager(Configuration);
             

@@ -10,7 +10,10 @@ namespace BusinessLayer
     public interface ICustomerManager
     {
 
+
         ICustomersDB CustomersDb { get; }
+
+        List<Customer> GetCustomerAccount();
 
         List<Customer> GetCustomers();
 

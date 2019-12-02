@@ -6,11 +6,28 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebVSEat.Models;
+using BusinessLayer;
+using Microsoft.Extensions.Configuration;
 
 namespace WebVSEat.Controllers
 {
+
+
+
+
     public class RestaurantController : Controller
     {
+
+        private IConfiguration Configuration { get; }
+
+
+        public RestaurantController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+
+
         // GET: Restaurant
         public ActionResult Index()
         {
@@ -27,27 +44,29 @@ namespace WebVSEat.Controllers
         //Create a list déroulante
         //selected = par défaut
         // GET: Restaurant/Details/5
+       // public ActionResult Details(int id)
+       // {
+
+           // var names = new List<SelectListItem>
+           // {
+           //     new SelectListItem{Value="1", Text = "Vache and me"},
+           //     new SelectListItem{Value="2", Text = "Downtown", Selected=true},
+          //      new SelectListItem{Value="3", Text = "Thai"}
+           // };
+           // ViewBag.Names = names;
+           // ViewBag.Selected = 2;
+           // return View();
+
+
+       // }
+        //if you have an object, you can get here, if not, you stay out
         public ActionResult Details(int id)
         {
 
-            var names = new List<SelectListItem>
-            {
-                new SelectListItem{Value="1", Text = "Vache and me"},
-                new SelectListItem{Value="2", Text = "Downtown", Selected=true},
-                new SelectListItem{Value="3", Text = "Thai"}
-            };
-            ViewBag.Names = names;
-            ViewBag.Selected = 2;
-            return View();
+            RestaurantManager rMan = new RestaurantManager(Configuration);
+            var restaurant = rMan.GetRestaurant(id);
+            return View(restaurant);
 
-
-        }
-        //if you have an object, you can get here, if not, you stay out
-        [HttpPost]
-        public ActionResult Details(DataTransferObject.Restaurant r)
-        {
-            DataTransferObject.Restaurant restaurant = r;
-            return View();
         }
 
 
@@ -60,13 +79,14 @@ namespace WebVSEat.Controllers
         // POST: Restaurant/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(DataTransferObject.Restaurant r)
         {
             try
             {
-                // TODO: Add insert logic here
+                RestaurantManager rMan = new RestaurantManager(Configuration);
+                rMan.AddRestaurant(r);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetRestaurants3));
             }
             catch
             {
@@ -74,51 +94,38 @@ namespace WebVSEat.Controllers
             }
         }
 
-        // GET: Restaurant/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: Restaurant/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: Restaurant/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            return View();
+            RestaurantManager rMan = new RestaurantManager(Configuration);
+            rMan.DeleteRestaurant(id);
+            return View(RedirectToAction(nameof(GetRestaurants3)));
+
         }
 
         // POST: Restaurant/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
+       // [HttpPost]
+    //    [ValidateAntiForgeryToken]
+       // public ActionResult Delete(int id, IFormCollection collection)
+        //{
+       //     try
+       //     {
                 // TODO: Add delete logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+      //          return RedirectToAction(nameof(Index));
+
+
+        //    }
+       //     catch
+      //      {
+      //          return View();
+     //       }
+     //   }
 
         public ActionResult GetRestaurants()
         {
@@ -146,5 +153,49 @@ namespace WebVSEat.Controllers
             return View("GetCityRestaurants", restaurantList);
 
         }
+
+
+
+        //use with bll import
+        public ActionResult GetRestaurants3()
+        {
+            RestaurantManager rManager = new RestaurantManager(Configuration);
+
+            var restaurantlist = rManager.GetRestaurants();
+
+
+            return View(restaurantlist);
+
+
+        }
+
+        // GET: Restaurant/Edit/5
+        //restaurant DTO
+        public ActionResult Edit(int id)
+        {
+
+            RestaurantManager rMan = new RestaurantManager(Configuration);
+            var restaurant = rMan.GetRestaurant(id);
+            return View(restaurant);
+        }
+
+
+
+         [HttpPost]
+        public ActionResult Edit(DataTransferObject.Restaurant r)
+        {
+
+            RestaurantManager rMan = new RestaurantManager(Configuration);
+            rMan.UpdateRestaurant(r);
+            return RedirectToAction(nameof(Index));
+
+
+
+
+        }
+
+
+
+
     }
 }

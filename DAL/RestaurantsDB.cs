@@ -9,17 +9,21 @@ namespace DAL
 {
     public class RestaurantsDB : IRestaurantsDB
     {
-        public IConfiguration Configuration { get; }
+        //option2
+        //private string connectioNString=null;
+        private IConfiguration Configuration { get; }
         public RestaurantsDB(IConfiguration configuration)
         {
+            //var config = configuration;
+            //connectionString = configuration.GetConnectionString("DefaultConnection")
             Configuration = configuration;
         }
 
         public List<Restaurant> GetRestaurants()
         {
             List<Restaurant> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPB;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -61,8 +65,8 @@ namespace DAL
         public Restaurant GetRestaurant(int id)
         {
             Restaurant restaurant = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
+           // string connectionString = Configuration.GetConnectionString("DefaultConnection");
+             string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPB;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -98,13 +102,13 @@ namespace DAL
 
         public Restaurant AddRestaurant(Restaurant restaurant)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
+           // string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPB;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Restaurant(IdRestaurant, created_at, IdCity, name) values(@IdRestaurant, @created_at, @IdCity, name); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Restaurant(IdRestaurant, created_at, IdCity, name, IdSchedule) values(@IdRestaurant, @created_at, @IdCity, @name, @IdSchedule); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdRestaurant", restaurant.IdRestaurant);
                     cmd.Parameters.AddWithValue("@created_at", restaurant.created_at);
@@ -128,15 +132,15 @@ namespace DAL
         public int UpdateRestaurant(Restaurant restaurant)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPB;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Restaurant SET IdRestaurant = @Idrestaurant, created_at = @created_at, IdCity = @IdCity, name = @name, IdSchedule = @IdSchedule WHERE IdRestaurant=@id";
+                    string query = "UPDATE Restaurant SET created_at = @created_at, IdCity = @IdCity, name = @name, IdSchedule = @IdSchedule WHERE IdRestaurant=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@Idrestaurant", restaurant.IdRestaurant);
+                    cmd.Parameters.AddWithValue("@id", restaurant.IdRestaurant);
                     cmd.Parameters.AddWithValue("@created_at", restaurant.created_at);
                     cmd.Parameters.AddWithValue("@IdCity", restaurant.IdCity);
                     cmd.Parameters.AddWithValue("@name", restaurant.name);

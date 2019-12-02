@@ -15,9 +15,52 @@ namespace DAL
             Configuration = configuration;
         }
 
-        public List<Account> Accounts
+        /*
+        public List<Account> GetCustomerAccount()
         {
-            get
+            List<Account> lAccounts = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+                string query = "SELECT * FROM Account inner join Customer on Account.IdAccount=Customer.IdAccount";
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cn.Open();
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        if (lAccounts == null)
+                                lAccounts = new List<Account>();
+
+                            Account accountTemp = new Account();
+                            accountTemp.IdAccount = (int)dr["IdAccount"];
+                            accountTemp.login = (string)dr["login"];
+                            accountTemp.password = (string)dr["password"];
+                            accountTemp.customerAccount = (bool)dr["customerAccount"];
+                            accountTemp.name = (string)dr["name"];
+                            accountTemp.created_at = (DateTime)dr["created_at"];
+
+                            lAccounts.Add(accountTemp);
+
+                    }
+                }
+            }
+           
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return lAccounts;
+        }
+        */
+
+        public List<Account> GetAccounts()
+        {
+          
             {
                 List<Account> results = null;
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -43,7 +86,7 @@ namespace DAL
                                 account.IdAccount = (int)dr["IdAccount"];
                                 account.login = (string)dr["login"];
                                 account.password = (string)dr["password"];                         
-                                account.customerAccount = (int)dr["customerAccount"];
+                                account.customerAccount = (bool)dr["customerAccount"];
 
 
 
@@ -85,7 +128,7 @@ namespace DAL
                             account.IdAccount = (int)dr["IdAccount"];
                             account.login = (string)dr["login"];
                             account.password = (string)dr["password"];
-                            account.customerAccount = (int)dr["customerAccount"];
+                            account.customerAccount = (bool)dr["customerAccount"];
                         }
                     }
                 }
@@ -180,20 +223,6 @@ namespace DAL
             return result;
         }
 
-        public List<Account> GetAccounts()
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Account> IAccountsDB.GetAccounts()
-        {
-            throw new NotImplementedException();
-        }
-
-        Account IAccountsDB.GetAccount(int id)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

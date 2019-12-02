@@ -9,7 +9,7 @@ namespace DAL
     public interface IDishesDB
     {
 
-        IConfiguration Configuration { get; }
+       // IConfiguration Configuration { get; }
 
         List<Dish> GetDishes();
 

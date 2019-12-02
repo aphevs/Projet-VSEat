@@ -9,7 +9,7 @@ namespace DAL
     public interface ISchedulesDB
     {
     
-        IConfiguration Configuration { get; }
+       // IConfiguration Configuration { get; }
 
 
         Schedule GetSchedule(int id);

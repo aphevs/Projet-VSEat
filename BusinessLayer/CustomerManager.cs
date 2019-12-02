@@ -12,6 +12,11 @@ namespace BusinessLayer
         public ICustomersDB CustomerDB { get; }
 
 
+        public List<Customer> GetCustomerAccount()
+        {
+            return CustomerDB.GetCustomerAccount();
+        }
+
         public CustomerManager(IConfiguration configuration)
         {
             CustomerDB = new CustomersDB(configuration);

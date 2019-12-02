@@ -15,6 +15,57 @@ namespace DAL
             Configuration = configuration;
         }
 
+        public List<Customer> GetCustomerAccount()
+        {
+            List<Customer> lCustomer = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+                    string query = "SELECT * FROM Customer inner join Account on Customer.IdAccount=Account.IdAccount";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (lCustomer == null)
+                                lCustomer = new List<Customer>();
+
+                            Customer accountTemp = new Customer();
+                            accountTemp.IdCustomer = (int)dr["IdCustomer"];
+                            accountTemp.name = (string)dr["name"];
+                            accountTemp.created_at = (DateTime)dr["created_at"];
+                            accountTemp.streetname = (string)dr["streetname"];
+                            accountTemp.IdCity = (int)dr["IdCity"];
+                            accountTemp.IdAccount = (int)dr["IdAccount"];
+                            accountTemp.login = (string)dr["login"];
+                            accountTemp.password = (string)dr["password"];
+                            accountTemp.customerAccount = (bool)dr["customerAccount"];
+                           
+                           
+
+                            lCustomer.Add(accountTemp);
+
+                        }
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return lCustomer;
+        }
+
+
+
+
+
+
         public List<Customer> Customers
         {
             get
