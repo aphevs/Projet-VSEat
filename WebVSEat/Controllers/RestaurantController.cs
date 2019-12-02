@@ -18,12 +18,12 @@ namespace WebVSEat.Controllers
     public class RestaurantController : Controller
     {
 
-        private IConfiguration Configuration { get; }
+        private IRestaurantManager RestaurantManager { get; }
 
 
-        public RestaurantController(IConfiguration configuration)
+        public RestaurantController(IRestaurantManager restaurantManager)
         {
-            Configuration = configuration;
+            RestaurantManager = restaurantManager;
         }
 
 
@@ -63,8 +63,8 @@ namespace WebVSEat.Controllers
         public ActionResult Details(int id)
         {
 
-            RestaurantManager rMan = new RestaurantManager(Configuration);
-            var restaurant = rMan.GetRestaurant(id);
+           
+            var restaurant = RestaurantManager.GetRestaurant(id);
             return View(restaurant);
 
         }
@@ -83,8 +83,8 @@ namespace WebVSEat.Controllers
         {
             try
             {
-                RestaurantManager rMan = new RestaurantManager(Configuration);
-                rMan.AddRestaurant(r);
+               
+                RestaurantManager.AddRestaurant(r);
 
                 return RedirectToAction(nameof(GetRestaurants3));
             }
@@ -102,8 +102,8 @@ namespace WebVSEat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            RestaurantManager rMan = new RestaurantManager(Configuration);
-            rMan.DeleteRestaurant(id);
+
+            RestaurantManager.DeleteRestaurant(id);
             return View(RedirectToAction(nameof(GetRestaurants3)));
 
         }
@@ -159,9 +159,9 @@ namespace WebVSEat.Controllers
         //use with bll import
         public ActionResult GetRestaurants3()
         {
-            RestaurantManager rManager = new RestaurantManager(Configuration);
+            
 
-            var restaurantlist = rManager.GetRestaurants();
+            var restaurantlist = RestaurantManager.GetRestaurants();
 
 
             return View(restaurantlist);
@@ -174,8 +174,8 @@ namespace WebVSEat.Controllers
         public ActionResult Edit(int id)
         {
 
-            RestaurantManager rMan = new RestaurantManager(Configuration);
-            var restaurant = rMan.GetRestaurant(id);
+           
+            var restaurant = RestaurantManager.GetRestaurant(id);
             return View(restaurant);
         }
 
@@ -185,8 +185,8 @@ namespace WebVSEat.Controllers
         public ActionResult Edit(DataTransferObject.Restaurant r)
         {
 
-            RestaurantManager rMan = new RestaurantManager(Configuration);
-            rMan.UpdateRestaurant(r);
+
+            RestaurantManager.UpdateRestaurant(r);
             return RedirectToAction(nameof(Index));
 
 
