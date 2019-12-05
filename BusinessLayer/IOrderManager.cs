@@ -10,7 +10,7 @@ namespace BusinessLayer
     public interface IOrderManager
     {
 
-        IOrdersDB OrdersDb { get; }
+        //IOrdersDB OrdersDb { get; }
 
         List<Order> GetOrders();
 

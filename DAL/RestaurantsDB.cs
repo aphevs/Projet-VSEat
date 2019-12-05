@@ -9,21 +9,20 @@ namespace DAL
 {
     public class RestaurantsDB : IRestaurantsDB
     {
-        //option2
-        //private string connectioNString=null;
-        private IConfiguration Configuration { get; }
+ 
+        private string connectionString=null;
+
         public RestaurantsDB(IConfiguration configuration)
         {
-            //var config = configuration;
-            //connectionString = configuration.GetConnectionString("DefaultConnection")
-            Configuration = configuration;
+            var config = configuration;
+            connectionString = config.GetConnectionString("DefaultConnection");
+
         }
 
         public List<Restaurant> GetRestaurants()
         {
             List<Restaurant> results = null;
-            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPB;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -65,13 +64,12 @@ namespace DAL
         public Restaurant GetRestaurant(int id)
         {
             Restaurant restaurant = null;
-           // string connectionString = Configuration.GetConnectionString("DefaultConnection");
-             string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPB;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+          
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Restaurant WHERE IdRestaurant = @id ";  //si plusieurs resultats, on va lire dr.Read pour les voir: location = Sion
+                    string query = "SELECT * FROM Restaurant WHERE IdRestaurant = @id "; 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -102,8 +100,6 @@ namespace DAL
 
         public Restaurant AddRestaurant(Restaurant restaurant)
         {
-           // string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPB;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -132,8 +128,7 @@ namespace DAL
         public int UpdateRestaurant(Restaurant restaurant)
         {
             int result = 0;
-            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPB;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+            
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -162,7 +157,6 @@ namespace DAL
         public int DeleteRestaurant(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

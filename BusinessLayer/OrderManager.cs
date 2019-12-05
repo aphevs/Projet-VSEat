@@ -7,41 +7,41 @@ using Microsoft.Extensions.Configuration;
 
 namespace BusinessLayer
 {
-    public class OrderManager
+    public class OrderManager : IOrderManager
     {
-        public IOrdersDB OrderDB { get; }
+        private IOrdersDB OrderDBObject { get; }
 
 
-        public OrderManager(IConfiguration configuration)
+        public OrderManager(IOrdersDB orderDB)
         {
-           OrderDB = new OrdersDB(configuration);
+            OrderDBObject = orderDB;
 
         }
 
         public List<Order> GetOrders()
         {
-            return OrderDB.GetOrders();
+            return OrderDBObject.GetOrders();
 
         }
 
         public Order GetOrder(int id)
         {
-            return OrderDB.GetOrder(id);
+            return OrderDBObject.GetOrder(id);
         }
 
         public Order AddOrder(Order order)
         {
-            return OrderDB.AddOrder(order);
+            return OrderDBObject.AddOrder(order);
         }
 
         public int UpdateOrder(Order order)
         {
-            return OrderDB.UpdateOrder(order);
+            return OrderDBObject.UpdateOrder(order);
         }
 
         public int DeleteOrder(int id)
         {
-            return OrderDB.DeleteOrder(id);
+            return OrderDBObject.DeleteOrder(id);
         }
 
 

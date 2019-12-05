@@ -32,9 +32,8 @@ namespace ConsoleApp
 
 
 
-
             /*
-             * 
+
             var restaurantsDBManager = new RestaurantManager(Configuration);
             var restaurants = restaurantsDBManager.GetRestaurants();
 
@@ -44,7 +43,8 @@ namespace ConsoleApp
             }
 
 
-
+                        
+             * 
             //Get on restau
             Console.WriteLine("--Get one Restaurant--");
             var restaurant1 = restaurantsDBManager.GetRestaurant(1);

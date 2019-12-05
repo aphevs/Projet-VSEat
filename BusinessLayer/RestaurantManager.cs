@@ -40,7 +40,6 @@ namespace BusinessLayer
         }
 
 
-        //put all algorithms deletion here
         public int DeleteRestaurant(int id)
         {
             return RestaurantDBObject.DeleteRestaurant(id);

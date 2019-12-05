@@ -34,12 +34,6 @@ namespace WebVSEat.Controllers
             return View();
         }
 
-        public ActionResult GetRestaurants2()
-        {
-
-            return View();
-
-        }
 
         //Create a list déroulante
         //selected = par défaut
@@ -86,7 +80,7 @@ namespace WebVSEat.Controllers
                
                 RestaurantManager.AddRestaurant(r);
 
-                return RedirectToAction(nameof(GetRestaurants3));
+                return RedirectToAction(nameof(GetAllRestaurants));
             }
             catch
             {
@@ -104,7 +98,7 @@ namespace WebVSEat.Controllers
         {
 
             RestaurantManager.DeleteRestaurant(id);
-            return View(RedirectToAction(nameof(GetRestaurants3)));
+            return View(RedirectToAction(nameof(GetAllRestaurants)));
 
         }
 
@@ -157,7 +151,7 @@ namespace WebVSEat.Controllers
 
 
         //use with bll import
-        public ActionResult GetRestaurants3()
+        public ActionResult GetAllRestaurants()
         {
             
 

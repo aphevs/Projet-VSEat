@@ -9,16 +9,17 @@ namespace DAL
 {
     public class OrdersDB : IOrdersDB
     {
-        public IConfiguration Configuration { get; }
+        private string connectionString = null;
         public OrdersDB(IConfiguration configuration)
         {
-            Configuration = configuration;
+            var config = configuration;
+            connectionString = config.GetConnectionString("DefaultConnection");
         }
 
         public List<Order> GetOrders()
         {
             List<Order> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
 
             try
             {
@@ -61,7 +62,6 @@ namespace DAL
         public Order GetOrder(int id)
         {
             Order order = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -99,7 +99,6 @@ namespace DAL
 
         public Order AddOrder(Order order)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -130,7 +129,6 @@ namespace DAL
         public int UpdateOrder(Order order)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -161,7 +159,6 @@ namespace DAL
         public int DeleteOrder(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
