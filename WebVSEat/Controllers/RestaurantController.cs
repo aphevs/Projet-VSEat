@@ -121,39 +121,38 @@ namespace WebVSEat.Controllers
      //       }
      //   }
 
-        public ActionResult GetRestaurants()
-        {
-            var restaurantList = new List<Restaurant>
-            {
-            new Restaurant() {IdRestaurant = 1, created_at = new DateTime(2008, 3, 1, 7, 0, 0), name = "Vache and me", IdCity =1, IdSchedule = 1 },
-            new Restaurant() {IdRestaurant = 2, created_at = new DateTime(2009, 7, 10, 0, 0, 0), name = "Downtown", IdCity =2, IdSchedule = 1 },
-            new Restaurant() {IdRestaurant = 3, created_at = new DateTime(2014, 4, 10, 0, 0, 0), name = "SAP", IdCity =1, IdSchedule = 1 },
-            new Restaurant() {IdRestaurant = 4, created_at = new DateTime(2018, 7, 11, 0, 0, 0), name = "San Andreas", IdCity =1, IdSchedule = 1 },
-            };
-            return View();
+        //public ActionResult GetRestaurants()
+        //{
+        //    var restaurantList = new List<Restaurant>
+        //    {
+        //    new Restaurant() {IdRestaurant = 1, created_at = new DateTime(2008, 3, 1, 7, 0, 0), name = "Vache and me", IdCity =1 },
+        //    new Restaurant() {IdRestaurant = 2, created_at = new DateTime(2009, 7, 10, 0, 0, 0), name = "Downtown", IdCity =2},
+        //    new Restaurant() {IdRestaurant = 3, created_at = new DateTime(2014, 4, 10, 0, 0, 0), name = "SAP", IdCity =1},
+        //    new Restaurant() {IdRestaurant = 4, created_at = new DateTime(2018, 7, 11, 0, 0, 0), name = "San Andreas", IdCity =1 },
+        //    };
+        //    return View();
 
-        }
+        //}
 
-        public ActionResult GetCityRestaurants()
-        {
-            var restaurantList = new List<CityRestaurants>
-            {
-                new CityRestaurants() {city = "Sierre", lrestaurants = new List<Restaurant>{
-                new Restaurant() {Name ="Vache and me" },
-                new Restaurant() {Name = "Downtown" },
-                new Restaurant() {Name = "Team"},
-                }}
-            };
-            return View("GetCityRestaurants", restaurantList);
+        //public ActionResult GetCityRestaurants()
+        //{
+        //    var restaurantList = new List<CityRestaurants>
+        //    {
+        //        new CityRestaurants() {city = "Sierre", lrestaurants = new List<Restaurant>{
+        //        new Restaurant() {Name ="Vache and me" },
+        //        new Restaurant() {Name = "Downtown" },
+        //        new Restaurant() {Name = "Team"},
+        //        }}
+        //    };
+        //    return View("GetCityRestaurants", restaurantList);
 
-        }
+        //}
 
 
 
         //use with bll import
         public ActionResult GetAllRestaurants()
         {
-            
 
             var restaurantlist = RestaurantManager.GetRestaurants();
 

@@ -7,45 +7,40 @@ using Microsoft.Extensions.Configuration;
 
 namespace BusinessLayer
 {
-    public class CustomerManager
+    public class CustomerManager : ICustomerManager
     {
-        public ICustomersDB CustomerDB { get; }
+        private ICustomersDB CustomerDbObject { get; }
 
-
-        public List<Customer> GetCustomerAccount()
+        public CustomerManager(ICustomersDB customersDB)
         {
-            return CustomerDB.GetCustomerAccount();
+            CustomerDbObject = customersDB;
         }
 
-        public CustomerManager(IConfiguration configuration)
-        {
-            CustomerDB = new CustomersDB(configuration);
-        }
 
         public List<Customer> GetCustomers()
         {
-            return CustomerDB.GetCustomers();
+            return CustomerDbObject.GetCustomers();
         }
 
         public Customer GetCustomer(int id)
         {
-            return CustomerDB.GetCustomer(id);
+            return CustomerDbObject.GetCustomer(id);
         }
 
         public Customer AddCustomer(Customer customer)
         {
-            return CustomerDB.AddCustomer(customer);
+            return CustomerDbObject.AddCustomer(customer);
         }
 
 
         public int UpdateCustomer(Customer customer)
         {
-            return CustomerDB.UpdateCustomer(customer);
+            return CustomerDbObject.UpdateCustomer(customer);
         }
 
         public int DeleteCustomer(int id)
         {
-            return CustomerDB.DeleteCustomer(id);
+            return CustomerDbObject.DeleteCustomer(id);
         }
 
 

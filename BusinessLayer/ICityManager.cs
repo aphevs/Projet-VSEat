@@ -10,9 +10,7 @@ namespace BusinessLayer
     public interface ICityManager
     {
 
-        ICitiesDB CitiesDb { get; }
-
-        Customer GetCustomer(int id);
+        City GetCity(int id);
 
     }
 }

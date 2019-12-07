@@ -19,15 +19,16 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
 
-            var customerDBManager = new CustomerManager(Configuration);
-           // var accounts = accountsDBManager.GetCustomerAccount();
+            // var customerDBManager = new CustomerManager(Configuration);
+            // var accounts = accountsDBManager.GetCustomerAccount();
+           // var ordersDBManager = new OrderManager(Configuration);
+            //var orders = ordersDBManager.GetOrders();
 
-
-            List<Customer> lAccount = customerDBManager.GetCustomerAccount();
-            foreach (Customer cu in lAccount)
-            {
-                Console.WriteLine(cu);
-            }
+           // List<Order> lOrder = ordersDBManager.GetOrders();
+           // foreach (Order o in lOrder)
+           // {
+          //      Console.WriteLine(o);
+          //  }
 
 
 

@@ -7,40 +7,39 @@ using Microsoft.Extensions.Configuration;
 
 namespace BusinessLayer
 {
-    public class DishManager
+    public class DishManager : IDishManager
     {
-        public IDishesDB DishDB { get; }
+        private IDishesDB DishDbObject { get; }
 
-
-        public DishManager(IConfiguration configuration)
+        public DishManager(IDishesDB dishDB)
         {
-            DishDB = new DishesDB(configuration);
+            DishDbObject = dishDB;
         }
 
         public List<Dish> GetDishes()
         {
-            return DishDB.GetDishes();
+            return DishDbObject.GetDishes();
         }
 
         public Dish GetDish(int id)
         {
-            return DishDB.GetDish(id);
+            return DishDbObject.GetDish(id);
         }
 
         public Dish AddDish(Dish dish)
         {
-            return DishDB.AddDish(dish);
+            return DishDbObject.AddDish(dish);
         }
 
 
         public int UpdateDish(Dish dish)
         {
-            return DishDB.UpdateDish(dish);
+            return DishDbObject.UpdateDish(dish);
         }
 
         public int DeleteDish(int id)
         {
-            return DishDB.DeleteDish(id);
+            return DishDbObject.DeleteDish(id);
         }
 
 

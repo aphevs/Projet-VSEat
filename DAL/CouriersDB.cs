@@ -9,18 +9,26 @@ namespace DAL
 {
     public class CouriersDB : ICouriersDB
     {
-        public IConfiguration Configuration { get; }
+        //public IConfiguration Configuration { get; }
+        //public CouriersDB(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        //}
+
+        private string connectionString = null;
         public CouriersDB(IConfiguration configuration)
         {
-            Configuration = configuration;
+            var config = configuration;
+            connectionString = config.GetConnectionString("DefaultConnection");
         }
 
-        public List<Courier> Couriers
+
+        public List<Courier> GetCouriers()
         {
-            get
+            
             {
                 List<Courier> results = null;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
                 try
                 {
@@ -42,10 +50,9 @@ namespace DAL
 
                                 courier.IdCourier = (int)dr["IdCourier"];
                                 courier.name = (string)dr["name"];
-                                courier.created_at = (DateTime)dr["created_at"];
-                                courier.streetname = (string)dr["streetname"];
+                                courier.login = (string)dr["login"];
+                                courier.password = (string)dr["password"];
                                 courier.IdCity = (int)dr["IdCity"];
-                                courier.IdAccount = (int)dr["IdAccount"];
 
 
                                 results.Add(courier);
@@ -65,13 +72,13 @@ namespace DAL
         public Courier GetCourier(int id)
         {
             Courier courier = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Courier where idCourier = @id ";
+                    string query = "SELECT * FROM Courier WHERE IdCourier = @id ";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -85,11 +92,10 @@ namespace DAL
 
                             courier.IdCourier = (int)dr["IdCourier"];
                             courier.name = (string)dr["name"];
-                            courier.created_at = (DateTime)dr["created_at"];
-                            courier.streetname = (string)dr["streetname"];
+                            courier.login = (string)dr["login"];
+                            courier.password = (string)dr["password"];
                             courier.IdCity = (int)dr["IdCity"];
-                            courier.IdAccount = (int)dr["IdAccount"];
-
+                           
                         }
                     }
                 }
@@ -104,20 +110,18 @@ namespace DAL
 
         public Courier AddCourier(Courier courier)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Courier(name, created_at, streetname, idCity, idAccount) values(@name, @created_at, @streetname, @idCity, @idAccount); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Courier(IdCourier, name, login, password, IdCity) values(@IdCourier, @name, @login, @password, @IdCity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", courier.name);
-                    cmd.Parameters.AddWithValue("@created_at", courier.created_at);
-                    cmd.Parameters.AddWithValue("@streetname", courier.streetname);
+                    cmd.Parameters.AddWithValue("@login", courier.login);
+                    cmd.Parameters.AddWithValue("@password", courier.password);
                     cmd.Parameters.AddWithValue("@IdCity", courier.IdCity);
-                    cmd.Parameters.AddWithValue("@IdAccount", courier.IdAccount);
-
 
                     cn.Open();
 
@@ -135,19 +139,20 @@ namespace DAL
         public int UpdateCourier(Courier courier)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           // string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Courier SET name = @name, created_at =@created_at, streetname = @streetname, IdCity = @IdCity, IdAccount = @IdAccount WHERE IdCourier=@id";
+                    string query = "UPDATE Courier SET name = @name, login =@login, password = @password, IdCity = @IdCity WHERE IdCourier=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", courier.IdCourier);
                     cmd.Parameters.AddWithValue("@name", courier.name);
-                    cmd.Parameters.AddWithValue("@created_at", courier.created_at);
-                    cmd.Parameters.AddWithValue("@streetname", courier.streetname);
-                    cmd.Parameters.AddWithValue("@idCity", courier.IdCity);
-                    cmd.Parameters.AddWithValue("@IdAccount", courier.IdAccount);
+                    cmd.Parameters.AddWithValue("@login", courier.login);
+                    cmd.Parameters.AddWithValue("@password", courier.password);
+                    cmd.Parameters.AddWithValue("@IdCity", courier.IdCity);
+
 
                     cn.Open();
 
@@ -165,7 +170,7 @@ namespace DAL
         public int DeleteCourier(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           // string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -186,21 +191,6 @@ namespace DAL
             }
 
             return result;
-        }
-
-        List<Courier> ICouriersDB.GetCouriers()
-        {
-            throw new NotImplementedException();
-        }
-
-        Courier ICouriersDB.GetCourier(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Courier> GetCouriers()
-        {
-            throw new NotImplementedException();
         }
 
 

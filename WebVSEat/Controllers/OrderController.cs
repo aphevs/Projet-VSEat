@@ -19,6 +19,20 @@ namespace WebVSEat.Controllers
 
 
 
+
+
+        public ActionResult GetAllOrders()
+        {
+
+            var orderlist = OrderManager.GetOrders();
+
+            return View(orderlist);
+
+
+        }
+
+
+
         // GET: Order
         public ActionResult Index()
         {
@@ -98,17 +112,6 @@ namespace WebVSEat.Controllers
             {
                 return View();
             }
-        }
-
-
-        public ActionResult GetAllOrders()
-        {
-
-            var orderlist = OrderManager.GetOrders();
-
-            return View(orderlist);
-
-
         }
 
 

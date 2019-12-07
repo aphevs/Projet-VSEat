@@ -7,22 +7,21 @@ using Microsoft.Extensions.Configuration;
 
 namespace BusinessLayer
 {
-    public class CityManager
+    public class CityManager : ICityManager
     {
-        public ICitiesDB CityDB { get; }
 
+        private ICitiesDB CitiesDbObject { get; }
 
-        public CityManager(IConfiguration configuration)
+        public CityManager(ICitiesDB citiesDB)
         {
-           CityDB = new CitiesDB(configuration);
-
+            CitiesDbObject = citiesDB;
         }
 
-        
+
 
         public City GetCity(int id)
         {
-            return CityDB.GetCity(id);
+            return CitiesDbObject.GetCity(id);
         }
 
 

@@ -10,12 +10,10 @@ namespace BusinessLayer
     public interface IOrder_DishManager
     {
 
-        IOrder_DishesDB Order_DishesDb { get; }
+        // IOrder_DishesDB Order_DishesDb { get; }
 
 
-        Customer GetCustomer(int id);
-
-
+        Order_Dish GetOrder_Dish(int id);
 
     }
 }

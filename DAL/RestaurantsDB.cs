@@ -14,14 +14,15 @@ namespace DAL
 
         public RestaurantsDB(IConfiguration configuration)
         {
-            var config = configuration;
-            connectionString = config.GetConnectionString("DefaultConnection");
+           
+            connectionString = configuration.GetConnectionString("DefaultConnection");
 
         }
 
         public List<Restaurant> GetRestaurants()
         {
             List<Restaurant> results = null;
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
 
             try
             {
@@ -46,7 +47,6 @@ namespace DAL
                             restaurant.created_at = (DateTime)dr["created_at"];
                             restaurant.name = (string)dr["name"];
                             restaurant.IdCity = (int)dr["IdCity"];
-                            restaurant.IdSchedule = (int)dr["IdSchedule"];
 
                             results.Add(restaurant);
                         }
@@ -55,7 +55,8 @@ namespace DAL
             }
             catch (Exception e)
             {
-                throw e;
+              
+                    throw e;
             }
 
             return results;
@@ -85,7 +86,6 @@ namespace DAL
                             restaurant.created_at = (DateTime)dr["created_at"];
                             restaurant.IdCity = (int)dr["IdCity"];
                             restaurant.name = (string)dr["name"];
-                            restaurant.IdSchedule = (int)dr["IdSchedule"];
                         }
                     }
                 }
@@ -104,14 +104,12 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Restaurant(IdRestaurant, created_at, IdCity, name, IdSchedule) values(@IdRestaurant, @created_at, @IdCity, @name, @IdSchedule); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Restaurant(IdRestaurant, created_at, IdCity, name) values(@IdRestaurant, @created_at, @IdCity, @name); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdRestaurant", restaurant.IdRestaurant);
                     cmd.Parameters.AddWithValue("@created_at", restaurant.created_at);
                     cmd.Parameters.AddWithValue("@IdCity", restaurant.IdCity);
                     cmd.Parameters.AddWithValue("@name", restaurant.name);
-                    cmd.Parameters.AddWithValue("@IdSchedule", restaurant.IdSchedule);
-
                     cn.Open();
 
                     restaurant.IdRestaurant = Convert.ToInt32(cmd.ExecuteScalar());
@@ -133,13 +131,12 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Restaurant SET created_at = @created_at, IdCity = @IdCity, name = @name, IdSchedule = @IdSchedule WHERE IdRestaurant=@id";
+                    string query = "UPDATE Restaurant SET created_at = @created_at, IdCity = @IdCity, name = @name WHERE IdRestaurant=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", restaurant.IdRestaurant);
                     cmd.Parameters.AddWithValue("@created_at", restaurant.created_at);
                     cmd.Parameters.AddWithValue("@IdCity", restaurant.IdCity);
                     cmd.Parameters.AddWithValue("@name", restaurant.name);
-                    cmd.Parameters.AddWithValue("@IdSchedule", restaurant.IdSchedule);
 
                     cn.Open();
 

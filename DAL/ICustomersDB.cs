@@ -11,7 +11,6 @@ namespace DAL
     
         //IConfiguration Configuration { get; }
 
-        List<Customer>GetCustomerAccount();
 
         List<Customer> GetCustomers();
 

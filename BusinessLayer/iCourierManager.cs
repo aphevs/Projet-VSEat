@@ -10,7 +10,6 @@ namespace BusinessLayer
     public interface ICourierManager
     {
 
-        ICouriersDB CouriersDb { get; }
 
         List<Courier> GetCouriers();
 

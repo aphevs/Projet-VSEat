@@ -10,18 +10,27 @@ namespace DAL
     public class DishesDB : IDishesDB
     {
 
-        public IConfiguration Configuration { get; }
+        //public IConfiguration Configuration { get; }
+        //public DishesDB(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        //}
+
+        private string connectionString = null;
         public DishesDB(IConfiguration configuration)
         {
-            Configuration = configuration;
+            connectionString = configuration.GetConnectionString("DefaultConnection");
+
         }
+
+
 
         public List<Dish> Dishes
         {
             get
             {
                 List<Dish> results = null;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
                 try
                 {
@@ -41,11 +50,10 @@ namespace DAL
 
                                 Dish dish = new Dish();
 
-                                dish.IdDish = (int)dr["idDish"];
+                                dish.IdDish = (int)dr["IdDish"];
                                 dish.name = (string)dr["name"];
                                 dish.price = (int)dr["price"];
-                                dish.status = (string)dr["status"];
-                                dish.created_at = (DateTime)dr["created_at"];
+                                dish.description = (string)dr["description"];
                                 dish.IdRestaurant = (int)dr["IdRestaurant"];
 
 
@@ -67,7 +75,7 @@ namespace DAL
         public Dish GetDish(int id)
         {
             Dish dish = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           // string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -85,11 +93,10 @@ namespace DAL
                         {
                             dish = new Dish();
 
-                            dish.IdDish = (int)dr["idDish"];
+                            dish.IdDish = (int)dr["IdDish"];
                             dish.name = (string)dr["name"];
-                            dish.price = (int)dr["price"];
-                            dish.status = (string)dr["status"];
-                            dish.created_at = (DateTime)dr["created_at"];
+                            dish.price = (decimal)dr["price"];
+                            dish.description = (string)dr["description"];
                             dish.IdRestaurant = (int)dr["IdRestaurant"];
                         }
                     }
@@ -105,18 +112,17 @@ namespace DAL
 
         public Dish AddDish(Dish dish)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Dish(name, price, status,created_at,IdRestaurant) values(@name, @price, @status, @created_at, @IdRestaurant); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Dish(name, price, description, IdRestaurant) values(@name, @price, @description, @IdRestaurant); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", dish.name);
                     cmd.Parameters.AddWithValue("@price", dish.price);
-                    cmd.Parameters.AddWithValue("@status", dish.status);
-                    cmd.Parameters.AddWithValue("@created_at", dish.created_at);
+                    cmd.Parameters.AddWithValue("@description", dish.description);
                     cmd.Parameters.AddWithValue("@IdRestaurant", dish.IdRestaurant);
 
 
@@ -136,18 +142,17 @@ namespace DAL
         public int UpdateDish(Dish dish)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Dish SET name = @name, price = @price, status = @status, created_at =@created_at, IdRestaurant = @IdRestaurant WHERE IdDish=@id";
+                    string query = "UPDATE Dish SET name = @name, price = @price, description = @description, IdRestaurant = @IdRestaurant WHERE IdDish=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", dish.name);
                     cmd.Parameters.AddWithValue("@price", dish.price);
-                    cmd.Parameters.AddWithValue("@status", dish.status);
-                    cmd.Parameters.AddWithValue("@created_at", dish.created_at);
+                    cmd.Parameters.AddWithValue("@description", dish.description);
                     cmd.Parameters.AddWithValue("@IdRestaurant", dish.IdRestaurant);
 
                     cn.Open();
@@ -166,7 +171,7 @@ namespace DAL
         public int DeleteDish(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

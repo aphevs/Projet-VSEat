@@ -11,9 +11,6 @@ namespace BusinessLayer
     {
 
 
-        ICustomersDB CustomersDb { get; }
-
-        List<Customer> GetCustomerAccount();
 
         List<Customer> GetCustomers();
 

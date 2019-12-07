@@ -10,13 +10,13 @@ namespace BusinessLayer
     public interface IDishManager
     {
 
-        IDishesDB DishDb { get; }
+       // IDishesDB DishDb { get; }
 
         List<Dish> GetDishes();
 
         Dish GetDish(int id);
 
-        Dish AddDish(Dish rish);
+        Dish AddDish(Dish dish);
 
         int UpdateDish(Dish dish);
 

@@ -7,40 +7,39 @@ using Microsoft.Extensions.Configuration;
 
 namespace BusinessLayer
 {
-    public class CourierManager
+    public class CourierManager : ICourierManager
     {
-        public ICouriersDB CourierDB { get; }
+        private ICouriersDB CouriersDbObject { get; }
 
-
-        public CourierManager(IConfiguration configuration)
+        public CourierManager(ICouriersDB couriersDB)
         {
-            CourierDB = new CouriersDB(configuration);
+            CouriersDbObject = couriersDB;
         }
 
         public List<Courier> GetCouriers()
         {
-            return CourierDB.GetCouriers();
+            return CouriersDbObject.GetCouriers();
         }
 
         public Courier GetCourier(int id)
         {
-            return CourierDB.GetCourier(id);
+            return CouriersDbObject.GetCourier(id);
         }
 
         public Courier AddCourier(Courier courier)
         {
-            return CourierDB.AddCourier(courier);
+            return CouriersDbObject.AddCourier(courier);
         }
 
 
         public int UpdateCourier(Courier courier)
         {
-            return CourierDB.UpdateCourier(courier);
+            return CouriersDbObject.UpdateCourier(courier);
         }
 
         public int DeleteCourier(int id)
         {
-            return CourierDB.DeleteCourier(id);
+            return CouriersDbObject.DeleteCourier(id);
         }
 
 

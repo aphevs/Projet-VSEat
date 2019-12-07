@@ -16,6 +16,7 @@ namespace DAL
             connectionString = config.GetConnectionString("DefaultConnection");
         }
 
+
         public List<Order> GetOrders()
         {
             List<Order> results = null;
@@ -41,7 +42,6 @@ namespace DAL
 
                             order.IdOrder= (int)dr["IdOrder"];
                             order.status = (string)dr["status"];
-                            order.placetodeliver = (string)dr["placetodeliver"];
                             order.comment = (string)dr["comment"];
                             order.IdCustomer = (int)dr["IdCustomer"];
                             order.IdCourier = (int)dr["IdCourier"];
@@ -81,7 +81,6 @@ namespace DAL
 
                             order.IdOrder = (int)dr["IdOrder"];
                             order.status = (string)dr["status"];
-                            order.placetodeliver = (string)dr["placetodeliver"];
                             order.comment = (string)dr["comment"];
                             order.IdCustomer = (int)dr["IdCustomer"];
                             order.IdCourier = (int)dr["IdCourier"];
@@ -104,12 +103,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Order(IdOrder, status, created_at, placedeliver, comment, IdCustomer, IdCourier) values(@IdOrder, @status, @created_at, @placetodeliver, @comment, @IdCustomer, @IdCourier); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Order(IdOrder, status, comment, IdCustomer, IdCourier) values(@IdOrder, @status, @comment, @IdCustomer, @IdCourier); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdOrder", order.IdOrder);
                     cmd.Parameters.AddWithValue("@status", order.status);
-                    cmd.Parameters.AddWithValue("@created_at", order.created_at);
-                    cmd.Parameters.AddWithValue("@placetodeliver", order.placetodeliver);
                     cmd.Parameters.AddWithValue("@comment", order.comment);
                     cmd.Parameters.AddWithValue("@IdCustomer", order.IdCustomer);
                     cmd.Parameters.AddWithValue("@IdCourier", order.IdCourier);
@@ -134,12 +131,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Restaurant SET IdRestaurant = @Idrestaurant, created_at = @created_at, IdCity = @IdCity, name = @name, IdSchedule = @IdSchedule WHERE IdRestaurant=@id";
+                    string query = "UPDATE Order SET status = @status, comment = @comment, IdCustomer = @IdCustomer, IdCourier = @IdCourier WHERE IdOrder=@IdOrder";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@Idrestaurant", order.IdOrder);
+                    cmd.Parameters.AddWithValue("@IdOrder", order.IdOrder);
                     cmd.Parameters.AddWithValue("@status", order.status);
-                    cmd.Parameters.AddWithValue("@created_at", order.created_at);
-                    cmd.Parameters.AddWithValue("@placetodeliver", order.placetodeliver);
                     cmd.Parameters.AddWithValue("@comment", order.comment);
                     cmd.Parameters.AddWithValue("@IdCustomer", order.IdCustomer);
                     cmd.Parameters.AddWithValue("@IdCourier", order.IdCourier);

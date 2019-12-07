@@ -4,7 +4,7 @@
     ViewData["Title"] = "GetAllRestaurants";
 }
 
-<h2>Those restaurants are in your city :</h2>
+<h2>GetAllRestaurants</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -12,13 +12,17 @@
 <table class="table">
     <thead>
         <tr>
-
-
+            <th>
+                @Html.DisplayNameFor(model => model.IdRestaurant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.created_at)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdSchedule)
+                @Html.DisplayNameFor(model => model.IdCity)
             </th>
             <th></th>
         </tr>
@@ -27,13 +31,21 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.IdRestaurant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.created_at)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdSchedule)
+                @Html.DisplayFor(modelItem => item.IdCity)
             </td>
             <td>
-                @Html.ActionLink("Details", "Orders", new { id=item.IdRestaurant }) 
+                @Html.ActionLink("Edit", "Edit", new { id=item.IdRestaurant }) |
+                @Html.ActionLink("Details", "Details", new {id=item.IdRestaurant}) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.IdRestaurant })
             </td>
         </tr>
 }

@@ -7,21 +7,21 @@ using Microsoft.Extensions.Configuration;
 
 namespace BusinessLayer
 {
-    public class Order_DishManager
+    public class Order_DishManager : IOrder_DishManager
     {
-        public IOrder_DishesDB Order_DishDB { get; }
+        private IOrder_DishesDB Order_DishDBObject { get; }
 
 
-        public Order_DishManager(IConfiguration configuration)
+        public Order_DishManager(IOrder_DishesDB order_dishDB)
         {
-            Order_DishDB = new Order_DishesDB(configuration);
+            Order_DishDBObject = order_dishDB;
 
         }
 
 
         public Order_Dish GetOrder_Dish(int id)
         {
-            return Order_DishDB.GetOrder_Dish(id);
+            return Order_DishDBObject.GetOrder_Dish(id);
         }
 
 
