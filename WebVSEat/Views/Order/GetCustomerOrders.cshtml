@@ -8,12 +8,12 @@
 
 
 <h2>Your orders to deliver :</h2>
-
+<br />
 
 <table class="table">
 
     <thead>
-        <tr>
+        <tr class="table-primary">
             <th>
                 Order number
             </th>
@@ -60,19 +60,23 @@
                         @Html.DisplayFor(modelItem => item.IdCity)
                     </td>
                     <td>
-                        @Html.ActionLink("Order delivered", "Edit", new { id = item.IdOrder, })
+                        @Html.ActionLink("Order delivered", "Edit", new { id = item.IdOrder, },  htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+                        @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })*@
                     </td>
 
                 </tr>
             }
         }
-        else
-        {
-            <h2 style="red"> You don't have any order yet !</h2>
-        }
     </tbody>
 
 </table>
+@if (Model == null)
+{
 
-
+    <div class="alert alert-dismissible alert-info">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading">Well done!</h4>
+        <p class="mb-0">You have delivered all your orders. Wait for a new order to pop up here. <a href="#" class="alert-link"></a></p>
+    </div>
+}
 <a asp-action="GetArchivedOrders">Archives</a>

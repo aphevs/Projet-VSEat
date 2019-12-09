@@ -5,11 +5,16 @@
 }
 
 @*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
+        <a asp-action="Create">Create New</a>
+    </p>*@
+
+<h2>Order archives : </h2>
+
+<br />
+
 <table class="table">
     <thead>
-        <tr>
+        <tr class="table-active">
             <th>
                 Order number
             </th>
@@ -54,13 +59,23 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.IdCity)
                     </td>
-                    <td>
-                        @Html.ActionLink("Order delivered", "Edit", new { id = item.IdOrder, })
-                    </td>
                 </tr>
             }
         }
-        
+
     </tbody>
 </table>
+
+@if (Model == null)
+{
+
+    <div class="alert alert-dismissible alert-info">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading">Looks like this section is empty.</h4>
+        <p class="mb-0">This is here where all the orders cancelled, delivered or not will be displayed.<a href="#" class="alert-link"></a></p>
+    </div>
+
+
+}
+
 <a asp-action="GetCustomerOrders">My orders</a>

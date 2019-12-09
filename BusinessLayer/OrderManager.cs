@@ -23,7 +23,22 @@ namespace BusinessLayer
         public List<Order> GetArchivedOrders()
         {
 
-            return OrderDBObject.GetCustomerOrders();
+            List<Order> lCurrentOrder = null;
+            List<Order> lOrder = OrderDBObject.GetCustomerOrders();
+
+            foreach (Order order in lOrder)
+            {
+
+                if (order.status.ToLower() != "not delivered")
+                {
+                    if (lCurrentOrder == null)
+                        lCurrentOrder = new List<Order>();
+
+                    lCurrentOrder.Add(order);
+
+                }
+            }
+            return lCurrentOrder;
         }
 
 
@@ -38,7 +53,7 @@ namespace BusinessLayer
             foreach (Order order in lOrder)
             {
 
-                if (order.status.ToLower() != "delivered")
+                if (order.status.ToLower() != "delivered" && order.status.ToLower() != "cancelled")
                 {
                     if (lCurrentOrder == null)
                         lCurrentOrder = new List<Order>();
