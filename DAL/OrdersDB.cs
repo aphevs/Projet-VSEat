@@ -17,16 +17,18 @@ namespace DAL
         }
 
 
+
+
         public List<Order> GetOrders()
         {
             List<Order> results = null;
-
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Order";
+                    string query = "SELECT * FROM [Order]";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -40,9 +42,9 @@ namespace DAL
 
                             Order order = new Order();
 
-                            order.IdOrder= (int)dr["IdOrder"];
+                            order.IdOrder = (int)dr["IdOrder"];
                             order.status = (string)dr["status"];
-                            order.comment = (string)dr["comment"];
+                            order.created_at = (DateTime)dr["created_at"];
                             order.IdCustomer = (int)dr["IdCustomer"];
                             order.IdCourier = (int)dr["IdCourier"];
 
@@ -59,15 +61,65 @@ namespace DAL
             return results;
         }
 
+
+        public List<Order> GetCustomerOrders()
+        {
+            List<Order> lOrder = null;
+
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+            try
+            { 
+            using (SqlConnection cn = new SqlConnection(connectionString))
+            {
+
+                string query = "SELECT * FROM [Order] inner join Customer on [Order].IdCustomer=Customer.IdCustomer";
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cn.Open();
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        if (lOrder == null)
+                                lOrder = new List<Order>();
+
+                        Order orderTemp = new Order();
+
+                            orderTemp.IdOrder = (int)dr["IdOrder"];
+                            orderTemp.status = (string)dr["status"];
+                            orderTemp.created_at = (DateTime)dr["created_at"];
+                            orderTemp.IdCustomer = (int)dr["IdCustomer"];
+                            orderTemp.IdCourier = (int)dr["IdCourier"];
+                            orderTemp.name = (string)dr["name"];
+                            orderTemp.streetname = (string)dr["streetname"];
+                            orderTemp.IdCity = (int)dr["IdCity"];
+
+                            lOrder.Add(orderTemp);
+
+                    }
+                }
+            }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return lOrder;
+        }
+
+
+
+
         public Order GetOrder(int id)
         {
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
             Order order = null;
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Order WHERE IdOrder = @id "; 
+                    string query = "SELECT * FROM [Order] WHERE IdOrder = @id"; 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -81,9 +133,10 @@ namespace DAL
 
                             order.IdOrder = (int)dr["IdOrder"];
                             order.status = (string)dr["status"];
-                            order.comment = (string)dr["comment"];
+                            order.created_at = (DateTime)dr["created_at"];
                             order.IdCustomer = (int)dr["IdCustomer"];
                             order.IdCourier = (int)dr["IdCourier"];
+
                         }
                     }
                 }
@@ -103,11 +156,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Order(IdOrder, status, comment, IdCustomer, IdCourier) values(@IdOrder, @status, @comment, @IdCustomer, @IdCourier); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Order(IdOrder, status, created_at, IdCustomer, IdCourier) values(@IdOrder, @status, @created_at, @IdCustomer, @IdCourier); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdOrder", order.IdOrder);
                     cmd.Parameters.AddWithValue("@status", order.status);
-                    cmd.Parameters.AddWithValue("@comment", order.comment);
+                    cmd.Parameters.AddWithValue("@created_at", order.created_at);
                     cmd.Parameters.AddWithValue("@IdCustomer", order.IdCustomer);
                     cmd.Parameters.AddWithValue("@IdCourier", order.IdCourier);
                     cn.Open();
@@ -126,16 +179,16 @@ namespace DAL
         public int UpdateOrder(Order order)
         {
             int result = 0;
-
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Order SET status = @status, comment = @comment, IdCustomer = @IdCustomer, IdCourier = @IdCourier WHERE IdOrder=@IdOrder";
+                    string query = "UPDATE [Order] SET status = @status, created_at = @created_at, IdCustomer = @IdCustomer, IdCourier = @IdCourier WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@IdOrder", order.IdOrder);
+                    cmd.Parameters.AddWithValue("@id", order.IdOrder);
                     cmd.Parameters.AddWithValue("@status", order.status);
-                    cmd.Parameters.AddWithValue("@comment", order.comment);
+                    cmd.Parameters.AddWithValue("@created_at", order.created_at);
                     cmd.Parameters.AddWithValue("@IdCustomer", order.IdCustomer);
                     cmd.Parameters.AddWithValue("@IdCourier", order.IdCourier);
                     cn.Open();
@@ -150,6 +203,11 @@ namespace DAL
 
             return result;
         }
+
+
+
+
+
 
         public int DeleteOrder(int id)
         {

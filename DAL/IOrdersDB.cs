@@ -18,8 +18,9 @@ namespace DAL
         Order AddOrder(Order order);
 
         int UpdateOrder(Order order);
-
         int DeleteOrder(int id);
+
+        List<Order> GetCustomerOrders();
 
 
     }

@@ -11,11 +11,60 @@ namespace BusinessLayer
     {
         private IOrdersDB OrderDBObject { get; }
 
-
         public OrderManager(IOrdersDB orderDB)
         {
             OrderDBObject = orderDB;
 
+        }
+        
+
+        //Get all orders which are not designed as "delivered"
+
+        public List<Order> GetCurrentOrders()
+        {
+            List<Order> lCurrentOrder = null;
+            List<Order> lOrder = GetOrders();
+
+            foreach(Order order in lOrder)
+            {
+                
+                if(order.status.ToLower() != "delivered")
+                { 
+                if(lCurrentOrder == null)
+                        lCurrentOrder = new List<Order>();
+
+                    lCurrentOrder.Add(order);
+                
+                }
+            }
+            return lCurrentOrder;
+         
+
+        }
+
+
+
+       public List<Order> GetCustomerOrders()
+        {
+
+
+            List<Order> lCurrentOrder = null;
+            List<Order> lOrder = OrderDBObject.GetCustomerOrders();
+
+            foreach (Order order in lOrder)
+            {
+
+                if (order.status.ToLower() != "delivered")
+                {
+                    if (lCurrentOrder == null)
+                        lCurrentOrder = new List<Order>();
+
+                    lCurrentOrder.Add(order);
+
+                }
+            }
+            return lCurrentOrder;
+ 
         }
 
         public List<Order> GetOrders()

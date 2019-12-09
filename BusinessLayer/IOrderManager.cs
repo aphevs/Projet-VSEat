@@ -10,6 +10,9 @@ namespace BusinessLayer
     public interface IOrderManager
     {
 
+        List<Order> GetCustomerOrders();
+
+        List<Order> GetCurrentOrders();
 
         List<Order> GetOrders();
 

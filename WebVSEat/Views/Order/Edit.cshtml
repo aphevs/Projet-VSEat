@@ -1,0 +1,106 @@
+﻿@model DataTransferObject.Order
+
+@{
+    ViewData["Title"] = "Order delivery check ";
+}
+
+<h2>Confirm you have delivered this order :</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Order number :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdOrder)
+        </dd>
+        <dt>
+            Created at :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.created_at)
+        </dd>
+        <dt>
+    </dl>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+
+                <span asp-validation-for="IdOrder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="status" class="control-label"> Status : </label>
+
+                <select>
+                <option>delivered</option>
+                <option>not delivered</option>
+                </select>
+
+
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span asp-validation-for="created_at" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <span asp-validation-for="IdCustomer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+     
+                <span asp-validation-for="IdCourier" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <span asp-validation-for="streetname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <span asp-validation-for="IdCity" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="status" class="control-label"></label>
+                <input asp-for="status" class="form-control" />
+                @{
+
+
+                <option>delivered</option>
+                <option>not delivered</option>
+
+
+            }
+            </select>
+               
+
+                <span asp-validation-for="status" class="text-danger"></span> 
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+<div>
+    <a asp-action="GetCustomerOrders">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

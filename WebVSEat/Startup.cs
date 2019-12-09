@@ -47,6 +47,10 @@ namespace WebVSEat
             services.AddScoped<IRestaurantManager, RestaurantManager>();
             services.AddScoped<IRestaurantsDB, RestaurantsDB>();
 
+
+            services.AddScoped<IOrderManager, OrderManager>();
+            services.AddScoped<IOrdersDB, OrdersDB>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -72,7 +76,7 @@ namespace WebVSEat
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Restaurant}/{action=GetAllRestaurants}/{id?}");
+                    template: "{controller=Order}/{action=GetCustomerOrders}/{id?}");
             });
         }
     }

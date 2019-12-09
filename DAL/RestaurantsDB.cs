@@ -65,7 +65,7 @@ namespace DAL
         public Restaurant GetRestaurant(int id)
         {
             Restaurant restaurant = null;
-          
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -126,7 +126,7 @@ namespace DAL
         public int UpdateRestaurant(Restaurant restaurant)
         {
             int result = 0;
-            
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))

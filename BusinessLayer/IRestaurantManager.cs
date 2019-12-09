@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DAL;
+﻿using System.Collections.Generic;
 using DataTransferObject;
-using Microsoft.Extensions.Configuration;
 
 namespace BusinessLayer
 {

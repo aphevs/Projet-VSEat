@@ -8,8 +8,15 @@ namespace DataTransferObject
     {
         public int IdOrder { get; set; }
         public string status { get; set; }
-        public string comment { get; set; }
+        public DateTime created_at { get; set; }
         public int IdCustomer { get; set; }
         public int IdCourier { get; set; }
+
+
+
+        //get orders and customer info
+        public string name { get; set; }
+        public string streetname { get; set; }
+        public int IdCity { get; set; }
     }
 }
