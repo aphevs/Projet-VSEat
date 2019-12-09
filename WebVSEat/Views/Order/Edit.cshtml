@@ -16,76 +16,49 @@
             @Html.DisplayFor(model => model.IdOrder)
         </dd>
         <dt>
-            Created at :
+            Ordered at :
         </dt>
         <dd>
             @Html.DisplayFor(model => model.created_at)
         </dd>
         <dt>
+            Customer name : 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+
     </dl>
 </div>
+<hr />
 
+
+@* As you must automatically use the Get(id), the id must figure on this page, but we don't want that 
+    the courier can modify the Id of the order, so it's marked as "hidden"*@
 
 
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
+                <label asp-for="status" class="control-label">Status : </label>
 
-                <span asp-validation-for="IdOrder" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-
-                <label asp-for="status" class="control-label"> Status : </label>
-
-                <select>
-                <option>delivered</option>
-                <option>not delivered</option>
+                <select asp-for="status" class="form-control">
+                    <option value="delivered">delivered</option>
+                    <option value="cancelled">cancelled</option>
                 </select>
 
-
+                @*<input asp-for="status" class="form-control" />*@
                 <span asp-validation-for="status" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <span asp-validation-for="created_at" class="text-danger"></span>
+            <div class="form-group" style="visibility:hidden">
+                <label asp-for="IdOrder" class="control-label"></label>
+                <input asp-for="IdOrder" class="form-control" />
+                <span asp-validation-for="IdOrder" class="text-danger"></span>
             </div>
-            <div class="form-group">
-
-                <span asp-validation-for="IdCustomer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-     
-                <span asp-validation-for="IdCourier" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-
-                <span asp-validation-for="name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-
-                <span asp-validation-for="streetname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-
-                <span asp-validation-for="IdCity" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="status" class="control-label"></label>
-                <input asp-for="status" class="form-control" />
-                @{
-
-
-                <option>delivered</option>
-                <option>not delivered</option>
-
-
-            }
-            </select>
-               
-
-                <span asp-validation-for="status" class="text-danger"></span> 
-            </div>*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
@@ -93,12 +66,8 @@
     </div>
 </div>
 
-
-
-
-
 <div>
-    <a asp-action="GetCustomerOrders">Back to List</a>
+    <a asp-action="GetCustomerOrders">Cancel</a>
 </div>
 
 @section Scripts {

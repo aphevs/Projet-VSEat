@@ -14,13 +14,17 @@ namespace DAL
         List<Order> GetOrders();
 
         Order GetOrder(int id);
+        Order GetCustomerOrder(int id);
 
         Order AddOrder(Order order);
 
         int UpdateOrder(Order order);
+        int SetDelivered(Order order);
         int DeleteOrder(int id);
 
+
         List<Order> GetCustomerOrders();
+
 
 
     }

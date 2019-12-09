@@ -180,7 +180,7 @@ namespace WebVSEat.Controllers
 
 
             RestaurantManager.UpdateRestaurant(r);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetAllRestaurants));
 
 
 

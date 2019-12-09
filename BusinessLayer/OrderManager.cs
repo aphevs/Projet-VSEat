@@ -18,33 +18,17 @@ namespace BusinessLayer
         }
         
 
-        //Get all orders which are not designed as "delivered"
+        //Get all orders to make an archive of it
 
-        public List<Order> GetCurrentOrders()
+        public List<Order> GetArchivedOrders()
         {
-            List<Order> lCurrentOrder = null;
-            List<Order> lOrder = GetOrders();
 
-            foreach(Order order in lOrder)
-            {
-                
-                if(order.status.ToLower() != "delivered")
-                { 
-                if(lCurrentOrder == null)
-                        lCurrentOrder = new List<Order>();
-
-                    lCurrentOrder.Add(order);
-                
-                }
-            }
-            return lCurrentOrder;
-         
-
+            return OrderDBObject.GetCustomerOrders();
         }
 
 
-
-       public List<Order> GetCustomerOrders()
+        //Get all orders which are not designed as "delivered"
+        public List<Order> GetCustomerOrders()
         {
 
 
@@ -78,6 +62,13 @@ namespace BusinessLayer
             return OrderDBObject.GetOrder(id);
         }
 
+        public Order GetCustomerOrder(int id)
+        {
+
+            return OrderDBObject.GetCustomerOrder(id);
+
+        }
+
         public Order AddOrder(Order order)
         {
             return OrderDBObject.AddOrder(order);
@@ -87,6 +78,14 @@ namespace BusinessLayer
         {
             return OrderDBObject.UpdateOrder(order);
         }
+
+        public int SetDelivered(Order order)
+        {
+
+            return OrderDBObject.SetDelivered(order);
+        }
+
+
 
         public int DeleteOrder(int id)
         {

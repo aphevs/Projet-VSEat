@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer;
-using DataTransferObject;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,44 +22,24 @@ namespace WebVSEat.Controllers
 
 
 
-
-
-
-        public ActionResult GetCurrentOrders()
+        public ActionResult GetArchivedOrders()
         {
-            try
-            {
+     
+            var orderlist = OrderManager.GetArchivedOrders();
 
+            return View(orderlist);
            
-            var orderlist = OrderManager.GetCurrentOrders();
-
-            return View(orderlist);
-            }
-            catch
-            {
-                return View();
-            }
-
-
         }
 
-
-        public ActionResult GetAllOrders()
-        {
-
-            var orderlist = OrderManager.GetOrders();
-
-            return View(orderlist);
-
-
-        }
 
         public ActionResult GetCustomerOrders()
         {
 
+           
             var orderlist = OrderManager.GetCustomerOrders();
 
             return View(orderlist);
+
 
 
         }
@@ -68,24 +47,18 @@ namespace WebVSEat.Controllers
 
         public ActionResult Edit(int id)
         {
-
-
-            var order = OrderManager.GetOrder(id);
+            var order = OrderManager.GetCustomerOrder(id);
             return View(order);
         }
 
 
 
         [HttpPost]
-        public ActionResult Edit(DataTransferObject.Order o)
+        public ActionResult Edit(DataTransferObject.Order order)
         {
 
-
-            OrderManager.UpdateOrder(o);
+            OrderManager.SetDelivered(order);
             return RedirectToAction(nameof(GetCustomerOrders));
-
-
-
 
         }
 

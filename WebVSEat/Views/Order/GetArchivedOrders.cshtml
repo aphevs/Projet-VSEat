@@ -1,17 +1,13 @@
 ﻿@model IEnumerable<DataTransferObject.Order>
 
 @{
-    ViewData["Title"] = "GetCustomerOrders";
+    ViewData["Title"] = "All the orders :";
 }
 
-
-
-
-<h2>Your orders to deliver :</h2>
-
-
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
 <table class="table">
-
     <thead>
         <tr>
             <th>
@@ -35,7 +31,6 @@
         </tr>
     </thead>
     <tbody>
-
         @if (Model != null)
         {
             @foreach (var item in Model)
@@ -62,17 +57,10 @@
                     <td>
                         @Html.ActionLink("Order delivered", "Edit", new { id = item.IdOrder, })
                     </td>
-
                 </tr>
             }
         }
-        else
-        {
-            <h2 style="red"> You don't have any order yet !</h2>
-        }
+        
     </tbody>
-
 </table>
-
-
-<a asp-action="GetArchivedOrders">Archives</a>
+<a asp-action="GetCustomerOrders">My orders</a>

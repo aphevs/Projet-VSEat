@@ -137,6 +137,52 @@ namespace DAL
                             order.IdCustomer = (int)dr["IdCustomer"];
                             order.IdCourier = (int)dr["IdCourier"];
 
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return order;
+        }
+
+
+
+        public Order GetCustomerOrder(int id)
+        {
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+            Order order = null;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM [Order] inner join Customer on [Order].IdCustomer=Customer.IdCustomer WHERE IdOrder = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            order = new Order();
+
+                            order.IdOrder = (int)dr["IdOrder"];
+                            order.status = (string)dr["status"];
+                            order.created_at = (DateTime)dr["created_at"];
+                            order.IdCustomer = (int)dr["IdCustomer"];
+                            order.IdCourier = (int)dr["IdCourier"];
+                            order.name = (string)dr["name"];
+                            order.streetname = (string)dr["streetname"];
+                            order.IdCity = (int)dr["IdCity"];
+
+
                         }
                     }
                 }
@@ -205,6 +251,31 @@ namespace DAL
         }
 
 
+        public int SetDelivered(Order order)
+        {
+            int result = 0;
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "UPDATE [Order] SET status = @status WHERE IdOrder=@id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", order.IdOrder);
+                    cmd.Parameters.AddWithValue("@status", order.status);
+
+                    cn.Open();
+
+                    result = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return result;
+        }
 
 
 
