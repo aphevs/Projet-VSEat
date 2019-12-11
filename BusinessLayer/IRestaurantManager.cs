@@ -6,6 +6,7 @@ namespace BusinessLayer
     public interface IRestaurantManager
     {
 
+        List<Restaurant> GetRestaurantsFromCity(int id);
 
         List<Restaurant> GetRestaurants();
 
@@ -16,6 +17,9 @@ namespace BusinessLayer
         int UpdateRestaurant(Restaurant restaurant);
 
         int DeleteRestaurant(int id);
+
+        List<int> GetCitiesId();
+
 
     }
 }

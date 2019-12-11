@@ -9,7 +9,7 @@ namespace BusinessLayer
 {
     public class RestaurantManager : IRestaurantManager
     {
-        private IRestaurantsDB RestaurantDBObject { get; }
+        private IRestaurantsDB RestaurantDBObject { get; } 
 
 
         public RestaurantManager(IRestaurantsDB restaurantDB)
@@ -18,6 +18,37 @@ namespace BusinessLayer
 
         }
 
+
+       
+
+        public List<Restaurant> GetRestaurantsFromCity(int id)
+        {
+            return RestaurantDBObject.GetRestaurantsFromCity(id);
+
+        }
+
+
+        //This is used to check if the city is or not in the database 
+
+        public List<int> GetCitiesId()
+        {
+
+            List<int> lidcity = null;
+            List<Restaurant> lCities = RestaurantDBObject.GetRestaurants();
+
+            foreach(Restaurant restaurant in lCities)
+            {
+                if (lidcity == null)
+                    lidcity = new List<int>();
+
+                lidcity.Add(restaurant.IdCity);
+
+            }
+
+            return lidcity;
+
+
+        }
 
 
 

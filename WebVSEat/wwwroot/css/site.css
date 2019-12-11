@@ -36,3 +36,11 @@ body {
     }
 }
 
+
+.navbar {
+    padding-top: 0.25rem; /* 0px does not look good on small screens */
+    padding-bottom: 0.25rem;
+    font-size: smaller; /* Just because I am using big size font */
+    line-height: 1em;
+}
+

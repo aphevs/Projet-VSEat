@@ -35,24 +35,29 @@ namespace WebVSEat.Controllers
         }
 
 
+        public ActionResult IndexError()
+        {
+            return View();
+        }
+
         //Create a list déroulante
         //selected = par défaut
         // GET: Restaurant/Details/5
-       // public ActionResult Details(int id)
-       // {
+        // public ActionResult Details(int id)
+        // {
 
-           // var names = new List<SelectListItem>
-           // {
-           //     new SelectListItem{Value="1", Text = "Vache and me"},
-           //     new SelectListItem{Value="2", Text = "Downtown", Selected=true},
-          //      new SelectListItem{Value="3", Text = "Thai"}
-           // };
-           // ViewBag.Names = names;
-           // ViewBag.Selected = 2;
-           // return View();
+        // var names = new List<SelectListItem>
+        // {
+        //     new SelectListItem{Value="1", Text = "Vache and me"},
+        //     new SelectListItem{Value="2", Text = "Downtown", Selected=true},
+        //      new SelectListItem{Value="3", Text = "Thai"}
+        // };
+        // ViewBag.Names = names;
+        // ViewBag.Selected = 2;
+        // return View();
 
 
-       // }
+        // }
         //if you have an object, you can get here, if not, you stay out
         public ActionResult Details(int id)
         {
@@ -162,11 +167,54 @@ namespace WebVSEat.Controllers
 
         }
 
+
+
+
+        //Search a city code and get all the city inside
+
+        [HttpPost]
+        public ActionResult GetAllRestaurantsFromCity(int id)
+        {
+
+            var cityidlist = RestaurantManager.GetCitiesId();
+            bool validCityId = false;
+
+            foreach (int index in cityidlist)
+            {
+
+                if (id == index)
+                    validCityId = true;
+
+            }
+
+            if(validCityId==true)
+            { 
+
+            var restaurantlist = RestaurantManager.GetRestaurantsFromCity(id);
+
+            return View(restaurantlist);
+
+            }
+            else
+            {
+
+
+                return RedirectToAction(nameof(IndexError));
+
+
+            }
+
+
+
+
+        }
+
+
+
         // GET: Restaurant/Edit/5
         //restaurant DTO
         public ActionResult Edit(int id)
         {
-
            
             var restaurant = RestaurantManager.GetRestaurant(id);
             return View(restaurant);
@@ -177,12 +225,8 @@ namespace WebVSEat.Controllers
          [HttpPost]
         public ActionResult Edit(DataTransferObject.Restaurant r)
         {
-
-
             RestaurantManager.UpdateRestaurant(r);
             return RedirectToAction(nameof(GetAllRestaurants));
-
-
 
 
         }

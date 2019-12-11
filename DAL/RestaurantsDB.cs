@@ -84,8 +84,8 @@ namespace DAL
 
                             restaurant.IdRestaurant = (int)dr["IdRestaurant"];
                             restaurant.created_at = (DateTime)dr["created_at"];
-                            restaurant.IdCity = (int)dr["IdCity"];
                             restaurant.name = (string)dr["name"];
+                            restaurant.IdCity = (int)dr["IdCity"];
                         }
                     }
                 }
@@ -97,6 +97,55 @@ namespace DAL
 
             return restaurant;
         }
+
+
+        public List<Restaurant> GetRestaurantsFromCity(int id)
+        {
+            List<Restaurant> results = null;
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM Restaurant where IdCity = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Restaurant>();
+
+
+                            Restaurant restaurant = new Restaurant();
+
+                            restaurant.IdRestaurant = (int)dr["IdRestaurant"];
+                            restaurant.created_at = (DateTime)dr["created_at"];
+                            restaurant.name = (string)dr["name"];
+                            restaurant.IdCity = (int)dr["IdCity"];
+
+                            results.Add(restaurant);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+            return results;
+        }
+
+
+
+
 
         public Restaurant AddRestaurant(Restaurant restaurant)
         {

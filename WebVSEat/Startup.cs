@@ -72,11 +72,13 @@ namespace WebVSEat
             app.UseCookiePolicy();
 
             app.UseSession();
+
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Order}/{action=GetCustomerOrders}/{id?}");
+                    template: "{controller=Restaurant}/{action=Index}/{id?}");
             });
         }
     }

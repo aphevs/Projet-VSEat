@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DataTransferObject.Restaurant>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="jumbotron">
+    <h1 class="display-3">VsEat, eat well, eat Valaisan</h1>
+    <p class="lead">Enter your city code there and we'll bring you to the best restaurants in your area!</p>
+    <hr class="my-4">
+
+
+    @using (@Html.BeginForm("GetAllRestaurantsFromCity", "Restaurant", FormMethod.Post))
+    {
+        <form class="form-inline my-2 my-md-0" action="GetAllRestaurantsFromCity" method="POST" >
+            <input class="form-control mr-sm-2" type="text" name="id" placeholder="City code">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+
+        </form>
+    }
+
+
+
+
+
+
+
+</div>
+<br/>
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4 class="alert-heading">Oops!</h4>
+    <p class="mb-0"> Looks like you have made a mistake in the name of the city, or the city you are looking for is not in our system, sorry for the inconvinience !</p>
+</div>
+
+<p>
+    <img src="~/images/LogoVsEat.PNG" alt="Microsoft Azure" class="img-responsive" />
+</p>
