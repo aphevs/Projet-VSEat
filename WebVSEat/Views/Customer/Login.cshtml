@@ -1,0 +1,50 @@
+﻿@model DataTransferObject.Customer
+
+
+@{
+    ViewBag.Title = "Home Login";
+}
+
+<div class="jumbotron">
+    <h1>VsEAT, Sûr et Rapide !</h1>
+    <p class="lead">Bienvenue.</p>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+                <div class="col-md-4">
+                    <h2>Login</h2>
+                    <div class="form-group">
+                        <label asp-for="login">Email address</label>
+                        <input type="email" class="form-control" asp-for="login" aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="password" for="password">Password</label>
+                        <input asp-for="password" type="password" class="form-control" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Se Connecter</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+                <div class="col-md-4">
+                    <h2>Courier only</h2>
+                    <div class="form-group">
+                        <label for="login">Email address</label>
+                        <input type="email" class="form-control" id="login" aria-describedby="emailHelp">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Log</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

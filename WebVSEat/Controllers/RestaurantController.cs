@@ -11,10 +11,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace WebVSEat.Controllers
 {
-
-
-
-
     public class RestaurantController : Controller
     {
 
@@ -160,6 +156,7 @@ namespace WebVSEat.Controllers
 
             var restaurantlist = RestaurantManager.GetRestaurants();
 
+            ViewBag.id = HttpContext.Session.GetInt32("id");
 
             return View(restaurantlist);
 

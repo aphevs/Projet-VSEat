@@ -9,8 +9,6 @@ namespace BusinessLayer
 {
     public interface ICourierManager
     {
-
-
         List<Courier> GetCouriers();
 
         Courier GetCourier(int id);

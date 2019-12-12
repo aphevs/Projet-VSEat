@@ -16,6 +16,22 @@ namespace BusinessLayer
             CouriersDbObject = couriersDB;
         }
 
+        public bool isCustomerValid(Courier cour)
+        {
+            //vérifie que le livreur est dans la liste des livreurs
+
+            List<Courier> list = GetCouriers();
+
+            foreach (var courier in list)
+            {
+                if (courier.login.Equals(cour.login) && courier.password.Equals(cour.password))
+                    return true;
+            }
+
+            return false;
+
+        }
+
         public List<Courier> GetCouriers()
         {
             return CouriersDbObject.GetCouriers();

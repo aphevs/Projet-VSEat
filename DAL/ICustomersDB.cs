@@ -8,11 +8,12 @@ namespace DAL
 {
     public interface ICustomersDB
     {
-    
+
         //IConfiguration Configuration { get; }
 
+      
 
-        List<Customer> GetCustomers();
+    List<Customer> GetCustomers();
 
         Customer GetCustomer(int id);
 
@@ -21,6 +22,9 @@ namespace DAL
         int UpdateCustomer(Customer customer);
 
         int DeleteCustomer(int id);
+
+
+        Customer GetCustomerByUsernamePassword(string login, string password);
 
 
     }

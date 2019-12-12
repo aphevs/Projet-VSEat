@@ -9,7 +9,7 @@ namespace DAL
 {
     public class CustomersDB : ICustomersDB
     {
-        //public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
         //public CustomersDB(IConfiguration configuration)
         //{
         //    Configuration = configuration;
@@ -18,9 +18,21 @@ namespace DAL
         private string connectionString = null;
         public CustomersDB(IConfiguration configuration)
         {
-            var config = configuration;
-            connectionString = config.GetConnectionString("DefaultConnection");
+            //var config = configuration;
+            connectionString = configuration.GetConnectionString("DefaultConnection");
         }
+
+
+        
+
+
+
+
+
+
+
+
+
 
 
         public List<Customer> GetCustomers()
@@ -28,7 +40,6 @@ namespace DAL
             
             {
                 List<Customer> results = null;
-               // string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
                 try
                 {
@@ -50,7 +61,6 @@ namespace DAL
 
                                 customer.IdCustomer = (int)dr["IdCustomer"];
                                 customer.name = (string)dr["name"];
-                                customer.created_at = (DateTime)dr["created_at"];
                                 customer.streetname = (string)dr["streetname"];
                                 customer.login = (string)dr["login"];
                                 customer.password = (string)dr["password"];
@@ -70,6 +80,51 @@ namespace DAL
                 return results;
             }
         }
+        public Customer GetCustomerByUsernamePassword(string login, string password)
+        {
+            Customer customer = null;
+
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+                    string query = "Select * from Customer where login = @login and @password = password";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@login", login);
+                    cmd.Parameters.AddWithValue("@password", password);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            customer = new Customer();
+
+                            customer.IdCustomer = (int)dr["IdCustomer"];
+                            customer.name = (string)dr["name"];
+                            customer.streetname = (string)dr["streetname"];
+                            customer.login = (string)dr["login"];
+                            customer.password = (string)dr["password"];
+                            customer.IdCity = (int)dr["IdCity"];
+
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return customer;
+        }
+
 
         public Customer GetCustomer(int id)
         {
@@ -94,7 +149,6 @@ namespace DAL
 
                             customer.IdCustomer = (int)dr["IdCustomer"];
                             customer.name = (string)dr["name"];
-                            customer.created_at = (DateTime)dr["created_at"];
                             customer.streetname = (string)dr["streetname"];
                             customer.login = (string)dr["login"];
                             customer.password = (string)dr["password"];
@@ -121,11 +175,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Customer(IdCustomer, name, created_at, streetname, login, password, IdCity, ) values(@IdCustomer, @name, @created_at, @streetname, @login, @password, @IdCity); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Customer(IdCustomer, name, streetname, login, password, IdCity, ) values(@IdCustomer, @name, @streetname, @login, @password, @IdCity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdCustomer", customer.IdCustomer);
                     cmd.Parameters.AddWithValue("@name", customer.name);
-                    cmd.Parameters.AddWithValue("@created_at", customer.created_at);
                     cmd.Parameters.AddWithValue("@streetname", customer.streetname);
                     cmd.Parameters.AddWithValue("@login", customer.login);
                     cmd.Parameters.AddWithValue("@password", customer.password);
@@ -156,11 +209,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Customer SET name = @name, created_at =@created_at, streetname = @streetname, login = @login, password = @password, IdCity = @IdCity WHERE IdCustomer=@id";
+                    string query = "UPDATE Customer SET name = @name, streetname = @streetname, login = @login, password = @password, IdCity = @IdCity WHERE IdCustomer=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdCustomer", customer.IdCustomer);
                     cmd.Parameters.AddWithValue("@name", customer.name);
-                    cmd.Parameters.AddWithValue("@created_at", customer.created_at);
                     cmd.Parameters.AddWithValue("@streetname", customer.streetname);
                     cmd.Parameters.AddWithValue("@login", customer.login);
                     cmd.Parameters.AddWithValue("@password", customer.password);

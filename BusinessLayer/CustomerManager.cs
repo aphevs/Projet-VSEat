@@ -9,11 +9,36 @@ namespace BusinessLayer
 {
     public class CustomerManager : ICustomerManager
     {
-        private ICustomersDB CustomerDbObject { get; }
+        public ICustomersDB CustomerDbObject { get; }
 
         public CustomerManager(ICustomersDB customersDB)
         {
             CustomerDbObject = customersDB;
+        }
+
+        public Customer GetCustomerByUsernamePassword(string login, string password)
+        {
+            return CustomerDbObject.GetCustomerByUsernamePassword(login,password);
+        }
+
+
+
+        //vérifie que le customer est dans la liste des customers
+        public bool isCustomerValid(Customer cus)
+        {         
+
+            List<Customer> list = CustomerDbObject.GetCustomers();
+
+            foreach (Customer customer in list)
+            {
+                if (cus.login.Equals(customer.login) && cus.password.Equals(customer.password))
+                {
+                    return true;
+                }
+                   
+            }
+            return false;
+
         }
 
 
@@ -42,7 +67,6 @@ namespace BusinessLayer
         {
             return CustomerDbObject.DeleteCustomer(id);
         }
-
 
 
     }

@@ -46,7 +46,8 @@ namespace WebVSEat
 
             services.AddScoped<IRestaurantManager, RestaurantManager>();
             services.AddScoped<IRestaurantsDB, RestaurantsDB>();
-
+            services.AddScoped<ICustomerManager, CustomerManager>();
+            services.AddScoped<ICustomersDB, CustomersDB>();
 
             services.AddScoped<IOrderManager, OrderManager>();
             services.AddScoped<IOrdersDB, OrdersDB>();
@@ -72,13 +73,11 @@ namespace WebVSEat
             app.UseCookiePolicy();
 
             app.UseSession();
-
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Restaurant}/{action=Index}/{id?}");
+                    template: "{controller=Customer}/{action=Login}/{id?}");
             });
         }
     }

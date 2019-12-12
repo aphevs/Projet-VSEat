@@ -9,8 +9,10 @@ namespace BusinessLayer
 {
     public interface ICustomerManager
     {
+        Customer GetCustomerByUsernamePassword(string login, string password);
 
 
+        bool isCustomerValid(Customer cus);
 
         List<Customer> GetCustomers();
 
