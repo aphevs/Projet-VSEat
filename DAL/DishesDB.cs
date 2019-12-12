@@ -51,7 +51,7 @@ namespace DAL
                                 Dish dish = new Dish();
 
                                 dish.IdDish = (int)dr["IdDish"];
-                                dish.name = (string)dr["name"];
+                                dish.nameDish = (string)dr["nameDish"];
                                 dish.price = (int)dr["price"];
                                 dish.description = (string)dr["description"];
                                 dish.IdRestaurant = (int)dr["IdRestaurant"];
@@ -94,7 +94,7 @@ namespace DAL
                             dish = new Dish();
 
                             dish.IdDish = (int)dr["IdDish"];
-                            dish.name = (string)dr["name"];
+                            dish.nameDish = (string)dr["nameDish"];
                             dish.price = (decimal)dr["price"];
                             dish.description = (string)dr["description"];
                             dish.IdRestaurant = (int)dr["IdRestaurant"];
@@ -118,9 +118,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Dish(name, price, description, IdRestaurant) values(@name, @price, @description, @IdRestaurant); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Dish(nameDish, price, description, IdRestaurant) values(@nameDish, @price, @description, @IdRestaurant); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", dish.name);
+                    cmd.Parameters.AddWithValue("@nameDish", dish.nameDish);
                     cmd.Parameters.AddWithValue("@price", dish.price);
                     cmd.Parameters.AddWithValue("@description", dish.description);
                     cmd.Parameters.AddWithValue("@IdRestaurant", dish.IdRestaurant);
@@ -148,9 +148,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Dish SET name = @name, price = @price, description = @description, IdRestaurant = @IdRestaurant WHERE IdDish=@id";
+                    string query = "UPDATE Dish SET nameDish = @nameDish, price = @price, description = @description, IdRestaurant = @IdRestaurant WHERE IdDish=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", dish.name);
+                    cmd.Parameters.AddWithValue("@nameDish", dish.nameDish);
                     cmd.Parameters.AddWithValue("@price", dish.price);
                     cmd.Parameters.AddWithValue("@description", dish.description);
                     cmd.Parameters.AddWithValue("@IdRestaurant", dish.IdRestaurant);

@@ -20,6 +20,6 @@ namespace BusinessLayer
 
         List<int> GetCitiesId();
 
-
+        List<Restaurant> GetRestaurantDishes(int id);
     }
 }

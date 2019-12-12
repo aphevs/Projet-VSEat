@@ -19,7 +19,12 @@ namespace BusinessLayer
         }
 
 
-       
+        public List<Restaurant> GetRestaurantDishes(int id)
+        {
+            return RestaurantDBObject.GetRestaurantDishes(id);
+        }
+
+
 
         public List<Restaurant> GetRestaurantsFromCity(int id)
         {

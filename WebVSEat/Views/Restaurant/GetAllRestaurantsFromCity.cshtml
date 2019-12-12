@@ -17,10 +17,12 @@
     <div class="card mb-sm-3">
         <h2 class="card-header">@Html.DisplayFor(modelItem => item.name)</h2>
         <div class="card-body">
-            <h5 class="card-title">@Html.ActionLink("Menu", "Details", new {  id=item.IdRestaurant }) </h5>
+            <h5 class="card-title">@Html.ActionLink("Menu", "GetRestaurantDishes", new {  id=item.IdRestaurant }) </h5>
 
         </div>
     </div>
-            }
+
+
+      }
 
 

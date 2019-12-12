@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DataTransferObject.Restaurant>
+
+@{
+    ViewData["Title"] = "Restaurant menu";
+}
+
+<h2>Menu</h2>
+
+
+<table class="table">
+    <thead>
+        <tr class="table-info">
+            <th>
+                Dishes
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Description
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="table-light">
+            <td>
+                @Html.DisplayFor(modelItem => item.nameDish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @*<div class="form-group">
+                    <label asp-for="quantity">quantity</label>
+                    <select asp-for="quantity" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <span asp-validation-for="quantity" class="text-danger"></span>
+                </div>*@
+
+
+
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="GetAllRestaurantsFromCity">Back to List</a>
+</div>

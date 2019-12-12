@@ -29,7 +29,7 @@ namespace BusinessLayer
             foreach (Order order in lOrder)
             {
 
-                if (order.status.ToLower() == "not delivered")
+                if (order.status.ToLower() == "delivered" || order.status.ToLower() == "cancelled" )
                 {
                     if (lCurrentOrder == null)
                         lCurrentOrder = new List<Order>();

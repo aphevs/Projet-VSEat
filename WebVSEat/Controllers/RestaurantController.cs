@@ -57,13 +57,12 @@ namespace WebVSEat.Controllers
         // return View();
 
 
-        // }
-        //if you have an object, you can get here, if not, you stay out
-        public ActionResult Details(int id)
+        //Getting the dishes of a given restaurant
+        public ActionResult GetRestaurantDishes(int id)
         {
 
            
-            var restaurant = RestaurantManager.GetRestaurant(id);
+            var restaurant = RestaurantManager.GetRestaurantDishes(id);
             return View(restaurant);
 
         }

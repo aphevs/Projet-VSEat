@@ -1,42 +1,36 @@
 ﻿@model DataTransferObject.Restaurant
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Menu";
 }
 
-<h2>Details</h2>
+    <h1>@Html.DisplayFor(model => model.name)</h1>
 
 <div>
-    <h4>Restaurant</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IdRestaurant)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IdRestaurant)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.created_at)
+            @Html.DisplayNameFor(model => model.nameDish)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.created_at)
+            @Html.DisplayFor(model => model.nameDish)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IdCity)
+            @Html.DisplayNameFor(model => model.price)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IdCity)
+            @Html.DisplayFor(model => model.price)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.description)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.name)
+            @Html.DisplayFor(model => model.description)
         </dd>
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.IdRestaurant  }) 
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="GetAllRestaurantsFromCity">Back to List</a>
 </div>
