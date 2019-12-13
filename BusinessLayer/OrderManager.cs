@@ -89,6 +89,13 @@ namespace BusinessLayer
             return OrderDBObject.AddOrder(order);
         }
 
+        public Order CreateOrder(Order order)
+        {
+
+            return OrderDBObject.CreateOrder(order);
+        }
+
+
         public int UpdateOrder(Order order)
         {
             return OrderDBObject.UpdateOrder(order);

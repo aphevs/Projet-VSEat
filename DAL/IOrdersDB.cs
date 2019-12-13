@@ -16,6 +16,7 @@ namespace DAL
         Order GetOrder(int id);
         Order GetCustomerOrder(int id);
 
+        Order CreateOrder(Order order);
         Order AddOrder(Order order);
 
         int UpdateOrder(Order order);

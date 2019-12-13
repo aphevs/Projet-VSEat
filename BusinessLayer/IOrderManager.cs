@@ -18,9 +18,11 @@ namespace BusinessLayer
 
         Order GetOrder(int id);
 
+
         Order GetCustomerOrder(int id);
 
         Order AddOrder(Order order);
+        Order CreateOrder(Order order);
 
         int UpdateOrder(Order order);
 

@@ -24,7 +24,10 @@
                 Order time
             </th>
             <th>
-                Customer name
+                Firstname
+            </th>
+            <th>
+                Lastname
             </th>
             <th>
                 Street
@@ -32,45 +35,62 @@
             <th>
                 City code
             </th>
+            <th>
+                When to deliver
+            </th>
+            <th>
+                Total
+            </th>
         </tr>
     </thead>
     <tbody>
 
+        @if(@Item.IdOrder == 2) { 
         @if (Model != null)
         {
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdOrder)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.status)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.created_at)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.streetname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdCity)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Order delivered", "Edit", new { id = item.IdOrder },  htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
-                        @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })*@
-                    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.created_at)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.streetname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.timeToDeliver)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.totalprice)
+            </td>
+            <td>
+                @Html.ActionLink("Order delivered", "Edit", new { id = item.IdOrder }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+                @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })*@
+            </td>
 
-                </tr>
+        </tr>
             }
+        }
         }
     </tbody>
 
 </table>
-@if (Model == null)
+else
 {
 
     <div class="alert alert-dismissible alert-info">

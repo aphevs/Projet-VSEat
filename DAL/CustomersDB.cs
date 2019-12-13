@@ -61,6 +61,7 @@ namespace DAL
 
                                 customer.IdCustomer = (int)dr["IdCustomer"];
                                 customer.name = (string)dr["name"];
+                                customer.lastname = (string)dr["lastname"];
                                 customer.streetname = (string)dr["streetname"];
                                 customer.login = (string)dr["login"];
                                 customer.password = (string)dr["password"];
@@ -107,6 +108,7 @@ namespace DAL
 
                             customer.IdCustomer = (int)dr["IdCustomer"];
                             customer.name = (string)dr["name"];
+                            customer.lastname = (string)dr["lastname"];
                             customer.streetname = (string)dr["streetname"];
                             customer.login = (string)dr["login"];
                             customer.password = (string)dr["password"];
@@ -149,6 +151,7 @@ namespace DAL
 
                             customer.IdCustomer = (int)dr["IdCustomer"];
                             customer.name = (string)dr["name"];
+                            customer.lastname = (string)dr["lastname"];
                             customer.streetname = (string)dr["streetname"];
                             customer.login = (string)dr["login"];
                             customer.password = (string)dr["password"];
@@ -175,10 +178,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Customer(IdCustomer, name, streetname, login, password, IdCity, ) values(@IdCustomer, @name, @streetname, @login, @password, @IdCity); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Customer(IdCustomer, name, lastname, streetname, login, password, IdCity, ) values(@IdCustomer, @name, @lastname, @streetname, @login, @password, @IdCity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdCustomer", customer.IdCustomer);
                     cmd.Parameters.AddWithValue("@name", customer.name);
+                    cmd.Parameters.AddWithValue("@lastname", customer.lastname);
                     cmd.Parameters.AddWithValue("@streetname", customer.streetname);
                     cmd.Parameters.AddWithValue("@login", customer.login);
                     cmd.Parameters.AddWithValue("@password", customer.password);
@@ -209,10 +213,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Customer SET name = @name, streetname = @streetname, login = @login, password = @password, IdCity = @IdCity WHERE IdCustomer=@id";
+                    string query = "UPDATE Customer SET name = @name, lastname = @lastname, streetname = @streetname, login = @login, password = @password, IdCity = @IdCity WHERE IdCustomer=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@IdCustomer", customer.IdCustomer);
                     cmd.Parameters.AddWithValue("@name", customer.name);
+                    cmd.Parameters.AddWithValue("@lastname", customer.lastname);
                     cmd.Parameters.AddWithValue("@streetname", customer.streetname);
                     cmd.Parameters.AddWithValue("@login", customer.login);
                     cmd.Parameters.AddWithValue("@password", customer.password);
