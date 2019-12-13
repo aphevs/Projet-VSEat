@@ -45,7 +45,7 @@
     </thead>
     <tbody>
 
-        @if(@Item.IdOrder == 2) { 
+        @*@if(@Item.IdOrder == 2) {*@ 
         @if (Model != null)
         {
             @foreach (var item in Model)
@@ -85,12 +85,12 @@
 
         </tr>
             }
-        }
+            //}
         }
     </tbody>
 
 </table>
-else
+@if(Model == null)
 {
 
     <div class="alert alert-dismissible alert-info">

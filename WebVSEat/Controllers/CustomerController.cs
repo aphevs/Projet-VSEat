@@ -34,7 +34,7 @@ namespace WebVSEat.Controllers
                 HttpContext.Session.SetInt32("id", customer.IdCustomer);
                 HttpContext.Session.SetString("name", customer.name);
                 //HttpContext.Session.SetString("password", customer.password);
-                return RedirectToAction("GetAllRestaurants", "Restaurant");
+                return RedirectToAction("Index", "Restaurant");
 
                 
 
