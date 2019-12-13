@@ -9,10 +9,16 @@ namespace BusinessLayer
 {
     public interface IOrderManager
     {
+        //Archive
+        List<Order> GetArchivedOrdersWithIdCourier(int IdGiven);
 
+
+        //List of orders
+        List<Order> GetCustomerOrdersWithIdCourier(int IdGiven);
+
+        //TEST TEST TEST
         List<Order> GetCustomerOrders();
 
-        List<Order> GetArchivedOrders();
 
         List<Order> GetOrders();
 

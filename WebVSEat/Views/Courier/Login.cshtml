@@ -1,13 +1,13 @@
-﻿@model DataTransferObject.Customer
+﻿@model DataTransferObject.Courier
 
 
 @{
-    ViewBag.Title = "Home Login";
+    ViewBag.Title = "Home Login Courier";
 }
 
 <div class="jumbotron">
-    <h1>VsEAT</h1>
-    <p class="lead">Welcome, what are you waiting for ? Sign in !</p>
+    <h1>Prêt à livrer ?</h1>
+    <p class="lead">Bienvenue.</p>
 </div>
 
 
@@ -19,18 +19,20 @@
                 <div class="col-md-4">
                     <h2>Login</h2>
                     <div class="form-group">
-                        <label asp-for="login">Email address</label>
-                        <input type="email" class="form-control" asp-for="login" aria-describedby="emailHelp">
+                        <label asp-for="login">Votre login</label>
+                        <input type="text" class="form-control" asp-for="login" aria-describedby="emailHelp">
                     </div>
 
                     <div class="form-group">
                         <label asp-for="password" for="password">Password</label>
                         <input asp-for="password" type="password" class="form-control" id="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Connect</button>
+                    <button type="submit" class="btn btn-primary">Se Connecter</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
 

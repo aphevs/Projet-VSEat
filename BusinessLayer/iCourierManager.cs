@@ -11,6 +11,8 @@ namespace BusinessLayer
     {
         List<Courier> GetCouriers();
 
+        Courier GetCourierByUsernamePassword(string login, string password);
+
         Courier GetCourier(int id);
 
         Courier AddCourier(Courier courier);

@@ -13,6 +13,9 @@ namespace DAL
 
         List<Order> GetOrders();
 
+        //TEST TEST TEST
+        List<Order> GetCustomerOrders();
+
         Order GetOrder(int id);
         Order GetCustomerOrder(int id);
 
@@ -24,7 +27,7 @@ namespace DAL
         int DeleteOrder(int id);
 
 
-        List<Order> GetCustomerOrders();
+        List<Order> GetCustomerOrdersWithIdCourier(int IdGiven);
 
 
 

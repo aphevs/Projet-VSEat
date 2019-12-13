@@ -8,10 +8,10 @@ namespace DAL
 {
     public interface ICouriersDB
     {
-    
-        //IConfiguration Configuration { get; }
 
         List<Courier> GetCouriers();
+
+        Courier GetCourierByUsernamePassword(string login, string password);
 
         Courier GetCourier(int id);
 

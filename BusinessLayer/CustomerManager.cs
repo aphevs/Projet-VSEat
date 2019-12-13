@@ -16,6 +16,7 @@ namespace BusinessLayer
             CustomerDbObject = customersDB;
         }
 
+        //Méthode vérifiant que customer n'est pas nul et donc valide
         public Customer GetCustomerByUsernamePassword(string login, string password)
         {
             return CustomerDbObject.GetCustomerByUsernamePassword(login,password);
