@@ -14,17 +14,49 @@ namespace BusinessLayer
         public OrderManager(IOrdersDB orderDB)
         {
             OrderDBObject = orderDB;
+        }
+
+
+
+        //TEST TEST TEST
+        public List<Order> GetCustomerOrders()
+        {
+            return OrderDBObject.GetCustomerOrders();
+        }
+
+
+
+
+
+        //Get all orders which are not designed as "delivered"
+        public List<Order> GetCustomerOrdersWithIdCourier(int IdGiven)
+        {
+            List<Order> lCurrentOrder = null;
+            List<Order> lOrder = OrderDBObject.GetCustomerOrdersWithIdCourier(IdGiven);
+
+            foreach (Order order in lOrder)
+            {
+
+                if (order.status.ToLower() != "delivered" && order.status.ToLower() != "cancelled")
+                {
+                    if (lCurrentOrder == null)
+                        lCurrentOrder = new List<Order>();
+
+                    lCurrentOrder.Add(order);
+
+                }
+            }
+            return lCurrentOrder;
 
         }
-        
 
         //Get all orders to make an archive of it
 
-        public List<Order> GetArchivedOrders()
+        public List<Order> GetArchivedOrdersWithIdCourier(int IdGiven)
         {
 
             List<Order> lCurrentOrder = null;
-            List<Order> lOrder = OrderDBObject.GetCustomerOrders();
+            List<Order> lOrder = OrderDBObject.GetCustomerOrdersWithIdCourier(IdGiven);
 
             foreach (Order order in lOrder)
             {
@@ -42,34 +74,13 @@ namespace BusinessLayer
         }
 
 
-        //Get all orders which are not designed as "delivered"
-        public List<Order> GetCustomerOrders()
-        {
 
 
-            List<Order> lCurrentOrder = null;
-            List<Order> lOrder = OrderDBObject.GetCustomerOrders();
-
-            foreach (Order order in lOrder)
-            {
-
-                if (order.status.ToLower() != "delivered" && order.status.ToLower() != "cancelled")
-                {
-                    if (lCurrentOrder == null)
-                        lCurrentOrder = new List<Order>();
-
-                    lCurrentOrder.Add(order);
-
-                }
-            }
-            return lCurrentOrder;
- 
-        }
+     
 
         public List<Order> GetOrders()
         {
             return OrderDBObject.GetOrders();
-
         }
 
         public Order GetOrder(int id)
@@ -108,7 +119,7 @@ namespace BusinessLayer
         }
 
 
-
+       
     }
 }
 

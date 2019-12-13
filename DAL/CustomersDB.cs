@@ -23,18 +23,6 @@ namespace DAL
         }
 
 
-        
-
-
-
-
-
-
-
-
-
-
-
         public List<Customer> GetCustomers()
         {
             

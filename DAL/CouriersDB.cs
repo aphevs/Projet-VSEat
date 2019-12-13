@@ -9,17 +9,55 @@ namespace DAL
 {
     public class CouriersDB : ICouriersDB
     {
-        //public IConfiguration Configuration { get; }
-        //public CouriersDB(IConfiguration configuration)
-        //{
-        //    Configuration = configuration;
-        //}
 
         private string connectionString = null;
         public CouriersDB(IConfiguration configuration)
         {
             var config = configuration;
             connectionString = config.GetConnectionString("DefaultConnection");
+        }
+
+        public Courier GetCourierByUsernamePassword(string login, string password)
+        {
+            Courier courier = null;
+
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+                    string query = "Select * from Courier where login = @login and @password = password";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@login", login);
+                    cmd.Parameters.AddWithValue("@password", password);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            courier = new Courier();
+
+                            courier.IdCourier = (int)dr["IdCourier"];
+                            courier.name = (string)dr["name"];           
+                            courier.login = (string)dr["login"];
+                            courier.password = (string)dr["password"];
+                            courier.IdCity = (int)dr["IdCity"];
+
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return courier;
         }
 
 

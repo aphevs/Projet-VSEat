@@ -9,14 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebVSEat.Controllers
 {
-    public class CustomerController : Controller
+    public class CourierController : Controller
     {
       
-        private ICustomerManager CustomerManager { get; }
+        private ICourierManager CourierManager { get; }
 
-        public CustomerController(ICustomerManager customerManager)
+        public CourierController(ICourierManager courierManager)
         {
-            CustomerManager = customerManager;
+            CourierManager = courierManager;
         }
 
         [HttpGet]
@@ -26,19 +26,19 @@ namespace WebVSEat.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(Customer cus)
+        public IActionResult Login(Courier cour)
         {
-            Customer customer = CustomerManager.GetCustomerByUsernamePassword(cus.login, cus.password);
+            Courier courier = CourierManager.GetCourierByUsernamePassword(cour.login, cour.password);
 
-            if (customer != null)
+            if (courier != null)
             {
-                HttpContext.Session.SetInt32("id", customer.IdCustomer);
-                HttpContext.Session.SetString("name", customer.name);
-                return RedirectToAction("Index", "Restaurant");
+                HttpContext.Session.SetInt32("id", courier.IdCourier);
+                HttpContext.Session.SetString("name", courier.name);
+                return RedirectToAction("GetCustomerOrders", "Order");
             }
             else
             {
-                return RedirectToAction("Customer","Login");
+                return RedirectToAction("Courier","Login");
             }
         }
 
@@ -47,19 +47,19 @@ namespace WebVSEat.Controllers
 
 
 
-        // GET: Customer
+        // GET: Courier
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Customer/Details/5
+        // GET: Courier/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Customer/Create
+        // GET: Courier/Create
         public ActionResult Create()
         {
             return View();

@@ -12,8 +12,6 @@ namespace WebVSEat.Controllers
     public class OrderController : Controller
     {
 
-      
-
         private IOrderManager OrderManager { get; }
         public OrderController(IOrderManager ordersManager)
         {
@@ -24,8 +22,9 @@ namespace WebVSEat.Controllers
 
         public ActionResult GetArchivedOrders()
         {
-     
-            var orderlist = OrderManager.GetArchivedOrders();
+            ViewBag.id = HttpContext.Session.GetInt32("id"); //id de alex, le courier
+
+            var orderlist = OrderManager.GetArchivedOrdersWithIdCourier(ViewBag.id);
 
             return View(orderlist);
            
@@ -34,8 +33,14 @@ namespace WebVSEat.Controllers
 
         public ActionResult GetCustomerOrders()
         {
+            ViewBag.id = HttpContext.Session.GetInt32("id");
 
-           
+            //int id = (int)ViewBag.id;
+
+            //TEST WITH ID 2, IT'S ALEXANDREP
+            //var orderlist = OrderManager.GetCustomerOrdersWithIdCourier(2);
+
+            //TEST TEST TEST
             var orderlist = OrderManager.GetCustomerOrders();
 
             return View(orderlist);
@@ -102,41 +107,6 @@ namespace WebVSEat.Controllers
             }
         }
 
-        //// GET: Order/Edit/5
-        //[HttpPost]
-        //public ActionResult Edit(int id)
-        //{
-
-        //    var order = OrderManager.UpdateOrder(id);
-        //    return RedirectToAction(nameof(GetCurrentOrders));
-
-
-        //}
-
-        //// POST: Order/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
-
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-
-        //[HttpPost]
-        //public ActionResult Edit(Order o)
-        //{
-            
-        //    return RedirectToAction(nameof(GetCurrentOrders));
-        //}
 
 
 

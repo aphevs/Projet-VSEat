@@ -21,12 +21,6 @@ namespace WebVSEat
         {
             Configuration = configuration;
         }
-
-
-
-     
-
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -48,6 +42,8 @@ namespace WebVSEat
             services.AddScoped<IRestaurantsDB, RestaurantsDB>();
             services.AddScoped<ICustomerManager, CustomerManager>();
             services.AddScoped<ICustomersDB, CustomersDB>();
+            services.AddScoped<ICourierManager, CourierManager>();
+            services.AddScoped<ICouriersDB, CouriersDB>();
 
             services.AddScoped<IOrderManager, OrderManager>();
             services.AddScoped<IOrdersDB, OrdersDB>();
@@ -77,7 +73,7 @@ namespace WebVSEat
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Customer}/{action=Login}/{id?}");
+                    template: "{controller=Courier}/{action=Login}/{id?}");
             });
         }
     }
