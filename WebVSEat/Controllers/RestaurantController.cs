@@ -15,11 +15,13 @@ namespace WebVSEat.Controllers
     {
 
         private IRestaurantManager RestaurantManager { get; }
+       
 
 
         public RestaurantController(IRestaurantManager restaurantManager)
         {
             RestaurantManager = restaurantManager;
+
         }
 
 
@@ -57,7 +59,7 @@ namespace WebVSEat.Controllers
         public ActionResult GetRestaurantDishes(int id)
         {
 
-           
+            ViewBag.Price = HttpContext.Session.GetInt32("price");
             var restaurant = RestaurantManager.GetRestaurantDishes(id);
             return View(restaurant);
 
@@ -193,13 +195,9 @@ namespace WebVSEat.Controllers
             }
             else
             {
-
-
                 return RedirectToAction(nameof(IndexError));
 
-
             }
-
 
 
 
@@ -207,9 +205,86 @@ namespace WebVSEat.Controllers
 
 
 
-        // GET: Restaurant/Edit/5
-        //restaurant DTO
-        public ActionResult Edit(int id)
+        //public ActionResult ConfirmOrder(string name, decimal price)
+        //{
+
+        //    new Order() {IdOrder = HttpContext. + ViewBag["lastname"], status = "non delivered", created_at= DateTime.Now,  };
+
+        //    HttpContext.Session.SetInt32("id", customer.IdCustomer);
+        //    HttpContext.Session.SetString("name", customer.name);
+
+        //}
+
+        public static List<Dish> cartlist = new List<Dish>();
+
+        public ActionResult Cart(int id, string name, decimal price)
+        {
+
+
+
+
+            if (name != null && price > 0)
+            {
+
+                //if the list is not empty, add a new object, if the dish is already in the cart, just add +1 to the quantity
+
+                //if (cartlist.Any(i => i.NameDish == name))
+                //{
+                //    cartlist[i] = new Dish { IdDish = id, NameDish = name, Price = price, Quantity+=1 };
+                //}
+                // else
+                //{
+                    cartlist.Add(new Dish { IdDish = id, NameDish = name, Price = price, Quantity = 1 });
+                //}
+
+
+
+
+
+
+
+            }
+
+
+            return View("Cart", cartlist);
+
+            //ViewBag.id = id;
+            //ViewBag.name = name;
+            //ViewBag.price = price;
+
+
+            //    var restaurantList = new List<CityRestaurants>
+            //    {
+            //        new CityRestaurants() {city = "Sierre", lrestaurants = new List<Restaurant>{
+            //        new Restaurant() {Name ="Vache and me" },
+            //        new Restaurant() {Name = "Downtown" },
+            //        new Restaurant() {Name = "Team"},
+            //        }}
+            //    };
+            //    return View("GetCityRestaurants", restaurantList);
+
+
+            //HttpContext.Session.SetInt32("Sessioniddish", id);
+            //HttpContext.Session.SetString("Sessiondishname", name);
+            //HttpContext.Session.Set<decimal>("Sessionprice", price);
+
+        }
+
+
+        public ActionResult ConfirmOrder(decimal total, int quantity)
+        {
+            ViewBag.total = total;
+            ViewBag.quantity = quantity;
+
+
+            return View();
+        }
+
+
+
+            // GET: Restaurant/Edit/5
+            //restaurant DTO
+            public ActionResult Edit(int id)
         {
            
             var restaurant = RestaurantManager.GetRestaurant(id);

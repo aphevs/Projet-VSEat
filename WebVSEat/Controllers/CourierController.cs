@@ -38,7 +38,7 @@ namespace WebVSEat.Controllers
             }
             else
             {
-                return RedirectToAction("Courier","Login");
+                return RedirectToAction("Login","Courier");
             }
         }
 

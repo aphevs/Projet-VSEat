@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Restaurant menu";
+
+    var quantity = "0";
 }
 
 <h2>Menu</h2>
@@ -19,6 +21,7 @@
             <th>
                 Description
             </th>
+
             <th></th>
         </tr>
     </thead>
@@ -35,28 +38,19 @@
                 @Html.DisplayFor(modelItem => item.description)
             </td>
             <td>
-                @*<div class="form-group">
-                    <label asp-for="quantity">quantity</label>
-                    <select asp-for="quantity" class="form-control">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <span asp-validation-for="quantity" class="text-danger"></span>
-                </div>*@
-
-
-
+                @Html.ActionLink("Add to cart", "Cart", null ,new { id = item.IdDish, name = item.nameDish, price = item.price }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+                
                 @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
         @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
             </td>
+
         </tr>
 }
     </tbody>
 </table>
 
-<div>
-    <a asp-action="GetAllRestaurantsFromCity">Back to List</a>
-</div>
+
+
+    <div>
+        <a asp-action="Index">Back to search</a>
+    </div>

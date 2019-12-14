@@ -27,7 +27,7 @@ namespace DAL
         int DeleteOrder(int id);
 
 
-        List<Order> GetCustomerOrdersWithIdCourier(int IdGiven);
+        //List<Order> GetCustomerOrdersWithIdCourier(int IdGiven);
 
 
 

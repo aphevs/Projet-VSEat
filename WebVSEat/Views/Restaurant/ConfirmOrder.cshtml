@@ -1,0 +1,80 @@
+﻿@model DataTransferObject.Order
+
+@{
+    ViewData["Title"] = "ConfirmOrder";
+}
+
+<h2>ConfirmOrder</h2>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ConfirmOrder">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdOrder" class="control-label"></label>
+                <input asp-for="IdOrder" class="form-control" />
+                <span asp-validation-for="IdOrder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="status" class="control-label"></label>
+                <input asp-for="status" class="form-control" />
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="created_at" class="control-label"></label>
+                <input asp-for="created_at" class="form-control" />
+                <span asp-validation-for="created_at" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="timeToDeliver" class="control-label"></label>
+                <input asp-for="timeToDeliver" class="form-control" />
+                <span asp-validation-for="timeToDeliver" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="totalprice" class="control-label"></label>
+                <input asp-for="totalprice" class="form-control" />
+                <span asp-validation-for="totalprice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdCustomer" class="control-label"></label>
+                <input asp-for="IdCustomer" class="form-control" />
+                <span asp-validation-for="IdCustomer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdCourier" class="control-label"></label>
+                <input asp-for="IdCourier" class="form-control" />
+                <span asp-validation-for="IdCourier" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="lastname" class="control-label"></label>
+                <input asp-for="lastname" class="form-control" />
+                <span asp-validation-for="lastname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="streetname" class="control-label"></label>
+                <input asp-for="streetname" class="form-control" />
+                <span asp-validation-for="streetname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdCity" class="control-label"></label>
+                <input asp-for="IdCity" class="form-control" />
+                <span asp-validation-for="IdCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
