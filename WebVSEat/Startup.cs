@@ -48,6 +48,9 @@ namespace WebVSEat
             services.AddScoped<IOrderManager, OrderManager>();
             services.AddScoped<IOrdersDB, OrdersDB>();
 
+            services.AddScoped<IDishManager,DishManager>();
+            services.AddScoped<IDishesDB,DishesDB > ();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

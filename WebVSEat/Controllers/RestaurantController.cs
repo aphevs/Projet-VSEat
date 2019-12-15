@@ -15,12 +15,81 @@ namespace WebVSEat.Controllers
     {
 
         private IRestaurantManager RestaurantManager { get; }
+        private IDishManager DishManager { get; }
+        private IOrderManager OrderManager { get; }
 
 
-        public RestaurantController(IRestaurantManager restaurantManager)
+        public RestaurantController(IRestaurantManager restaurantManager, IDishManager dishManager, IOrderManager orderManager)
         {
             RestaurantManager = restaurantManager;
+
+            DishManager = dishManager;
+
+            OrderManager = orderManager;
         }
+
+        
+        public ActionResult ConfirmationOrder(IFormCollection fc)
+        {
+            int[] id_dishes = Array.ConvertAll(fc["nameDish"].ToString().Split(','),
+                s => int.TryParse(s, out var i) ? i : 0);
+
+            int[] quantity = Array.ConvertAll(fc["quantity"].ToString().Split(','),
+                s => int.TryParse(s, out var i) ? i : 0);
+
+
+            //With Dictionary, we have a list of two int "linked".
+            //That's the object dish and its quantity
+            Dictionary<int, int> dishes = id_dishes.Zip(quantity, (s, i) => new { s, i })
+                          .ToDictionary(item => item.s, item => item.i);
+
+
+            //Calculating the total price the customer will have to pay, and the city where the courier 
+            //will be attached to (alex corrige cette phrase c'est 2h du mat)
+            decimal total = 0;
+            int idCit=0;
+            foreach (var i in dishes)
+            {
+                if(i.Value != 0)
+                {
+                    total += DishManager.GetPrice(i.Key) * i.Value;
+                    idCit = DishManager.GetIdCityRestaurant(i.Key);
+                }
+
+
+
+            }
+           
+
+
+            //Taking the dateTime and stocking it in the variable dat
+            DateTime dat = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
+               Int32.Parse(fc["hour"]), Int32.Parse(fc["min"]), 0);
+
+
+            //CHECK if the date is upper than now and if the total isn't zero. 
+            //That means the customer has choosed something for a correct/possible livraison time
+            if (dat > DateTime.Now && total != 0)
+            {
+                //probleme ici avec le idCity du restau !! il faudra mettre idCity 1,2,3 et pas le code postal
+                //ou alors trouver solution car jpp comme certains disent
+
+                OrderManager.SetOrder(dishes, idCit, Convert.ToInt32(HttpContext.Session.GetInt32("id")), dat);
+                ViewBag.total = total;
+                ViewBag.dat = dat;
+                return View();
+            }
+            return RedirectToAction("GetRestaurantDishes");
+
+
+
+
+
+        }
+
+
+
+
 
 
 

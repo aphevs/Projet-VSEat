@@ -13,6 +13,11 @@ namespace DAL
 
         Courier GetCourierByUsernamePassword(string login, string password);
 
+        List<Courier> GetCouriersOfACity(int idCity);
+
+
+
+
         Courier GetCourier(int id);
 
         Courier AddCourier(Courier courier);
@@ -20,7 +25,6 @@ namespace DAL
         int UpdateCourier(Courier courier);
 
         int DeleteCourier(int id);
-
-
+       
     }
 }

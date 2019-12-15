@@ -61,10 +61,61 @@ namespace DAL
         }
 
 
+        public List<Courier> GetCouriersOfACity(int idCity)
+        {
+            List<Courier> results = null;
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM Courier WHERE IdCity = @idCity";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@idCity", idCity);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Courier>();
+
+                            Courier courier = new Courier();
+
+                            courier.IdCourier = (int)dr["IdCourier"];
+                            courier.name = (string)dr["name"];
+                            courier.login = (string)dr["login"];
+                            courier.password = (string)dr["password"];
+                            courier.IdCity = (int)dr["IdCity"];
+
+
+                            results.Add(courier);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+        }
+
+
+
+
+
         public List<Courier> GetCouriers()
         {
             
-            {
+            
                 List<Courier> results = null;
                 //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -104,7 +155,7 @@ namespace DAL
                 }
 
                 return results;
-            }
+            
         }
 
         public Courier GetCourier(int id)

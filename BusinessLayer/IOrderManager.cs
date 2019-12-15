@@ -20,6 +20,12 @@ namespace BusinessLayer
         List<Order> GetCustomerOrders();
 
 
+        //This method will put a new order in the DB
+        int SetOrder(Dictionary<int, int> dishes, int idCity, int idCustomer, DateTime dat);
+
+
+
+
         List<Order> GetOrders();
 
         Order GetOrder(int id);
@@ -35,6 +41,6 @@ namespace BusinessLayer
         int SetDelivered(Order order);
 
         int DeleteOrder(int id);
-
+        
     }
 }

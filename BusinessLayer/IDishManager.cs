@@ -10,7 +10,11 @@ namespace BusinessLayer
     public interface IDishManager
     {
 
-       // IDishesDB DishDb { get; }
+        // IDishesDB DishDb { get; }
+
+        decimal GetPrice(int id);
+
+        int GetIdCityRestaurant(int id);
 
         List<Dish> GetDishes();
 
@@ -21,6 +25,6 @@ namespace BusinessLayer
         int UpdateDish(Dish dish);
 
         int DeleteDish(int id);
-
+       
     }
 }

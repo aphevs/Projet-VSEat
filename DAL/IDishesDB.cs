@@ -13,6 +13,11 @@ namespace DAL
 
         List<Dish> GetDishes();
 
+
+        decimal GetPrice(int id);
+
+        int GetIdCityRestaurant(int id);
+
         Dish GetDish(int id);
 
         Dish AddCustomer(Dish dish);
@@ -20,6 +25,8 @@ namespace DAL
         int UpdateDish(Dish dish);
 
         int DeleteDish(int id);
+       
         Dish AddDish(Dish dish);
+       
     }
 }

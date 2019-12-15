@@ -10,19 +10,41 @@ namespace BusinessLayer
     public class OrderManager : IOrderManager
     {
         private IOrdersDB OrderDBObject { get; }
+        private ICouriersDB CourierDBObject { get; }
 
-        public OrderManager(IOrdersDB orderDB)
+        public OrderManager(IOrdersDB orderDB, ICouriersDB couriersDB)
         {
             OrderDBObject = orderDB;
+
+            CourierDBObject = couriersDB;
         }
 
 
-
-        //TEST TEST TEST
-        public List<Order> GetCustomerOrders()
+        //This method will put a new order in the DB
+        public int SetOrder(Dictionary<int, int> dishes, int idCity, int idCourier, DateTime date)
         {
-            return OrderDBObject.GetCustomerOrders();
+            // Get couriers near restaurant
+            List<Courier> couriers = new List<Courier>();
+            couriers = CourierDBObject.GetCouriersOfACity(idCity);
+
+            // Get last available courier of the list
+            Courier courierAvailable = null;
+            foreach (Courier courier in couriers)
+            {
+                if (OrderDBObject.CountCourierOrders(date, idCourier) < 5)
+                    courierAvailable = courier;
+            }
+
+            // Put the order into BD (in Order_dish)
+            if (courierAvailable != null)
+            {
+                OrderDBObject.SetOrder(dishes, idCourier, date, courierAvailable.IdCourier);
+                return 1;
+            }
+            return 0;
         }
+
+
 
 
 
@@ -76,7 +98,12 @@ namespace BusinessLayer
 
 
 
-     
+
+        public List<Order> GetCustomerOrders()
+        {
+            return OrderDBObject.GetCustomerOrders();
+        }
+
 
         public List<Order> GetOrders()
         {
@@ -94,6 +121,8 @@ namespace BusinessLayer
             return OrderDBObject.GetCustomerOrder(id);
 
         }
+
+
 
         public Order AddOrder(Order order)
         {
@@ -126,7 +155,6 @@ namespace BusinessLayer
         }
 
 
-       
     }
 }
 

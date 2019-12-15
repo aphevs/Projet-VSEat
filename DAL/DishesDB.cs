@@ -24,6 +24,64 @@ namespace DAL
         }
 
 
+        //We don't need this method because we use postal code as Id for the table City
+        // A SUPPRIMER ALEX ALEX ALEX ALEX
+        public int GetIdCityRestaurant(int id)
+        {
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT r.IdCity " +
+                                    "FROM Dish d, Restaurant r " +
+                                    "WHERE d.IdRestaurant= r.IdRestaurant " +
+                                    "AND d.IdDish = @id";
+                                    
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+                    return (int)cmd.ExecuteScalar();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        
+
+        public decimal GetPrice(int id)
+        {
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT Price " +
+                                    "FROM Dish " +
+                                    "WHERE IdDish=@id";
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+                    return (decimal)cmd.ExecuteScalar();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
 
         public List<Dish> Dishes
         {
@@ -203,6 +261,7 @@ namespace DAL
         {
             throw new NotImplementedException();
         }
+
 
     }
     }
