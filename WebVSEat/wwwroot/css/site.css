@@ -44,3 +44,12 @@ body {
     line-height: 1em;
 }
 
+#logo {
+    width: 150px;
+    height: 150px;
+}
+
+
+#ValaisButton {
+    background-image: url(~/images/Valais.jpg);
+}

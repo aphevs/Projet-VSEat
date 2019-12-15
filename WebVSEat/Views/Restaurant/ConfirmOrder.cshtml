@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "ConfirmOrder";
+    Layout = "~/Views/Shared/_LayoutCourier.cshtml";
 }
 
 <h2>ConfirmOrder</h2>
@@ -31,11 +32,6 @@
                 <label asp-for="timeToDeliver" class="control-label"></label>
                 <input asp-for="timeToDeliver" class="form-control" />
                 <span asp-validation-for="timeToDeliver" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="totalprice" class="control-label"></label>
-                <input asp-for="totalprice" class="form-control" />
-                <span asp-validation-for="totalprice" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdCustomer" class="control-label"></label>

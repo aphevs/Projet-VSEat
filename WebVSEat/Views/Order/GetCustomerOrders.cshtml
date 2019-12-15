@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<DataTransferObject.Order>
 
 @{
-    ViewData["Title"] = "GetCustomerOrders";
+    ViewData["Title"] = "Customers orders";
 }
 
 
-    <h2>Hey your id is @ViewBag.id</h2>
 
 <h2>Your orders to deliver :</h2>
 <br />
@@ -18,7 +17,7 @@
                 Order number
             </th>
             <th>
-                Delivery status
+               When to deliver
             </th>
             <th>
                 Order time
@@ -36,7 +35,7 @@
                 City code
             </th>
             <th>
-                When to deliver
+               Order creation
             </th>
             <th>
                 Total
@@ -45,7 +44,7 @@
     </thead>
     <tbody>
 
-        @*@if(@Item.IdOrder == 2) {*@ 
+
         @if (Model != null)
         {
             @foreach (var item in Model)
@@ -57,7 +56,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.status)
             </td>
-            <td>
+            <td  style="color:red">
                 @Html.DisplayFor(modelItem => item.created_at)
             </td>
             <td>
@@ -76,16 +75,16 @@
                 @Html.DisplayFor(modelItem => item.timeToDeliver)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.totalprice)
+               
             </td>
             <td>
                 @Html.ActionLink("Order delivered", "Edit", new { id = item.IdOrder }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
-                @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })*@
+              
             </td>
 
         </tr>
             }
-            //}
+       
         }
     </tbody>
 

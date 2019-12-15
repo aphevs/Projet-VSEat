@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "All the orders :";
+    Layout = "~/Views/Shared/_LayoutCourier.cshtml";
 }
 
 @*<p>
@@ -75,7 +76,7 @@
                 @Html.DisplayFor(modelItem => item.timeToDeliver)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.totalprice)
+
             </td>
         </tr>
             }

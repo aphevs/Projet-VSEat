@@ -22,7 +22,13 @@
             @Html.DisplayFor(model => model.created_at)
         </dd>
         <dt>
-            Customer name : 
+            Ordered at :
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.timeToDeliver)
+        </dd>
+        <dt>
+            Customer name :
         </dt>
         <dd>
             @Html.DisplayFor(model => model.name) @Html.DisplayFor(model => model.lastname)
@@ -47,7 +53,6 @@
                 <label asp-for="status" class="control-label">Validate : </label>
 
                 <select asp-for="status" class="form-control">
-                    <option value="delivered">delivered</option>
                     <option value="cancelled">cancelled</option>
                 </select>
 
