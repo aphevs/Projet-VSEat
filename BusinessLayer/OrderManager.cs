@@ -51,10 +51,10 @@ namespace BusinessLayer
 
 
         //Get all orders which are not designed as "delivered"
-        public List<Order> GetCustomerOrdersWithIdCustomer()
+        public List<Order> GetMyOrdersWithIdCustomer(int id)
         {
             List<Order> lCurrentOrder = null;
-            List<Order> lOrder = OrderDBObject.GetCustomerOrders();
+            List<Order> lOrder = OrderDBObject.GetMyOrdersWithIdCustomer(id);
 
             foreach (Order order in lOrder)
             {
@@ -96,8 +96,8 @@ namespace BusinessLayer
 
         }
 
-        //Get all orders to make an archive of it
-        public List<Order> GetArchivedOrdersWithCourier(int id)
+        //Get all orders which are designed as "delivered"
+        public List<Order> GetArchivedOrdersWithIdCourier(int id)
         {
             List<Order> lCurrentOrder = null;
             List<Order> lOrder = OrderDBObject.GetCustomerOrdersWithIdCourier(id);
@@ -115,46 +115,12 @@ namespace BusinessLayer
                 }
             }
             return lCurrentOrder;
-        }
 
-
-
-
-
-
-        public List<Order> GetOrders()
-        {
-            return OrderDBObject.GetOrders();
         }
 
         public Order GetOrder(int id)
         {
             return OrderDBObject.GetOrder(id);
-        }
-
-        public Order GetCustomerOrder(int id)
-        {
-
-            return OrderDBObject.GetCustomerOrder(id);
-
-        }
-
-
-        public Order AddOrder(Order order)
-        {
-            return OrderDBObject.AddOrder(order);
-        }
-
-        public Order CreateOrder(Order order)
-        {
-
-            return OrderDBObject.CreateOrder(order);
-        }
-
-
-        public int UpdateOrder(Order order)
-        {
-            return OrderDBObject.UpdateOrder(order);
         }
 
         public int SetDelivered(Order order)
@@ -164,10 +130,16 @@ namespace BusinessLayer
         }
 
 
-        public int DeleteOrder(int id)
+
+        public Order GetCustomerOrder(int id)
         {
-            return OrderDBObject.DeleteOrder(id);
+
+            return OrderDBObject.GetCustomerOrder(id);
+
         }
+
+
+
 
 
     }

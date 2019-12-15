@@ -24,7 +24,7 @@ namespace WebVSEat.Controllers
         {
             ViewBag.id = HttpContext.Session.GetInt32("id");
 
-            var orderlist = OrderManager.GetArchivedOrdersWithCourier(ViewBag.id);
+            var orderlist = OrderManager.GetArchivedOrdersWithIdCourier(ViewBag.id);
 
 
             return View(orderlist);
@@ -47,6 +47,39 @@ namespace WebVSEat.Controllers
         }
 
 
+        public ActionResult GetMyOrdersWithIdCustomer()
+        {
+            ViewBag.id = HttpContext.Session.GetInt32("id");
+
+            var orderlist = OrderManager.GetMyOrdersWithIdCustomer(ViewBag.id);
+
+
+            return View(orderlist);
+
+        }
+
+
+        public ActionResult GetMyOrdersWithIdCustomerError()
+        {
+            ViewBag.id = HttpContext.Session.GetInt32("id");
+
+            var orderlist = OrderManager.GetMyOrdersWithIdCustomer(ViewBag.id);
+
+
+            return View(orderlist);
+
+        }
+
+
+        //Cancel the order interface
+        public ActionResult EditCustomer(int id)
+        {
+            var order = OrderManager.GetCustomerOrder(id);
+            return View(order);
+        }
+
+
+        //delivered or cancelled interface
         public ActionResult Edit(int id)
         {
             var order = OrderManager.GetCustomerOrder(id);
@@ -55,6 +88,30 @@ namespace WebVSEat.Controllers
 
 
 
+        //update the order
+        [HttpPost]
+        public ActionResult EditCustomer(DataTransferObject.Order order)
+        {
+
+            var total = (order.created_at - DateTime.Now).TotalMinutes;
+
+
+            if (total > 180) 
+            {
+            OrderManager.SetDelivered(order);
+            return RedirectToAction(nameof(GetMyOrdersWithIdCustomer));
+            }
+            else
+            {
+                return RedirectToAction(nameof(GetMyOrdersWithIdCustomerError));
+            }
+
+
+
+
+        }
+
+        //update the order - courier
         [HttpPost]
         public ActionResult Edit(DataTransferObject.Order order)
         {
@@ -65,14 +122,14 @@ namespace WebVSEat.Controllers
         }
 
 
-
+        //
         // GET: Order
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Order/Details/5
+
         public ActionResult Details(int id)
         {
 
@@ -81,56 +138,10 @@ namespace WebVSEat.Controllers
             return View(order);
         }
 
-        // GET: Order/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Order/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
 
-
-
-        // GET: Order/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Order/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
 
 
     }
-}
+   }

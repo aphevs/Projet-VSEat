@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DataTransferObject.Order>
 
 @{
-    ViewData["Title"] = "Get my orders";
+    ViewData["Title"] = "VsEat";
 }
 
 <h2>Your orders : </h2>
@@ -18,7 +18,7 @@
                 Delivery status
             </th>
             <th>
-                Order time
+               When to deliver
             </th>
             <th>
                 Firstname
@@ -33,7 +33,7 @@
                 City code
             </th>
             <th>
-                When to deliver
+               Created at
             </th>
             <th>
                 Total
@@ -91,8 +91,7 @@
 
     <div class="alert alert-dismissible alert-info">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <h4 class="alert-heading">Well done!</h4>
+        <h4 class="alert-heading"></h4>
         <p class="mb-0">You don't have any order at the moment.<a href="#" class="alert-link"></a></p>
     </div>
 }
-<a asp-action="GetArchivedOrders">Archives</a>

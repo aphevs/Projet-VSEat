@@ -9,10 +9,6 @@ namespace DAL
     public interface IDishesDB
     {
 
-       // IConfiguration Configuration { get; }
-
-        List<Dish> GetDishes();
-
 
         decimal GetPrice(int id);
 
@@ -20,13 +16,7 @@ namespace DAL
 
         Dish GetDish(int id);
 
-        Dish AddCustomer(Dish dish);
 
-        int UpdateDish(Dish dish);
-
-        int DeleteDish(int id);
-       
-        Dish AddDish(Dish dish);
        
     }
 }

@@ -38,11 +38,27 @@ namespace WebVSEat.Controllers
             }
             else
             {
-                return RedirectToAction("Login","Courier");
+                return RedirectToAction(nameof(LoginError));
             }
         }
 
 
+        [HttpPost]
+        public IActionResult LoginError(Courier cour)
+        {
+            Courier courier = CourierManager.GetCourierByUsernamePassword(cour.login, cour.password);
+
+            if (courier != null)
+            {
+                HttpContext.Session.SetInt32("id", courier.IdCourier);
+                HttpContext.Session.SetString("name", courier.name);
+                return RedirectToAction("GetCustomerOrders", "Order");
+            }
+            else
+            {
+                return RedirectToAction(nameof(LoginError));
+            }
+        }
 
 
 

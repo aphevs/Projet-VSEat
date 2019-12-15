@@ -14,15 +14,6 @@ namespace BusinessLayer
 
         bool isCustomerValid(Customer cus);
 
-        List<Customer> GetCustomers();
-
-        Customer GetCustomer(int id);
-
-        Customer AddCustomer(Customer customer);
-
-        int UpdateCustomer(Customer customer);
-
-        int DeleteCustomer(int id);
 
     }
 }

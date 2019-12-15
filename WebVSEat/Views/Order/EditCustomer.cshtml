@@ -1,10 +1,10 @@
 ﻿@model DataTransferObject.Order
 
 @{
-    ViewData["Title"] = "Order delivery check ";
+    ViewData["Title"] = "VsEat";
 }
 
-<h2>Confirm you have delivered this order :</h2>
+<h2>Please confirm you want to cancel this order :</h2>
 
 <div>
     <hr />
@@ -16,7 +16,7 @@
             @Html.DisplayFor(model => model.IdOrder)
         </dd>
         <dt>
-            Ordered at :
+           Will be delivered at :
         </dt>
         <dd>
             @Html.DisplayFor(model => model.created_at)
@@ -28,7 +28,7 @@
             @Html.DisplayFor(model => model.timeToDeliver)
         </dd>
         <dt>
-            Customer name :
+            Your name :
         </dt>
         <dd>
             @Html.DisplayFor(model => model.name) @Html.DisplayFor(model => model.lastname)
@@ -46,11 +46,14 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="EditCustomer">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="status" class="control-label">Validate : </label>
+
+
+
+            <div class="form-group" style="visibility:hidden">
+                <label asp-for="status" class="control-label"></label>
 
                 <select asp-for="status" class="form-control">
                     <option value="cancelled">cancelled</option>
@@ -65,9 +68,11 @@
                 <input asp-for="IdOrder" class="form-control" />
                 <span asp-validation-for="IdOrder" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-outline-primary" />
+                <input type="submit" value="Cancel this order" class="btn btn-outline-primary" />
             </div>
+
         </form>
     </div>
 </div>

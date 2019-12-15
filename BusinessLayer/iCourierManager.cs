@@ -9,17 +9,9 @@ namespace BusinessLayer
 {
     public interface ICourierManager
     {
-        List<Courier> GetCouriers();
 
         Courier GetCourierByUsernamePassword(string login, string password);
 
-        Courier GetCourier(int id);
-
-        Courier AddCourier(Courier courier);
-
-        int UpdateCourier(Courier courier);
-
-        int DeleteCourier(int id);
 
     }
 }

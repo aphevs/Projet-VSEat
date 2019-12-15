@@ -57,32 +57,6 @@ namespace BusinessLayer
 
 
 
-        public List<Restaurant> GetRestaurants()
-        {
-            return RestaurantDBObject.GetRestaurants();
-
-        }
-
-        public Restaurant GetRestaurant(int id)
-        {
-            return RestaurantDBObject.GetRestaurant(id);
-        }
-
-        public Restaurant AddRestaurant(Restaurant restaurant)
-        {
-            return RestaurantDBObject.AddRestaurant(restaurant);
-        }
-
-        public int UpdateRestaurant(Restaurant restaurant)
-        {
-            return RestaurantDBObject.UpdateRestaurant(restaurant);
-        }
-
-
-        public int DeleteRestaurant(int id)
-        {
-            return RestaurantDBObject.DeleteRestaurant(id);
-        }
 
 
 
