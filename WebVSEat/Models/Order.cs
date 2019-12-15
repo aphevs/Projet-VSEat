@@ -18,12 +18,5 @@ namespace WebVSEat.Models
         public int IdCustomer { get; set; }
         public int IdCourier { get; set; }
 
-
-        //get orders and customer info
-        public string name { get;set; }
-        public string lastname { get; set; }
-        public string streetname { get;set; }
-        public int idCity { get; set; }
-
     }
 }

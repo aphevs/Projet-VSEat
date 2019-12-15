@@ -44,7 +44,8 @@ namespace WebVSEat
             services.AddScoped<ICustomersDB, CustomersDB>();
             services.AddScoped<ICourierManager, CourierManager>();
             services.AddScoped<ICouriersDB, CouriersDB>();
-
+            services.AddScoped<IDishManager, DishManager>();
+            services.AddScoped<IDishesDB, DishesDB>();
             services.AddScoped<IOrderManager, OrderManager>();
             services.AddScoped<IOrdersDB, OrdersDB>();
 
@@ -67,6 +68,8 @@ namespace WebVSEat
                 app.UseHsts();
             }
 
+
+            app.UseIdentity();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -76,7 +79,7 @@ namespace WebVSEat
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Courier}/{action=Login}/{id?}");
+                    template: "{controller=Restaurant}/{action=GetRestaurantDishes}/{id=1}");
             });
         }
     }

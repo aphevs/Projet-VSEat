@@ -9,12 +9,11 @@ namespace WebVSEat.Models
     public class Dish
     {
         public int IdDish { get; set; }
-        public string name { get; set; }
-        public decimal price { get; set; }
+        public string NameDish { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
 
-        public string description { get; set; }
-
-        public int IdRestaurant { get; set; }
-
+        public static decimal Total { get; set; }
     }
+
 }

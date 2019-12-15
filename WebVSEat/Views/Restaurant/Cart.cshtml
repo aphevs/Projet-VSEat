@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model IEnumerable<WebVSEat.Models.Dish>
+
+@{
+
+    ViewData["Title"] = "Cart";
+    var sum = @Model.Sum(i => i.Price);
+    var count = @Model.Sum(i => i.Quantity);
+}
+
+
+<h1>My cart</h1>
+
+
+<table class="table">
+    <thead>
+        <tr class="table-primary">
+            <th>
+                Dish name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameDish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+
+        </tr>
+            }
+
+        }
+    </tbody>
+
+</table>
+
+
+<h3 text>Total is : @sum CHF</h3>
+
+<p>
+    @Html.ActionLink("Checkout", "ConfirmOrder", null, new { sum , count }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+</p>
+
+@if (Model == null)
+{
+
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Oh snap!</strong><a>Looks like your cart is empty.</a>
+    </div>
+
+}
+
+<br />
+<p>
+    <a asp-action="GetRestaurantDishes">Back to shopping</a>
+</p>
