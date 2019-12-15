@@ -79,7 +79,7 @@ namespace WebVSEat
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Restaurant}/{action=GetRestaurantDishes}/{id=1}");
+                    template: "{controller=Customer}/{action=Login}/{id=1}");
             });
         }
     }

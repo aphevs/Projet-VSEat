@@ -8,16 +8,11 @@ namespace DAL
 {
     public interface IOrdersDB
     {
-
         List<Order> GetOrders();
 
-        //TEST TEST TEST
-        List<Order> GetCustomerOrders();
 
         Order GetOrder(int id);
-
-
-
+        List<Order> GetCustomerOrdersWithIdCourier(int IdGiven);
 
         void SetOrder(Dictionary<int, int> dishes, int idCustomer, DateTime date, int idCourier);
 
@@ -28,7 +23,7 @@ namespace DAL
 
         Order GetCustomerOrder(int id);
 
-        List<Order> GetCustomerOrdersWithIdCourier(int IdGiven);
+       
 
 
 
@@ -38,5 +33,6 @@ namespace DAL
         int UpdateOrder(Order order);
         int SetDelivered(Order order);
         int DeleteOrder(int id);
+       
     }
 }

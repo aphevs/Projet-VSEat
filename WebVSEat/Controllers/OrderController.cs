@@ -22,12 +22,13 @@ namespace WebVSEat.Controllers
 
         public ActionResult GetArchivedOrders()
         {
-            //ViewBag.id = HttpContext.Session.GetInt32("id"); //id de alex, le courier
+            ViewBag.id = HttpContext.Session.GetInt32("id");
 
-            var orderlist = OrderManager.GetCustomerOrders();
+            var orderlist = OrderManager.GetArchivedOrdersWithCourier(ViewBag.id);
+
 
             return View(orderlist);
-           
+
         }
 
 
@@ -35,13 +36,9 @@ namespace WebVSEat.Controllers
         {
             ViewBag.id = HttpContext.Session.GetInt32("id");
 
-            //int id = (int)ViewBag.id;
 
-            //TEST WITH ID 2, IT'S ALEXANDREP
-            //var orderlist = OrderManager.GetCustomerOrdersWithIdCourier(2);
+            var orderlist = OrderManager.GetCustomerOrdersWithIdCourier(ViewBag.id);
 
-            //TEST TEST TEST
-            var orderlist = OrderManager.GetCustomerOrders();
 
             return View(orderlist);
 

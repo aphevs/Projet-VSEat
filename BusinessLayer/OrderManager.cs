@@ -50,11 +50,11 @@ namespace BusinessLayer
 
 
 
-        //Get all orders which are not designed as "delivered"
-        public List<Order> GetCustomerOrdersWithIdCourier()
+        //Get all orders which are designed as "delivered"
+        public List<Order> GetCustomerOrdersWithIdCourier(int id)
         {
             List<Order> lCurrentOrder = null;
-            List<Order> lOrder = OrderDBObject.GetCustomerOrders();
+            List<Order> lOrder = OrderDBObject.GetCustomerOrdersWithIdCourier(id);
 
             foreach (Order order in lOrder)
             {
@@ -73,12 +73,10 @@ namespace BusinessLayer
         }
 
         //Get all orders to make an archive of it
-
-        public List<Order> GetArchivedOrdersWithIdCourier()
+        public List<Order> GetArchivedOrdersWithCourier(int id)
         {
-
             List<Order> lCurrentOrder = null;
-            List<Order> lOrder = OrderDBObject.GetCustomerOrders();
+            List<Order> lOrder = OrderDBObject.GetCustomerOrdersWithIdCourier(id);
 
             foreach (Order order in lOrder)
             {
@@ -98,11 +96,6 @@ namespace BusinessLayer
 
 
 
-
-        public List<Order> GetCustomerOrders()
-        {
-            return OrderDBObject.GetCustomerOrders();
-        }
 
 
         public List<Order> GetOrders()
