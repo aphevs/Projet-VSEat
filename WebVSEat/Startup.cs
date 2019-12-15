@@ -68,8 +68,6 @@ namespace WebVSEat
                 app.UseHsts();
             }
 
-
-            app.UseIdentity();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -79,7 +77,7 @@ namespace WebVSEat
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Restaurant}/{action=GetRestaurantDishes}/{id=1}");
+                    template: "{controller=Customer}/{action=Login}/{id?}");
             });
         }
     }

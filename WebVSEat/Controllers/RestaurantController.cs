@@ -44,8 +44,7 @@ namespace WebVSEat.Controllers
                           .ToDictionary(item => item.s, item => item.i);
 
 
-            //Calculating the total price the customer will have to pay, and the city where the courier 
-            //will be attached to (alex corrige cette phrase c'est 2h du mat)
+            //Calculating the total price the customer will have to pay, and give it to the courrier in the right city
             decimal total = 0;
             int idCit=0;
             foreach (var i in dishes)
@@ -67,175 +66,56 @@ namespace WebVSEat.Controllers
                Int32.Parse(fc["hour"]), Int32.Parse(fc["min"]), 0);
 
 
-            //CHECK if the date is upper than now and if the total isn't zero. 
-            //That means the customer has choosed something for a correct/possible livraison time
+            //CHECK if the date is higher than now and if the total isn't zero. 
+            //That means the customer has choosen something for a correct/possible delivery time
             if (dat > DateTime.Now && total != 0)
             {
-                //probleme ici avec le idCity du restau !! il faudra mettre idCity 1,2,3 et pas le code postal
-                //ou alors trouver solution car jpp comme certains disent
 
                 OrderManager.SetOrder(dishes, idCit, Convert.ToInt32(HttpContext.Session.GetInt32("id")), dat);
                 ViewBag.total = total;
                 ViewBag.dat = dat;
                 return View();
             }
-            return RedirectToAction("GetRestaurantDishes");
+           
 
 
+            else
+             {
+                return RedirectToAction(nameof(OrderError));
+            }
 
+            //return RedirectToAction("GetRestaurantDishes");
+        }
 
-
+        public ActionResult OrderError()
+        {
+            return View();
         }
 
 
-
-
-
-
-
-        // GET: Restaurant
+        //The view to search a restaurant with a city code
         public ActionResult Index()
         {
             return View();
         }
 
-
+        //The view returned if the code is not in the database or is incorrect
         public ActionResult IndexError()
         {
             return View();
         }
 
-        //Create a list déroulante
-        //selected = par défaut
-        // GET: Restaurant/Details/5
-        // public ActionResult Details(int id)
-        // {
-
-        // var names = new List<SelectListItem>
-        // {
-        //     new SelectListItem{Value="1", Text = "Vache and me"},
-        //     new SelectListItem{Value="2", Text = "Downtown", Selected=true},
-        //      new SelectListItem{Value="3", Text = "Thai"}
-        // };
-        // ViewBag.Names = names;
-        // ViewBag.Selected = 2;
-        // return View();
-
-
         //Getting the dishes of a given restaurant
         public ActionResult GetRestaurantDishes(int id)
         {
 
-           
             var restaurant = RestaurantManager.GetRestaurantDishes(id);
             return View(restaurant);
 
         }
 
 
-        // GET: Restaurant/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Restaurant/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(DataTransferObject.Restaurant r)
-        {
-            try
-            {
-               
-                RestaurantManager.AddRestaurant(r);
-
-                return RedirectToAction(nameof(GetAllRestaurants));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
-
-
-        // GET: Restaurant/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
-        {
-
-            RestaurantManager.DeleteRestaurant(id);
-            return View(RedirectToAction(nameof(GetAllRestaurants)));
-
-        }
-
-        // POST: Restaurant/Delete/5
-       // [HttpPost]
-    //    [ValidateAntiForgeryToken]
-       // public ActionResult Delete(int id, IFormCollection collection)
-        //{
-       //     try
-       //     {
-                // TODO: Add delete logic here
-
-      //          return RedirectToAction(nameof(Index));
-
-
-        //    }
-       //     catch
-      //      {
-      //          return View();
-     //       }
-     //   }
-
-        //public ActionResult GetRestaurants()
-        //{
-        //    var restaurantList = new List<Restaurant>
-        //    {
-        //    new Restaurant() {IdRestaurant = 1, created_at = new DateTime(2008, 3, 1, 7, 0, 0), name = "Vache and me", IdCity =1 },
-        //    new Restaurant() {IdRestaurant = 2, created_at = new DateTime(2009, 7, 10, 0, 0, 0), name = "Downtown", IdCity =2},
-        //    new Restaurant() {IdRestaurant = 3, created_at = new DateTime(2014, 4, 10, 0, 0, 0), name = "SAP", IdCity =1},
-        //    new Restaurant() {IdRestaurant = 4, created_at = new DateTime(2018, 7, 11, 0, 0, 0), name = "San Andreas", IdCity =1 },
-        //    };
-        //    return View();
-
-        //}
-
-        //public ActionResult GetCityRestaurants()
-        //{
-        //    var restaurantList = new List<CityRestaurants>
-        //    {
-        //        new CityRestaurants() {city = "Sierre", lrestaurants = new List<Restaurant>{
-        //        new Restaurant() {Name ="Vache and me" },
-        //        new Restaurant() {Name = "Downtown" },
-        //        new Restaurant() {Name = "Team"},
-        //        }}
-        //    };
-        //    return View("GetCityRestaurants", restaurantList);
-
-        //}
-
-
-
-        //use with bll import
-        public ActionResult GetAllRestaurants()
-        {
-
-            var restaurantlist = RestaurantManager.GetRestaurants();
-
-            ViewBag.id = HttpContext.Session.GetInt32("id");
-
-            return View(restaurantlist);
-
-
-        }
-
-
-
-
-        //Search a city code and get all the city inside
+        //Search a city code and get all the restaurants inside
 
         [HttpPost]
         public ActionResult GetAllRestaurantsFromCity(int id)
@@ -244,6 +124,8 @@ namespace WebVSEat.Controllers
             var cityidlist = RestaurantManager.GetCitiesId();
             bool validCityId = false;
 
+
+           //if the city code is not in the database or not correct, it display a the index error view
             foreach (int index in cityidlist)
             {
 
@@ -252,12 +134,12 @@ namespace WebVSEat.Controllers
 
             }
 
-            if(validCityId==true)
-            { 
+            if (validCityId == true)
+            {
 
-            var restaurantlist = RestaurantManager.GetRestaurantsFromCity(id);
+                var restaurantlist = RestaurantManager.GetRestaurantsFromCity(id);
 
-            return View(restaurantlist);
+                return View(restaurantlist);
 
             }
             else
@@ -269,35 +151,89 @@ namespace WebVSEat.Controllers
 
             }
 
-
-
-
         }
 
 
 
-        // GET: Restaurant/Edit/5
-        //restaurant DTO
-        public ActionResult Edit(int id)
-        {
-           
-            var restaurant = RestaurantManager.GetRestaurant(id);
-            return View(restaurant);
-        }
+        //// GET: Restaurant/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        // POST: Restaurant/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        // public ActionResult Create(DataTransferObject.Restaurant r)
+        // {
+        //     try
+        //     {
+
+        //         RestaurantManager.AddRestaurant(r);
+
+        //         return RedirectToAction(nameof(GetAllRestaurants));
+        //     }
+        //     catch
+        //     {
+        //         return View();
+        //     }
+        // }
 
 
 
-         [HttpPost]
-        public ActionResult Edit(DataTransferObject.Restaurant r)
-        {
-            RestaurantManager.UpdateRestaurant(r);
-            return RedirectToAction(nameof(GetAllRestaurants));
+
+        //// GET: Restaurant/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id)
+        //{
+
+        //    RestaurantManager.DeleteRestaurant(id);
+        //    return View(RedirectToAction(nameof(GetAllRestaurants)));
+
+        //}
 
 
-        }
+
+
+        ////use with bll import
+        //public ActionResult GetAllRestaurants()
+        //{
+
+        //    var restaurantlist = RestaurantManager.GetRestaurants();
+
+        //    ViewBag.id = HttpContext.Session.GetInt32("id");
+
+        //    return View(restaurantlist);
+
+
+        //}
 
 
 
+
+
+
+
+        //// GET: Restaurant/Edit/5
+        ////restaurant DTO
+        //public ActionResult Edit(int id)
+        //{
+
+        //    var restaurant = RestaurantManager.GetRestaurant(id);
+        //    return View(restaurant);
+        //}
+
+
+
+        // [HttpPost]
+        //public ActionResult Edit(DataTransferObject.Restaurant r)
+        //{
+        //    RestaurantManager.UpdateRestaurant(r);
+        //    return RedirectToAction(nameof(GetAllRestaurants));
+
+
+        //}
 
     }
 }

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<DataTransferObject.Order>
+
+@{
+    ViewData["Title"] = "Get my orders";
+}
+
+<h2>Your orders : </h2>
+<br />
+
+<table class="table">
+
+    <thead>
+        <tr class="table-primary">
+            <th>
+                Order number
+            </th>
+            <th>
+                Delivery status
+            </th>
+            <th>
+                Order time
+            </th>
+            <th>
+                Firstname
+            </th>
+            <th>
+                Lastname
+            </th>
+            <th>
+                Street
+            </th>
+            <th>
+                City code
+            </th>
+            <th>
+                When to deliver
+            </th>
+            <th>
+                Total
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null )
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.created_at)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.streetname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.timeToDeliver)
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        @Html.ActionLink("Cancel this order", "EditCustomer", new { id = item.IdOrder }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+                        @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })*@
+                    </td>
+
+                </tr>
+            }
+
+        }
+    </tbody>
+
+</table>
+@if (Model == null)
+{
+
+    <div class="alert alert-dismissible alert-info">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading">Well done!</h4>
+        <p class="mb-0">You don't have any order at the moment.<a href="#" class="alert-link"></a></p>
+    </div>
+}
+<a asp-action="GetArchivedOrders">Archives</a>
