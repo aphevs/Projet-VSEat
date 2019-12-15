@@ -12,7 +12,7 @@ namespace BusinessLayer
 
         // IOrder_DishesDB Order_DishesDb { get; }
 
-
+        decimal GetPriceByIdOrder(int id);
         Order_Dish GetOrder_Dish(int id);
 
     }

@@ -52,6 +52,12 @@ namespace WebVSEat
             services.AddScoped<IDishManager,DishManager>();
             services.AddScoped<IDishesDB,DishesDB > ();
 
+
+            services.AddScoped<IOrder_DishManager, Order_DishManager>();
+            services.AddScoped<IOrder_DishesDB, Order_DishesDB>();
+
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

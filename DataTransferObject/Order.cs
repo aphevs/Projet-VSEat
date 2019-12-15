@@ -6,6 +6,8 @@ namespace DataTransferObject
 {
     public class Order
     {
+        public decimal total;
+
         public int IdOrder { get; set; }
         public string status { get; set; }
         public DateTime created_at { get; set; }

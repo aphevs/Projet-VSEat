@@ -14,9 +14,11 @@ namespace WebVSEat.Models
         public string status { get; set; }
         public DateTime created_at { get; set; }
         public DateTime timeToDeliver { get; set; }
-        public decimal totalprice { get; set; }
+        public decimal total { get; set; }
         public int IdCustomer { get; set; }
         public int IdCourier { get; set; }
+
+        
 
     }
 }

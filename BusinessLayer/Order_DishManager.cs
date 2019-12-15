@@ -17,6 +17,11 @@ namespace BusinessLayer
             Order_DishDBObject = order_dishDB;
 
         }
+        public decimal GetPriceByIdOrder(int id)
+        {
+            return Order_DishDBObject.GetPriceByIdOrder(id);
+        }
+
 
 
         public Order_Dish GetOrder_Dish(int id)

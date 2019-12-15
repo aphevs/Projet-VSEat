@@ -20,8 +20,11 @@ namespace BusinessLayer
         int SetOrder(Dictionary<int, int> dishes, int idCity, int idCustomer, DateTime dat);
 
 
-        List<Order> GetCustomerOrdersWithIdCourier();
-        List<Order> GetArchivedOrdersWithIdCourier();
+        List<Order> GetMyOrdersWithIdCustomer(int IdGiven);
+
+
+
+
         List<Order> GetOrders();
 
         Order GetOrder(int id);

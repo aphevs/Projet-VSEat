@@ -24,8 +24,6 @@ namespace DAL
         }
 
 
-        //We don't need this method because we use postal code as Id for the table City
-        // A SUPPRIMER ALEX ALEX ALEX ALEX
         public int GetIdCityRestaurant(int id)
         {
             string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";

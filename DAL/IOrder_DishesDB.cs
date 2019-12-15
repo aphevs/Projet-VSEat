@@ -12,7 +12,9 @@ namespace DAL
         //IConfiguration Configuration { get; }
 
 
-        Order_Dish GetOrder_Dish(int id);
+        decimal GetPriceByIdOrder(int id);
+
+    Order_Dish GetOrder_Dish(int id);
 
 
 

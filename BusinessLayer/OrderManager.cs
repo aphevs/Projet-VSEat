@@ -20,6 +20,8 @@ namespace BusinessLayer
         }
 
 
+
+
         //This method will put a new order in the DB
         public int SetOrder(Dictionary<int, int> dishes, int idCity, int idCourier, DateTime date)
         {
@@ -35,7 +37,7 @@ namespace BusinessLayer
                     courierAvailable = courier;
             }
 
-            // Put the order into BD (in Order_dish)
+            // Put the order (and Order_dish) into BD with this SetOrder bellow
             if (courierAvailable != null)
             {
                 OrderDBObject.SetOrder(dishes, idCourier, date, courierAvailable.IdCourier);
@@ -50,11 +52,11 @@ namespace BusinessLayer
 
 
 
-        //Get all orders which are not designed as "delivered"
-        public List<Order> GetCustomerOrdersWithIdCustomer()
+        //For the customer, get all his orders
+        public List<Order> GetMyOrdersWithIdCustomer(int id)
         {
             List<Order> lCurrentOrder = null;
-            List<Order> lOrder = OrderDBObject.GetCustomerOrders();
+            List<Order> lOrder = OrderDBObject.GetMyOrdersWithIdCustomer(id);
 
             foreach (Order order in lOrder)
             {
@@ -74,7 +76,7 @@ namespace BusinessLayer
 
 
 
-        //Get all orders which are designed as "delivered"
+        //For the courier, get all orders which are designed as "delivered"
         public List<Order> GetCustomerOrdersWithIdCourier(int id)
         {
             List<Order> lCurrentOrder = null;
@@ -96,7 +98,7 @@ namespace BusinessLayer
 
         }
 
-        //Get all orders to make an archive of it
+        //For the courier, get all orders to make an archive of it
         public List<Order> GetArchivedOrdersWithCourier(int id)
         {
             List<Order> lCurrentOrder = null;

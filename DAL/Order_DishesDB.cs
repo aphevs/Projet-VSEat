@@ -25,6 +25,40 @@ namespace DAL
 
         }
 
+        //Get the price from an order
+        public decimal GetPriceByIdOrder(int id)
+        {
+            string connectionString = "Data Source=153.109.124.35;Initial Catalog=VsEatPiguetBerthouzoz;Integrated Security=False;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=True";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT SUM(o.quantity * d.price) " +
+
+                            "FROM Dish d, Order_Dish o " +
+
+                            "WHERE d.IdDish = o.IdDish " +
+
+                            "AND o.IdOrder = @id";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+                    return (decimal)cmd.ExecuteScalar();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+
 
 
         public Order_Dish GetOrder_Dish(int id)

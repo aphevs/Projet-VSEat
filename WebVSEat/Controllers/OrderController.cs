@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer;
+using DataTransferObject;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,25 +14,27 @@ namespace WebVSEat.Controllers
     {
 
         private IOrderManager OrderManager { get; }
-        public OrderController(IOrderManager ordersManager)
+        private IOrder_DishManager Order_DishManager { get; }
+        public OrderController(IOrderManager ordersManager, IOrder_DishManager order_DishManager)
         {
             OrderManager = ordersManager;
+
+            Order_DishManager = order_DishManager;
         }
 
 
-
+        //For the courier who is logged
         public ActionResult GetArchivedOrders()
         {
             ViewBag.id = HttpContext.Session.GetInt32("id");
 
             var orderlist = OrderManager.GetArchivedOrdersWithCourier(ViewBag.id);
 
-
             return View(orderlist);
 
         }
 
-
+        //For the courier who is logged
         public ActionResult GetCustomerOrders()
         {
             ViewBag.id = HttpContext.Session.GetInt32("id");
@@ -43,6 +46,28 @@ namespace WebVSEat.Controllers
             return View(orderlist);
 
 
+
+        }
+
+        //For the customer who is logged
+        //It also calculates the total of each order
+        public ActionResult GetMyOrdersWithIdCustomer()
+        {
+
+            ViewBag.id = HttpContext.Session.GetInt32("id");
+            //var orderlist = OrderManager.GetMyOrdersWithIdCustomer(ViewBag.id);
+            List<Order> orderlist = OrderManager.GetMyOrdersWithIdCustomer(ViewBag.id);
+
+            List<decimal> total = new List<decimal>();
+            foreach(var i in orderlist)
+            {
+                total.Add(Order_DishManager.GetPriceByIdOrder(i.IdOrder));
+            }
+
+            ViewBag.total = total;
+
+
+            return View(orderlist);
 
         }
 
@@ -134,3 +159,4 @@ namespace WebVSEat.Controllers
 
     }
 }
+ 
