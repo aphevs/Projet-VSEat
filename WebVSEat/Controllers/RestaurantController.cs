@@ -84,7 +84,6 @@ namespace WebVSEat.Controllers
                 return RedirectToAction(nameof(OrderError));
             }
 
-            //return RedirectToAction("GetRestaurantDishes");
         }
 
         public ActionResult OrderError()
@@ -155,85 +154,6 @@ namespace WebVSEat.Controllers
 
 
 
-        //// GET: Restaurant/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        // POST: Restaurant/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        // public ActionResult Create(DataTransferObject.Restaurant r)
-        // {
-        //     try
-        //     {
-
-        //         RestaurantManager.AddRestaurant(r);
-
-        //         return RedirectToAction(nameof(GetAllRestaurants));
-        //     }
-        //     catch
-        //     {
-        //         return View();
-        //     }
-        // }
-
-
-
-
-        //// GET: Restaurant/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id)
-        //{
-
-        //    RestaurantManager.DeleteRestaurant(id);
-        //    return View(RedirectToAction(nameof(GetAllRestaurants)));
-
-        //}
-
-
-
-
-        ////use with bll import
-        //public ActionResult GetAllRestaurants()
-        //{
-
-        //    var restaurantlist = RestaurantManager.GetRestaurants();
-
-        //    ViewBag.id = HttpContext.Session.GetInt32("id");
-
-        //    return View(restaurantlist);
-
-
-        //}
-
-
-
-
-
-
-
-        //// GET: Restaurant/Edit/5
-        ////restaurant DTO
-        //public ActionResult Edit(int id)
-        //{
-
-        //    var restaurant = RestaurantManager.GetRestaurant(id);
-        //    return View(restaurant);
-        //}
-
-
-
-        // [HttpPost]
-        //public ActionResult Edit(DataTransferObject.Restaurant r)
-        //{
-        //    RestaurantManager.UpdateRestaurant(r);
-        //    return RedirectToAction(nameof(GetAllRestaurants));
-
-
-        //}
 
     }
 }

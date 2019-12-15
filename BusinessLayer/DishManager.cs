@@ -27,32 +27,10 @@ namespace BusinessLayer
         }
 
 
-       
-
-        public List<Dish> GetDishes()
-        {
-            return DishDbObject.GetDishes();
-        }
 
         public Dish GetDish(int id)
         {
             return DishDbObject.GetDish(id);
-        }
-
-        public Dish AddDish(Dish dish)
-        {
-            return DishDbObject.AddDish(dish);
-        }
-
-
-        public int UpdateDish(Dish dish)
-        {
-            return DishDbObject.UpdateDish(dish);
-        }
-
-        public int DeleteDish(int id)
-        {
-            return DishDbObject.DeleteDish(id);
         }
 
  

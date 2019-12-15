@@ -33,7 +33,6 @@ namespace WebVSEat.Controllers
             {
                 HttpContext.Session.SetInt32("id", customer.IdCustomer);
                 HttpContext.Session.SetString("name", customer.name);
-                //HttpContext.Session.SetString("password", customer.password);
                 return RedirectToAction("Index", "Restaurant");
 
                 
@@ -43,6 +42,11 @@ namespace WebVSEat.Controllers
             {
                 return RedirectToAction("Customer","Login");
             }
+
+
+
+
+
         }
 
 

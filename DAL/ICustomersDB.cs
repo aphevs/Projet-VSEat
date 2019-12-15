@@ -13,15 +13,7 @@ namespace DAL
 
       
 
-    List<Customer> GetCustomers();
-
-        Customer GetCustomer(int id);
-
-        Customer AddCustomer(Customer customer);
-
-        int UpdateCustomer(Customer customer);
-
-        int DeleteCustomer(int id);
+        List<Customer> GetCustomers();
 
 
         Customer GetCustomerByUsernamePassword(string login, string password);

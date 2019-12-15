@@ -24,33 +24,6 @@ namespace BusinessLayer
 
 
 
-        public List<Courier> GetCouriers()
-        {
-            return CouriersDbObject.GetCouriers();
-        }
-
-        public Courier GetCourier(int id)
-        {
-            return CouriersDbObject.GetCourier(id);
-        }
-
-        public Courier AddCourier(Courier courier)
-        {
-            return CouriersDbObject.AddCourier(courier);
-        }
-
-
-        public int UpdateCourier(Courier courier)
-        {
-            return CouriersDbObject.UpdateCourier(courier);
-        }
-
-        public int DeleteCourier(int id)
-        {
-            return CouriersDbObject.DeleteCourier(id);
-        }
-
-
     }
 }
 

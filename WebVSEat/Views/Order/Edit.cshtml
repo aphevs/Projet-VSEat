@@ -1,7 +1,7 @@
 ﻿@model DataTransferObject.Order
 
 @{
-    ViewData["Title"] = "Order delivery check ";
+    ViewData["Title"] = "VsEat";
 }
 
 <h2>Confirm you have delivered this order :</h2>
@@ -51,7 +51,6 @@
                     <option value="cancelled">cancelled</option>
                 </select>
 
-                @*<input asp-for="status" class="form-control" />*@
                 <span asp-validation-for="status" class="text-danger"></span>
             </div>
 

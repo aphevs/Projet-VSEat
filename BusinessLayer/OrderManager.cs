@@ -20,8 +20,6 @@ namespace BusinessLayer
         }
 
 
-
-
         //This method will put a new order in the DB
         public int SetOrder(Dictionary<int, int> dishes, int idCity, int idCourier, DateTime date)
         {
@@ -37,7 +35,7 @@ namespace BusinessLayer
                     courierAvailable = courier;
             }
 
-            // Put the order (and Order_dish) into BD with this SetOrder bellow
+            // Put the order into BD (in Order_dish)
             if (courierAvailable != null)
             {
                 OrderDBObject.SetOrder(dishes, idCourier, date, courierAvailable.IdCourier);
@@ -52,7 +50,7 @@ namespace BusinessLayer
 
 
 
-        //For the customer, get all his orders
+        //Get all orders which are not designed as "delivered"
         public List<Order> GetMyOrdersWithIdCustomer(int id)
         {
             List<Order> lCurrentOrder = null;
@@ -76,7 +74,7 @@ namespace BusinessLayer
 
 
 
-        //For the courier, get all orders which are designed as "delivered"
+        //Get all orders which are designed as "delivered"
         public List<Order> GetCustomerOrdersWithIdCourier(int id)
         {
             List<Order> lCurrentOrder = null;
@@ -98,8 +96,8 @@ namespace BusinessLayer
 
         }
 
-        //For the courier, get all orders to make an archive of it
-        public List<Order> GetArchivedOrdersWithCourier(int id)
+        //Get all orders which are designed as "delivered"
+        public List<Order> GetArchivedOrdersWithIdCourier(int id)
         {
             List<Order> lCurrentOrder = null;
             List<Order> lOrder = OrderDBObject.GetCustomerOrdersWithIdCourier(id);
@@ -117,46 +115,12 @@ namespace BusinessLayer
                 }
             }
             return lCurrentOrder;
-        }
 
-
-
-
-
-
-        public List<Order> GetOrders()
-        {
-            return OrderDBObject.GetOrders();
         }
 
         public Order GetOrder(int id)
         {
             return OrderDBObject.GetOrder(id);
-        }
-
-        public Order GetCustomerOrder(int id)
-        {
-
-            return OrderDBObject.GetCustomerOrder(id);
-
-        }
-
-
-        public Order AddOrder(Order order)
-        {
-            return OrderDBObject.AddOrder(order);
-        }
-
-        public Order CreateOrder(Order order)
-        {
-
-            return OrderDBObject.CreateOrder(order);
-        }
-
-
-        public int UpdateOrder(Order order)
-        {
-            return OrderDBObject.UpdateOrder(order);
         }
 
         public int SetDelivered(Order order)
@@ -166,10 +130,16 @@ namespace BusinessLayer
         }
 
 
-        public int DeleteOrder(int id)
+
+        public Order GetCustomerOrder(int id)
         {
-            return OrderDBObject.DeleteOrder(id);
+
+            return OrderDBObject.GetCustomerOrder(id);
+
         }
+
+
+
 
 
     }

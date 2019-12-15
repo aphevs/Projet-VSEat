@@ -18,7 +18,7 @@
                 Delivery status
             </th>
             <th>
-               When to deliver
+                Order time
             </th>
             <th>
                 Firstname
@@ -33,9 +33,11 @@
                 City code
             </th>
             <th>
-               Created at
+                When to deliver
             </th>
-            
+            <th>
+                Total
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -70,8 +72,6 @@
                         @Html.DisplayFor(modelItem => item.timeToDeliver)
                     </td>
                     <td>
-                        
-                        
 
                     </td>
                     <td>
@@ -86,12 +86,10 @@
     </tbody>
 
 </table>
-@if (Model == null)
-{
 
-    <div class="alert alert-dismissible alert-info">
+    <div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <h4 class="alert-heading"></h4>
-        <p class="mb-0">You don't have any order at the moment.<a href="#" class="alert-link"></a></p>
+        <h4 class="alert-heading">Warning !</h4>
+        <p class="mb-0">All orders must be cancelled at least 3 hours before delivery.<a href="#" class="alert-link"></a></p>
     </div>
-}
+
